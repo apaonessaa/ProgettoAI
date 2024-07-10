@@ -5,11 +5,6 @@
         location box content agent workstation content-type carrier - object
     )
 
-    (:functions
-        (capacity ?carrier - carrier)- number
-        (amount ?carrier - carrier) - number
-    )
-
     (:predicates
         (at-box ?box - box ?loc - location)
         (at-agent ?agent - agent ?loc - location)
@@ -24,6 +19,11 @@
         (box-at-carrier ?carrier - carrier ?box - box)
         (carrier-at-agent ?agent - agent ?carrier - carrier)
         (is-type ?content - content ?t - content-type)
+    )
+
+    (:functions
+        (capacity ?carrier - carrier)- number
+        (amount ?carrier - carrier) - number
     )
 
     ;Si procede a definire la action relativa al ritiro di una box da una location.

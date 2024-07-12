@@ -36,39 +36,12 @@ public class IMHeuristic extends RelaxedGraphHeuristic {
 
         return
             onGoal(state, goal)
-            + countUnnecessaryContent(state)
-            //+ filling(state)
-            - counter(state, "box-at-workstation", true);
+            + countUnnecessaryContent(state)                              // scope: box, avoid configuration where there are some unnecessary content for a loc/ws
+            - counter(state, "content-at-workstation")          // scope: goal
+            - counter(state, "box-at-workstation")              // scope: deliver
+            + countContentAt(state, "central_warehouse");    // scope: minimize number of move, fill before a move if it is possible
             // TODO add constraints
-
     }
-
-    /**
-     * Total capacity agent's carrier - num of boxes in all carrier
-     */
-    private int filling(State state) {
-        // for each box in carrier
-        // check if it is filled then add += -> currentAmount
-        // Contents box at agent
-        // (box-at-carrier ?carrier - carrier ?box - box) == (filled ?box ?content)
-        int currentAmount = 0;
-        for (int j : this.predicates.get("filled")) {
-            BitVector filledTmp = new BitVector();
-            filledTmp.set(j);
-            // If the state satisfies the condition filled(box, content)
-            if (!state.satisfy(new Condition(filledTmp, new BitVector())))
-                currentAmount++;
-        }
-
-        // for each agent or carrier, get carrier capacity
-        // sum carrier capacity -> totalCapacity
-        // Extract ws from init and build map {ws -> location index}
-        //int totalCapacity = 8;
-
-        // carrier capacity - box filled in the carrier = totalCapacity - currentAmount
-        return - currentAmount;
-    }
-
 
     /**
      * Counts the predicates in the goal that are satisfied in the current state.
@@ -93,16 +66,14 @@ public class IMHeuristic extends RelaxedGraphHeuristic {
     /**
      * Counts the predicates that are satisfied(or not satisfied) in the current state.
      * */
-    private int counter(State state, String predName, boolean toSatisfied) {
+    private int counter(State state, String predName) {
         int count = 0;
         for (int i : this.predicates.get(predName)) {
             BitVector tmp = new BitVector();
             tmp.set(i);
             Condition condition = new Condition(tmp, new BitVector());
-            if (toSatisfied)
-                if (state.satisfy(condition)) count++;
-            else
-                if (!state.satisfy(condition)) count++;
+            if (state.satisfy(condition))
+                count++;
         }
         return count;
     }
@@ -115,7 +86,6 @@ public class IMHeuristic extends RelaxedGraphHeuristic {
      *                      contents := (filled pred satisfied for box)
      *                      for each content in contents verify
      *                          +1 goal NOT is-type content same content-at-workstation content.
-     *
      * */
     private int countUnnecessaryContent(State state) {
         int count = 0;
@@ -186,6 +156,31 @@ public class IMHeuristic extends RelaxedGraphHeuristic {
                 }
                 // if exists a content-type not necessary, increment the counter
                 if (!isNecessary)
+                    count++;
+            }
+        }
+        return count;
+    }
+
+    /**
+     * Counts the content located at :targetLocation
+     * */
+    private int countContentAt(State state, String targetLocation) {
+        int count=0;
+        List<Integer> contentAtCentralWarehouse = this.predicates.get("at-content");
+        // content at loc (at-content ?content - content ?loc - location)
+        for (int j : contentAtCentralWarehouse) {
+            BitVector tmp = new BitVector();
+            tmp.set(j);
+            // If the state satisfies the condition at-content(content, loc)
+            if (state.satisfy(new Condition(tmp, new BitVector()))) {
+                // Extract the location from the predicate
+                // (at-content ?content - content ?loc - location)
+                //String content = this.fluents.get(j).get(1);
+                String loc = this.fluents.get(j).get(2);
+
+                // Ensure the loc is targetLocation
+                if (loc.equals(targetLocation))
                     count++;
             }
         }

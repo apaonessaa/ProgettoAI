@@ -25,7 +25,7 @@ public class IMPlanner extends AbstractPlanner {
         // Sets the domain of the problem to solve
         planner.setDomain(benchmark + "domain2.pddl");
         // Sets the problem to solve
-        planner.setProblem(benchmark + "/problems/instance2.pddl");
+        planner.setProblem(benchmark + "/problems/instance22.pddl");
         // Sets the timeout of the search in seconds
         planner.setTimeout(1000);
         // Sets log level

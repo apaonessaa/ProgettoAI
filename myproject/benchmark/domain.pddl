@@ -90,6 +90,7 @@
             (not (filled ?box ?content))
             (empty ?box)
             (at-box ?box ?loc)
+            (not (box-at-workstation ?ws ?box))
             (content-at-workstation ?ws ?content)
         )
     )

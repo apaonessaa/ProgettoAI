@@ -1,6 +1,6 @@
 (define (domain industrial_manufacturing2)
     (:requirements :strips :typing :numeric-fluents)
-    
+
     (:types
         location box content agent workstation content-type carrier - object
     )
@@ -86,17 +86,15 @@
             (box-at-carrier ?carrier ?box)
             (at-ws ?ws ?location)
             (filled ?box ?content)
-            ;(workstation-needs ?ws ?content)
         )
         ;Gli effetti dell'esecuzione portano ad uno stato in cui:
         ;-l'agente robotico non porta più la box
         ;-la workstation non ha più bisogno del contenuto della box
         ;-la box si trova nella workstation a cui è stata consegnata
-        :effect (and 
+        :effect (and
             (not (box-at-carrier ?carrier ?box))
             (decrease (amount ?carrier) 1)
             (box-at-workstation ?ws ?box)
-            ;(not (workstation-needs ?ws ?content))
         )
     )
 
@@ -131,7 +129,7 @@
     ;Si procede a definire la action relativa allo svuotamento di una box.
     ;I parametri utili alla action in oggetto sono: la box da svuotare, il contenuto della box,
     ;la workstation che riceve il contenuto, l'agente robotico coinvolto e la location.
-    (:action empty 
+    (:action empty
         :parameters (?box - box ?content - content ?t - content-type ?ws - workstation ?agent - agent ?loc - location)
         ;Le precondizioni che consentono l'esecuzione prevedono che:
         ;-l'agente non sia impegnato
@@ -149,14 +147,12 @@
         ;-la box non ha più contenuto
         ;-la box viene rilasciata nella locazione
         ;-la workstation ha il contenuto della box
-        :effect (and 
+        :effect (and
             (not (filled ?box ?content))
             (empty ?box)
             (at-box ?box ?loc)
+            (not (box-at-workstation ?ws ?box))
             (content-at-workstation ?ws ?t)
         )
     )
-
-  
-
 )

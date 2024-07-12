@@ -38,7 +38,7 @@ public class IMAStar extends AbstractStateSpaceSearch {
         // Initialize the opened list (store the pending node)
         final double currWeight = getWeight();
         // The list stores the node ordered according to the A* (getFValue = g + h) function
-        final PriorityQueue<Node> open = new PriorityQueue<>(100, new NodeComparator(currWeight));
+        final PriorityQueue<Node> open = new PriorityQueue<>(500, new NodeComparator(currWeight));
         // Creates the root node of the tree search
         final Node root = new Node(init, null, -1, 0, heuristic.estimate(init, codedProblem.getGoal()));
         // Adds the root to the list of pending nodes

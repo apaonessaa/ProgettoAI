@@ -1,5 +1,7 @@
-package fr.uga.pddl4j.heuristics.state;
+package fr.uga.pddl4j.myproject;
 
+import fr.uga.pddl4j.heuristics.state.RelaxedGraphHeuristic;
+import fr.uga.pddl4j.parser.Expression;
 import fr.uga.pddl4j.planners.statespace.search.Node;
 import fr.uga.pddl4j.problem.*;
 import fr.uga.pddl4j.problem.operator.Condition;
@@ -11,11 +13,13 @@ public class IMHeuristic extends RelaxedGraphHeuristic {
     private Problem p;
     private final HashMap<String,List<Integer>> predicates;
     private final HashMap<Integer, List<String>> fluents;
-    protected IMHeuristic(Problem problem) {
+    public IMHeuristic(Problem problem) {
         super(problem);
         this.p = problem;
         this.predicates = extractPredicates();
         this.fluents = extractFluents();
+        //System.out.println(this.predicates.values());
+        //System.out.println(this.fluents.values());
     }
 
     @Override
@@ -25,17 +29,46 @@ public class IMHeuristic extends RelaxedGraphHeuristic {
 
     @Override
     public int estimate(State state, Condition goal) {
-        // sets the goal state for the heuristic.
+        // Sets the goal state for the heuristic.
         super.setGoal(goal);
-        // expands the relaxed planning graph from the current state.
+        // Expands the relaxed planning graph from the current state.
         this.expandRelaxedPlanningGraph(state);
+
         return
-                onGoal(state, goal) +
-                countUnnecessaryContent(state) +
-                counter(state, "at-box", false) +       // #box NOT at loc - Counts the boxes that are not at their desired locations.
-                counter(state, "empty", false) +        // #NOT empty - Counts the boxes that are not empty.
-                counter(state, "filled", true);         // #box filled - Counts the boxes that are filled.
+            onGoal(state, goal)
+            + countUnnecessaryContent(state)
+            //+ filling(state)
+            - counter(state, "box-at-workstation", true);
+            // TODO add constraints
+
     }
+
+    /**
+     * Total capacity agent's carrier - num of boxes in all carrier
+     */
+    private int filling(State state) {
+        // for each box in carrier
+        // check if it is filled then add += -> currentAmount
+        // Contents box at agent
+        // (box-at-carrier ?carrier - carrier ?box - box) == (filled ?box ?content)
+        int currentAmount = 0;
+        for (int j : this.predicates.get("filled")) {
+            BitVector filledTmp = new BitVector();
+            filledTmp.set(j);
+            // If the state satisfies the condition filled(box, content)
+            if (!state.satisfy(new Condition(filledTmp, new BitVector())))
+                currentAmount++;
+        }
+
+        // for each agent or carrier, get carrier capacity
+        // sum carrier capacity -> totalCapacity
+        // Extract ws from init and build map {ws -> location index}
+        //int totalCapacity = 8;
+
+        // carrier capacity - box filled in the carrier = totalCapacity - currentAmount
+        return - currentAmount;
+    }
+
 
     /**
      * Counts the predicates in the goal that are satisfied in the current state.

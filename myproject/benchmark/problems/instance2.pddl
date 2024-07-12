@@ -5,13 +5,13 @@
     (:objects
         central_warehouse loc1 loc2 loc3 - location
         ws1 ws2 ws3 ws4 - workstation
-        b1 b2 - box
+        b1 b2 b3 b4 b5 - box
         a1 a2 - agent
         c1 c2 - carrier
         valve1 valve2 bolt1 bolt2 bolt3 tool1 - content
         valve bolt tool - content-type
     )
-    
+
     (:init
         (is-type valve1 valve)
         (is-type valve2 valve)
@@ -21,6 +21,9 @@
         (is-type tool1 tool)
         (at-box b1 central_warehouse)
         (at-box b2 central_warehouse)
+        (at-box b3 central_warehouse)
+        (at-box b4 central_warehouse)
+        (at-box b5 central_warehouse)
         (at-content valve1 central_warehouse)
         (at-content valve2 central_warehouse)
         (at-content bolt1 central_warehouse)
@@ -46,7 +49,7 @@
         (= (capacity c1) 3)
         (= (capacity c2) 3)
         (= (amount c1) 0)
-        (= (amount c2) 0)  
+        (= (amount c2) 0)
     )
 
     (:goal
@@ -56,7 +59,7 @@
             (content-at-workstation ws2 bolt)
             (content-at-workstation ws3 valve)
             (content-at-workstation ws3 bolt)
-            (content-at-workstation ws3 tool)
+            (content-at-workstation ws4 tool)
         )
-    ) 
+    )
 )

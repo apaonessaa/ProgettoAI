@@ -12,13 +12,10 @@ import fr.uga.pddl4j.problem.DefaultProblem;
 import fr.uga.pddl4j.problem.Problem;
 import fr.uga.pddl4j.problem.operator.Action;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class IMPlanner extends AbstractPlanner {
-    private double heuristic_weigth = 1.0;
-    private int split = 2;
+    private double heuristic_weigth = 1.5;
 
     public static void main(String[] args) {
         // The path to the benchmarks directory
@@ -51,36 +48,38 @@ public class IMPlanner extends AbstractPlanner {
 
     @Override
     public Plan solve(Problem problem) throws ProblemNotSupportedException {
-        //array di utilità
-        Problem[] subProblems = split(problem,split);
+        // utility structs
+        Problem[] subProblems = split(problem);
+        // reduce the size of subproblems, because there are few items will null value.
+
         Node[] subSolutions = new Node[subProblems.length];
         Plan[] subplans = new Plan[subProblems.length];
 
-        //parametri algoritmi
+        // params
         SearchStrategy.Name strategyName = SearchStrategy.Name.ASTAR;
         StateHeuristic.Name heuristic = StateHeuristic.Name.IM_HEURISTIC;
         int timeout = 1000000;
 
-        //inizialmente usiamo A*
+        // A*
         StateSpaceSearch alg0 = StateSpaceSearch.getInstance(strategyName, heuristic, heuristic_weigth);
         subSolutions[0] = alg0.searchSolutionNode(subProblems[0]);
         subplans[0] = alg0.extractPlan(subSolutions[0],subProblems[0]);
-        System.out.println("piano 0: ");
+        System.out.println("\nPlan 0:");
         if(subplans[0] != null)
             printPlan(subplans[0],problem);
-        else System.out.println("piano nullo");
-        System.out.println("fine piano");
-        //risolviamo i sottoproblemi rimanenti usando ModifiedAStar
+        else System.out.println("Plan empty");
+        System.out.println("End plan");
+        // subproblems solving
         for(int i = 1; i<subProblems.length; i++){
-            subSolutions[i-1].setParent(null);
+            //subSolutions[i-1].setParent(null);
             StateSpaceSearch alg = new IMAStar(timeout,heuristic,heuristic_weigth,subSolutions[i-1]);
             subSolutions[i] = alg.searchSolutionNode(subProblems[i]);
             subplans[i] = alg.extractPlan(subSolutions[i],subProblems[i]);
-            System.out.printf("piano %d: \n",i);
+            System.out.printf("\nPlan %d: \n",i);
             if(subplans[i] != null)
                 printPlan(subplans[i],problem);
-            else System.out.println("piano nullo");
-            System.out.println("fine piano");
+            else System.out.println("Plan empty");
+            System.out.println("End plan");
         }
         List<Action> sol = new LinkedList<>();
         for(Plan p: subplans)
@@ -93,40 +92,83 @@ public class IMPlanner extends AbstractPlanner {
         return solution;
     }
 
-    private void printPlan(Plan p, Problem problem){
-        System.out.println(
-            new StringBuilder().append(problem.toString(p)).toString()
-        );
+    private void printPlan(Plan p, Problem problem) {
+        System.out.print(problem.toString(p));
     }
 
     @SuppressWarnings("unchecked")
-    private Problem[] split(Problem problem, int split){
-        List<Expression<String>>[] goals = new LinkedList[split];
+    private  Problem[] split(Problem problem) {
         DefaultParsedProblem pp = problem.getParsedProblem();
-        System.out.println(pp.getConstants());
-        List<Expression<String>> inGoal = pp.getGoal().getChildren();
-        int bias = inGoal.size()/split;
-        int j = 0;
-        Iterator<Expression<String>> it = inGoal.iterator();
-        for(int i = 0; i<goals.length; i++){
-            goals[i] = new LinkedList<>();
-            int k = 0;
-            for(;k<bias; k++) {
-                goals[i].add(it.next());
-                it.remove();
+
+        // Extract locations from objects
+        List<String> locations = pp.getObjects().stream()
+            .filter(stringTypedSymbol -> stringTypedSymbol.getValue().startsWith("loc"))
+            .map(obj -> obj.getImage().toString())
+            .toList();
+        //System.out.println("Locations: " + locations);
+
+        // Extract ws from init and build map {ws -> location index}
+        Map<String, Integer> wsMap = new HashMap<>();
+        for (Expression<String> stringExpression : pp.getInit()) {
+            String[] stringExpr = stringExpression.toString().split(" ");
+            if (stringExpr.length >= 3 && stringExpr[0].equals("(at-ws")) {
+                //System.out.println(stringExpr[1]);
+                //System.out.println(stringExpr[2].substring(0, stringExpr[2].length() - 1));
+                int index = locations.indexOf(stringExpr[2].substring(0, stringExpr[2].length() - 1));
+                if (index != -1) {
+                    wsMap.put(stringExpr[1], index);
+                    //System.out.println(ws[index].toString());
+                }
             }
-            j+=k;
         }
-        while(inGoal.size()>0)
-            for(int k = 0; k<goals.length; k++) {
-                goals[k].add(inGoal.remove(0));
-                if(inGoal.isEmpty())break;
+
+        System.out.println(locations);
+
+        List<Expression<String>>[] goals = new LinkedList[locations.size()];
+        List<Expression<String>> inGoal = pp.getGoal().getChildren();
+        // Categorize goals by workstation
+        for (Expression<String> goal : inGoal) {
+            String[] parts = goal.toString().split(" ");
+            String wss = parts[1];
+            int index = wsMap.get(wss);
+            if(goals[index]==null)
+                goals[index] = new LinkedList<>();
+            goals[index].add(goal);
+        }
+
+        // foreach Expression<String> in goals.
+        //  if it can be splitted in split=3 parts
+        // add to goals new items builded as:
+        //  goals[i] -> subgoals[i],  subgoals[i+1], subgoals[i+2]
+        // each component has less than split elements.
+        // Add this subgoals to array of goals and remove the item splitted.
+        // Split goals into sub-goals
+
+        int splitSize = 2; // Max number of goals per sub-goal
+        List<Expression<String>>[] splitGoals = new LinkedList[locations.size() * splitSize + 1];
+        int splitIndex = 0;
+
+        for (int i = 0; i < goals.length; i++) {
+            if (goals[i] != null) {
+                for (int j = 0; j < goals[i].size(); j += splitSize) {
+                    List<Expression<String>> subGoals = new LinkedList<>();
+                    for (int k = 0; k < splitSize && j + k < goals[i].size(); k++)
+                        subGoals.add(goals[i].get(j + k));
+//                    if(splitIndex==0 && subGoals.size()>1) {
+//                        splitGoals[splitIndex] = new LinkedList<>();
+//                        splitGoals[splitIndex++].add(subGoals.remove(0));
+//                    }
+                    splitGoals[splitIndex++] = subGoals;
+                }
             }
-        Problem[] ret = new DefaultProblem[split];
-        for(int i = 0; i<ret.length; i++){
+        }
+
+        Problem[] ret = new DefaultProblem[splitIndex];
+        for (int i = 0; i < ret.length; i++) {
             Expression<String> tmp = new Expression<>();
-            tmp.setChildren(goals[i]);
-            System.out.println("Goal"+i+": "+tmp);
+            if (splitGoals[i] == null) continue;
+            tmp.setChildren(splitGoals[i]);
+            System.out.println("Goal" + i + ": " + tmp);
             pp.setGoal(tmp);
             ret[i] = new DefaultProblem(pp);
             ret[i].instantiate();
@@ -135,7 +177,5 @@ public class IMPlanner extends AbstractPlanner {
     }
 
     @Override
-    public boolean isSupported(Problem problem) {
-        return false;
-    }
+    public boolean isSupported(Problem problem) { return true; }
 }

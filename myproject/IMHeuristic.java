@@ -1,16 +1,16 @@
 package fr.uga.pddl4j.myproject;
 
 import fr.uga.pddl4j.heuristics.state.RelaxedGraphHeuristic;
-import fr.uga.pddl4j.parser.Expression;
 import fr.uga.pddl4j.planners.statespace.search.Node;
 import fr.uga.pddl4j.problem.*;
+import fr.uga.pddl4j.problem.numeric.NumericFluent;
 import fr.uga.pddl4j.problem.operator.Condition;
 import fr.uga.pddl4j.util.BitVector;
 
 import java.util.*;
 
 public class IMHeuristic extends RelaxedGraphHeuristic {
-    private Problem p;
+    private final Problem p;
     private final HashMap<String,List<Integer>> predicates;
     private final HashMap<Integer, List<String>> fluents;
     public IMHeuristic(Problem problem) {
@@ -33,14 +33,13 @@ public class IMHeuristic extends RelaxedGraphHeuristic {
         super.setGoal(goal);
         // Expands the relaxed planning graph from the current state.
         this.expandRelaxedPlanningGraph(state);
-
         return
             onGoal(state, goal)
             + countUnnecessaryContent(state)                              // scope: box, avoid configuration where there are some unnecessary content for a loc/ws
             - counter(state, "content-at-workstation")          // scope: goal
             - counter(state, "box-at-workstation")              // scope: deliver
-            + countContentAt(state, "central_warehouse");    // scope: minimize number of move, fill before a move if it is possible
-            // TODO add constraints
+            + countContentAt(state, "central_warehouse")     // scope: minimize number of move, fill before a move if it is possible
+            - countEmptyBoxAtCarrier(state);                              // scope: max number of box at central warehouse
     }
 
     /**
@@ -165,6 +164,44 @@ public class IMHeuristic extends RelaxedGraphHeuristic {
     /**
      * Counts the content located at :targetLocation
      * */
+    private int countEmptyBoxAtCarrier(State state) {
+        int count=0;
+
+        // collect boxes that are empty in the current state
+        List<String> empties = new LinkedList<>();
+        BitVector tmp = null;
+        for(int i : this.predicates.get("empty")) {
+            tmp = new BitVector();
+            tmp.set(i);
+            if (state.satisfy(new Condition(tmp, new BitVector()))) {
+                // Extract the box from the predicate
+                // (empty ?box - box)
+                String boxEmpty = this.fluents.get(i).get(1);
+                empties.add(boxEmpty);
+            }
+        }
+
+        List<Integer> boxes = this.predicates.get("box-at-carrier");
+        // box at carrier (box-at-carrier ?carrier - carrier ?box - box)
+        for (int i : boxes) {
+            tmp = new BitVector();
+            tmp.set(i);
+            // If the state satisfies the condition box-at-carrier(carrier, box)
+            if (state.satisfy(new Condition(tmp, new BitVector()))) {
+                // Extract the box from the predicate
+                // (box-at-carrier ?carrier - carrier ?box - box)
+                //String carrier = this.fluents.get(i).get(1);
+                String box = this.fluents.get(i).get(2);
+                if (empties.remove(box))
+                    count++;
+            }
+        }
+        return count;
+    }
+
+    /**
+     * Counts the content located at :targetLocation
+     * */
     private int countContentAt(State state, String targetLocation) {
         int count=0;
         List<Integer> contentAtCentralWarehouse = this.predicates.get("at-content");
@@ -224,6 +261,14 @@ public class IMHeuristic extends RelaxedGraphHeuristic {
             ret.get(key).add(index);
             index++;
         }
+        // Numeric fluents
+        for(NumericFluent f: ((FinalizedProblem)p).getNumericFluents()) {
+            String key = new StringTokenizer(((FinalizedProblem)p).toString(f),"( )",false).nextToken();
+            if(ret.get(key) == null)
+                ret.put(key, new ArrayList<>());
+            ret.get(key).add(index);
+            index++;
+        }
         return ret;
     }
 
@@ -235,6 +280,15 @@ public class IMHeuristic extends RelaxedGraphHeuristic {
         int index = 0;
         for(Fluent f: p.getFluents()) {
             StringTokenizer st = new StringTokenizer(p.toString(f),"( )",false);
+            if(ret.get(index)==null)
+                ret.put(index,new ArrayList<>());
+            while(st.hasMoreTokens())
+                ret.get(index).add(st.nextToken());
+            index++;
+        }
+        // Numeric fluents
+        for(NumericFluent f: ((FinalizedProblem)p).getNumericFluents()) {
+            StringTokenizer st = new StringTokenizer(((FinalizedProblem)p).toString(f),"( )",false);
             if(ret.get(index)==null)
                 ret.put(index,new ArrayList<>());
             while(st.hasMoreTokens())

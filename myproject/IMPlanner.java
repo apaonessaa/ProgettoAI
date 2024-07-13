@@ -12,24 +12,32 @@ import fr.uga.pddl4j.problem.DefaultProblem;
 import fr.uga.pddl4j.problem.Problem;
 import fr.uga.pddl4j.problem.operator.Action;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class IMPlanner extends AbstractPlanner {
-    private double heuristic_weigth = 1.5;
 
     public static void main(String[] args) {
         // The path to the benchmarks directory
         final String benchmark = "src/main/java/fr/uga/pddl4j/myproject/benchmark/";
+        final String domainName = "domain.pddl";
+        final String problemName = "problems/p05.pddl";
+        final String outputName = "statistics/p05.pddl.txt";
+
         // Creates the planner
         final IMPlanner planner = new IMPlanner();
         // Sets the domain of the problem to solve
-        planner.setDomain(benchmark + "domain2.pddl");
+        planner.setDomain(benchmark + domainName);
         // Sets the problem to solve
-        planner.setProblem(benchmark + "/problems/instance22.pddl");
+        planner.setProblem(benchmark + problemName);
         // Sets the timeout of the search in seconds
         planner.setTimeout(1000);
         // Sets log level
         planner.setLogLevel(LogLevel.INFO);
+        // Set heuristic weight
+        planner.setHeuristicWeight(1.2);
 
         // Solve and print the result
         try {
@@ -37,6 +45,34 @@ public class IMPlanner extends AbstractPlanner {
         } catch (InvalidConfigurationException e) {
             e.printStackTrace();
         }
+
+        File file = null;
+        FileWriter fw = null;
+        try {
+            file = new File(benchmark + outputName);
+            if (file.exists())
+                file.delete();
+            file.createNewFile();
+
+            // Write the stats
+            fw = new FileWriter(file);
+            fw.write(planner.getStatistics().toString());
+            fw.flush();
+            fw.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private double heuristicWeigth = 1.5;
+
+    public void setHeuristicWeight(double w) {
+        if (w<=0)  {
+            this.heuristicWeigth = 1.5;
+            return;
+        }
+        this.heuristicWeigth = w;
     }
 
     @Override
@@ -49,9 +85,7 @@ public class IMPlanner extends AbstractPlanner {
     @Override
     public Plan solve(Problem problem) throws ProblemNotSupportedException {
         // utility structs
-        Problem[] subProblems = split(problem);
-        // reduce the size of subproblems, because there are few items will null value.
-
+        Problem[] subProblems = buildSubproblems(problem);
         Node[] subSolutions = new Node[subProblems.length];
         Plan[] subplans = new Plan[subProblems.length];
 
@@ -60,26 +94,29 @@ public class IMPlanner extends AbstractPlanner {
         StateHeuristic.Name heuristic = StateHeuristic.Name.IM_HEURISTIC;
         int timeout = 1000000;
 
-        // A*
-        StateSpaceSearch alg0 = StateSpaceSearch.getInstance(strategyName, heuristic, heuristic_weigth);
-        subSolutions[0] = alg0.searchSolutionNode(subProblems[0]);
-        subplans[0] = alg0.extractPlan(subSolutions[0],subProblems[0]);
-        System.out.println("\nPlan 0:");
-        if(subplans[0] != null)
-            printPlan(subplans[0],problem);
-        else System.out.println("Plan empty");
-        System.out.println("End plan");
-        // subproblems solving
-        for(int i = 1; i<subProblems.length; i++){
-            //subSolutions[i-1].setParent(null);
-            StateSpaceSearch alg = new IMAStar(timeout,heuristic,heuristic_weigth,subSolutions[i-1]);
-            subSolutions[i] = alg.searchSolutionNode(subProblems[i]);
-            subplans[i] = alg.extractPlan(subSolutions[i],subProblems[i]);
-            System.out.printf("\nPlan %d: \n",i);
+        // Solving with A* and IMHeuristic
+        for (int i = 0; i<subProblems.length; i++){
+            if (i==0) {
+                // solve sub problem 0
+                StateSpaceSearch alg = StateSpaceSearch.getInstance(strategyName,heuristic,heuristicWeigth);
+                subSolutions[i] = alg.searchSolutionNode(subProblems[i]);
+                subplans[i] = alg.extractPlan(subSolutions[i],subProblems[i]);
+            }
+            else {
+                // solve sub problem from prev sub solution founded
+                subSolutions[i-1].setParent(null);
+                StateSpaceSearch alg = new IMAStar(timeout,heuristic,heuristicWeigth,subSolutions[i-1]);
+                subSolutions[i] = alg.searchSolutionNode(subProblems[i]);
+                subplans[i] = alg.extractPlan(subSolutions[i],subProblems[i]);
+            }
+            System.out.println("\n========================================================");
+            System.out.printf("Plan %d: \n",i);
+            System.out.println("--------------------------------------------------------");
             if(subplans[i] != null)
-                printPlan(subplans[i],problem);
-            else System.out.println("Plan empty");
-            System.out.println("End plan");
+                System.out.print(problem.toString(subplans[i]));
+            else
+                System.out.println("Plan empty");
+            System.out.println("========================================================");
         }
         List<Action> sol = new LinkedList<>();
         for(Plan p: subplans)
@@ -92,12 +129,8 @@ public class IMPlanner extends AbstractPlanner {
         return solution;
     }
 
-    private void printPlan(Plan p, Problem problem) {
-        System.out.print(problem.toString(p));
-    }
-
     @SuppressWarnings("unchecked")
-    private  Problem[] split(Problem problem) {
+    private Problem[] buildSubproblems(Problem problem) {
         DefaultParsedProblem pp = problem.getParsedProblem();
 
         // Extract locations from objects
@@ -122,7 +155,7 @@ public class IMPlanner extends AbstractPlanner {
             }
         }
 
-        System.out.println(locations);
+        //System.out.println(locations);
 
         List<Expression<String>>[] goals = new LinkedList[locations.size()];
         List<Expression<String>> inGoal = pp.getGoal().getChildren();
@@ -137,42 +170,48 @@ public class IMPlanner extends AbstractPlanner {
         }
 
         // foreach Expression<String> in goals.
-        //  if it can be splitted in split=3 parts
+        //  if it can be splitted in split=2 parts
         // add to goals new items builded as:
-        //  goals[i] -> subgoals[i],  subgoals[i+1], subgoals[i+2]
+        //  goals[i] -> subgoals[i:..],  subgoals[i+?:...]
         // each component has less than split elements.
         // Add this subgoals to array of goals and remove the item splitted.
         // Split goals into sub-goals
 
-        int splitSize = 2; // Max number of goals per sub-goal
-        List<Expression<String>>[] splitGoals = new LinkedList[locations.size() * splitSize + 1];
-        int splitIndex = 0;
+        int splitSize = 3; // Max number of goals per sub-goal
 
+        List<List<Expression<String>>> splitGoals = new LinkedList<>();
+        int splitIndex = 0;
         for (int i = 0; i < goals.length; i++) {
             if (goals[i] != null) {
                 for (int j = 0; j < goals[i].size(); j += splitSize) {
                     List<Expression<String>> subGoals = new LinkedList<>();
                     for (int k = 0; k < splitSize && j + k < goals[i].size(); k++)
                         subGoals.add(goals[i].get(j + k));
-//                    if(splitIndex==0 && subGoals.size()>1) {
-//                        splitGoals[splitIndex] = new LinkedList<>();
-//                        splitGoals[splitIndex++].add(subGoals.remove(0));
-//                    }
-                    splitGoals[splitIndex++] = subGoals;
+                    if(splitIndex==0 && subGoals.size()>1) {
+                        LinkedList<Expression<String>> tmp = new LinkedList<>();
+                        tmp.add(subGoals.remove(0));
+                        splitGoals.add(tmp);
+                        splitIndex++;
+                    }
+                    splitGoals.add(subGoals);
+                    splitIndex++;
                 }
             }
         }
 
+        System.out.println("========================================================");
+        System.out.println("SubProblems instantiated with:");
+        System.out.println("--------------------------------------------------------\n");
         Problem[] ret = new DefaultProblem[splitIndex];
         for (int i = 0; i < ret.length; i++) {
             Expression<String> tmp = new Expression<>();
-            if (splitGoals[i] == null) continue;
-            tmp.setChildren(splitGoals[i]);
+            tmp.setChildren(splitGoals.get(i));
             System.out.println("Goal" + i + ": " + tmp);
             pp.setGoal(tmp);
             ret[i] = new DefaultProblem(pp);
             ret[i].instantiate();
         }
+        System.out.println("\n========================================================");
         return ret;
     }
 

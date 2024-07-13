@@ -13,6 +13,7 @@ public class IMHeuristic extends RelaxedGraphHeuristic {
     private final Problem p;
     private final HashMap<String,List<Integer>> predicates;
     private final HashMap<Integer, List<String>> fluents;
+    private HashMap<String, List<String>> wsContentTypeRequested;
     public IMHeuristic(Problem problem) {
         super(problem);
         this.p = problem;
@@ -33,13 +34,26 @@ public class IMHeuristic extends RelaxedGraphHeuristic {
         super.setGoal(goal);
         // Expands the relaxed planning graph from the current state.
         this.expandRelaxedPlanningGraph(state);
+
+        // <workstation, types[]> to satisfied in current problem.
+        this.wsContentTypeRequested= new HashMap<>();
+        for(int i = goal.getPositiveFluents().nextSetBit(0); i>=0; i = goal.getPositiveFluents().nextSetBit(i+1)){
+            BitVector tmp = new BitVector();
+            tmp.set(i);
+            if(state.satisfy(new Condition(tmp,new BitVector()))){
+                // (content-at-workstation ?ws - workstation ?t - content-type)
+                String ws = this.fluents.get(i).get(1);
+                String type = this.fluents.get(i).get(2);
+                wsContentTypeRequested.computeIfAbsent(ws, k -> new ArrayList<>());
+                wsContentTypeRequested.get(ws).add(type);
+            }
+        }
         return
             onGoal(state, goal)
-            + countUnnecessaryContent(state)                              // scope: box, avoid configuration where there are some unnecessary content for a loc/ws
-            - counter(state, "content-at-workstation")          // scope: goal
-            - counter(state, "box-at-workstation")              // scope: deliver
-            + countContentAt(state, "central_warehouse")     // scope: minimize number of move, fill before a move if it is possible
-            - countEmptyBoxAtCarrier(state);                              // scope: max number of box at central warehouse
+            + countUnnecessaryContent(state)                                // scope: box, avoid configuration where there are some unnecessary content for a loc/ws
+            - countContentInWs(state)                                       // scope: goal, more sophisticated than "counter(state, "content-at-workstation")"
+            - counter(state, "box-at-workstation")                // scope: deliver
+            + countContentAt(state, "central_warehouse");      // scope: minimize number of move, fill before a move if it is possible
     }
 
     /**
@@ -78,7 +92,33 @@ public class IMHeuristic extends RelaxedGraphHeuristic {
     }
 
     /**
-     *  Counter of content that is not necessary for current loc
+     * Counts the content at ws, the satisfied the constraints
+     * */
+    private int countContentInWs(State state) {
+        int count = 0;
+        // (content-at-workstation ?ws - workstation ?t - content-type)
+        for (int i : this.predicates.get("content-at-workstation")) {
+            BitVector tmp = new BitVector();
+            tmp.set(i);
+            Condition condition = new Condition(tmp, new BitVector());
+            if (state.satisfy(condition)) {
+                // Extract the content-type and ws
+                // (content-at-workstation ?ws - workstation ?t - content-type)
+                String ws = this.fluents.get(i).get(1);
+                String type = this.fluents.get(i).get(2);
+                // Check if it is a target workstation
+                if (!wsContentTypeRequested.containsKey(ws))
+                    continue;
+                if(wsContentTypeRequested.get(ws).contains(type))
+                    count++;
+            }
+            count++;
+        }
+        return count;
+    }
+
+    /**
+     *  Counter of content that is not necessary for current loc/ws
      *  Goal : content-at-ws
      *
      *  Current state : for each box-at-workstation satisfied predicates
@@ -88,15 +128,14 @@ public class IMHeuristic extends RelaxedGraphHeuristic {
      * */
     private int countUnnecessaryContent(State state) {
         int count = 0;
+
+        // Step 1: Populate the filled map with boxes and their contents
         // Map box -> [content]
         Map<String, List<String>> filled = new HashMap<>();
+
         // Contents of the box
         // (filled ?box - box ?content - content)
-        List<Integer> filledPreds = this.predicates.get("filled");
-        // Content Type
-        // (is-type ?content - content ?t - content-type)
-        List<Integer> isTypeContentsPreds = this.predicates.get("is-type");
-        for (int j : filledPreds) {
+        for (int j : this.predicates.get("filled")) {
             BitVector filledTmp = new BitVector();
             filledTmp.set(j);
             // If the state satisfies the condition filled(box, content)
@@ -112,9 +151,12 @@ public class IMHeuristic extends RelaxedGraphHeuristic {
             }
         }
 
-        // Iterate through predicates related to box-at-workstation
-        List<Integer> boxAtWsPreds = this.predicates.get("box-at-workstation");
-        for (int i : boxAtWsPreds) {
+        // Step 2: Check the content at each workstation
+        // Content Type
+        // (is-type ?content - content ?t - content-type)
+        List<Integer> isTypeContentsPreds = this.predicates.get("is-type");
+        for (int i : this.predicates.get("box-at-workstation")) {
+            // (box-at-workstation ?ws - workstation ?box - box)
             BitVector tmp = new BitVector();
             tmp.set(i);
             // If the state satisfies the condition box-at-workstation
@@ -123,76 +165,34 @@ public class IMHeuristic extends RelaxedGraphHeuristic {
                 // (box-at-workstation ?ws - workstation ?box - box)
                 String ws = this.fluents.get(i).get(1);
                 String box = this.fluents.get(i).get(2);
+
+                // Check if it is a target workstation
+                if (!wsContentTypeRequested.containsKey(ws))
+                    continue;
+
                 // Get content type of the box
                 List<String> contentInTheBox = filled.get(box);
-                if(contentInTheBox==null)
+                if (contentInTheBox == null)
                     continue;
+
                 // Check if this content is necessary at this workstation
                 // (content-at-workstation ?ws - workstation ?t - content-type)
-                List<Integer> keys = this.predicates.get("content-at-workstation");
+                // current goal
                 boolean isNecessary = false;
-                for (int k : keys) {
-                    // (content-at-workstation ?ws - workstation ?t - content-type)
-                    String goalWs = this.fluents.get(k).get(1);
-                    String goalType = this.fluents.get(k).get(2);
-                    if (!ws.equals(goalWs))
-                        continue;
-                    // Ensure the content is of the type required at the workstation
-                    for (String theContent : contentInTheBox) {
-                        for (int l : isTypeContentsPreds) {
-                            String typeContent = this.fluents.get(l).get(1);
-                            String type = this.fluents.get(l).get(2);
-                            if (typeContent.equals(theContent) && type.equals(goalType)) {
-                                isNecessary = true;
-                                break;
-                            }
-                        }
-                        if (isNecessary)
+                for (String theContent : contentInTheBox) {
+                    for (int l : isTypeContentsPreds) {
+                        String typedContent = this.fluents.get(l).get(1);
+                        String type = this.fluents.get(l).get(2);
+                        if (typedContent.equals(theContent) && wsContentTypeRequested.get(ws).contains(type)) {
+                            isNecessary = true;
                             break;
+                        }
                     }
                     if (isNecessary)
                         break;
                 }
-                // if exists a content-type not necessary, increment the counter
+                // If there exists a content-type not necessary, increment the counter
                 if (!isNecessary)
-                    count++;
-            }
-        }
-        return count;
-    }
-
-    /**
-     * Counts the content located at :targetLocation
-     * */
-    private int countEmptyBoxAtCarrier(State state) {
-        int count=0;
-
-        // collect boxes that are empty in the current state
-        List<String> empties = new LinkedList<>();
-        BitVector tmp = null;
-        for(int i : this.predicates.get("empty")) {
-            tmp = new BitVector();
-            tmp.set(i);
-            if (state.satisfy(new Condition(tmp, new BitVector()))) {
-                // Extract the box from the predicate
-                // (empty ?box - box)
-                String boxEmpty = this.fluents.get(i).get(1);
-                empties.add(boxEmpty);
-            }
-        }
-
-        List<Integer> boxes = this.predicates.get("box-at-carrier");
-        // box at carrier (box-at-carrier ?carrier - carrier ?box - box)
-        for (int i : boxes) {
-            tmp = new BitVector();
-            tmp.set(i);
-            // If the state satisfies the condition box-at-carrier(carrier, box)
-            if (state.satisfy(new Condition(tmp, new BitVector()))) {
-                // Extract the box from the predicate
-                // (box-at-carrier ?carrier - carrier ?box - box)
-                //String carrier = this.fluents.get(i).get(1);
-                String box = this.fluents.get(i).get(2);
-                if (empties.remove(box))
                     count++;
             }
         }

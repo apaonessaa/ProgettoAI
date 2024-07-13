@@ -3,10 +3,10 @@
      122 number of relevant facts 
 
 * Time spent:
-    0,05 seconds parsing 
-    0,28 seconds encoding 
+    0,09 seconds parsing 
+    0,46 seconds encoding 
     0,00 seconds searching
-    0,33 seconds total time
+    0,55 seconds total time
 
 * Memory used:
     3,46 MBytes for problem representation

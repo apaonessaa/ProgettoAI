@@ -23,8 +23,8 @@ public class IMPlanner extends AbstractPlanner {
         // The path to the benchmarks directory
         final String benchmark = "src/main/java/fr/uga/pddl4j/myproject/benchmark/";
         final String domainName = "domain.pddl";
-        final String problemName = "problems/p05.pddl";
-        final String outputName = "statistics/p05.pddl.txt";
+        final String problemName = "problems/p06.pddl";
+        final String outputName = "statistics/p06.pddl.txt";
 
         // Creates the planner
         final IMPlanner planner = new IMPlanner();
@@ -36,8 +36,9 @@ public class IMPlanner extends AbstractPlanner {
         planner.setTimeout(1000);
         // Sets log level
         planner.setLogLevel(LogLevel.INFO);
-        // Set heuristic weight
+        // Set heuristic weight and split size
         planner.setHeuristicWeight(1.2);
+        planner.setSplitSize(2);
 
         // Solve and print the result
         try {
@@ -65,15 +66,18 @@ public class IMPlanner extends AbstractPlanner {
         }
     }
 
+    private int splitSize = 2; // Max number of goals per sub-goal
+
     private double heuristicWeigth = 1.5;
 
-    public void setHeuristicWeight(double w) {
-        if (w<=0)  {
-            this.heuristicWeigth = 1.5;
-            return;
-        }
-        this.heuristicWeigth = w;
+    public void setHeuristicWeight(double heuristicWeigth) {
+        if (heuristicWeigth>0) this.heuristicWeigth = heuristicWeigth;
     }
+
+    public void setSplitSize(int splitSize) {
+        if (splitSize>0) this.splitSize = splitSize;
+    }
+
 
     @Override
     public Problem instantiate(DefaultParsedProblem problem) {
@@ -177,15 +181,13 @@ public class IMPlanner extends AbstractPlanner {
         // Add this subgoals to array of goals and remove the item splitted.
         // Split goals into sub-goals
 
-        int splitSize = 3; // Max number of goals per sub-goal
-
         List<List<Expression<String>>> splitGoals = new LinkedList<>();
         int splitIndex = 0;
         for (int i = 0; i < goals.length; i++) {
             if (goals[i] != null) {
-                for (int j = 0; j < goals[i].size(); j += splitSize) {
+                for (int j = 0; j < goals[i].size(); j += this.splitSize) {
                     List<Expression<String>> subGoals = new LinkedList<>();
-                    for (int k = 0; k < splitSize && j + k < goals[i].size(); k++)
+                    for (int k = 0; k < this.splitSize && j + k < goals[i].size(); k++)
                         subGoals.add(goals[i].get(j + k));
                     if(splitIndex==0 && subGoals.size()>1) {
                         LinkedList<Expression<String>> tmp = new LinkedList<>();

@@ -1,6 +1,6 @@
 (define
-    (problem instance2)
-    (:domain industrial_manufacturing2)
+    (problem instance22)
+    (:domain industrial_manufacturing)
 
     (:objects
         central_warehouse loc1 loc2 loc3 - location

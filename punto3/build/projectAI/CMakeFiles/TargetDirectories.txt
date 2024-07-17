@@ -1,0 +1,14 @@
+/home/aiguy/projectAI/build/projectAI/CMakeFiles/uninstall.dir
+/home/aiguy/projectAI/build/projectAI/CMakeFiles/projectAI_uninstall.dir
+/home/aiguy/projectAI/build/projectAI/CMakeFiles/pickup_action.dir
+/home/aiguy/projectAI/build/projectAI/CMakeFiles/fill_action.dir
+/home/aiguy/projectAI/build/projectAI/CMakeFiles/move_action.dir
+/home/aiguy/projectAI/build/projectAI/CMakeFiles/deliver_action.dir
+/home/aiguy/projectAI/build/projectAI/CMakeFiles/empty_action.dir
+/home/aiguy/projectAI/build/projectAI/CMakeFiles/test.dir
+/home/aiguy/projectAI/build/projectAI/CMakeFiles/edit_cache.dir
+/home/aiguy/projectAI/build/projectAI/CMakeFiles/rebuild_cache.dir
+/home/aiguy/projectAI/build/projectAI/CMakeFiles/list_install_components.dir
+/home/aiguy/projectAI/build/projectAI/CMakeFiles/install.dir
+/home/aiguy/projectAI/build/projectAI/CMakeFiles/install/local.dir
+/home/aiguy/projectAI/build/projectAI/CMakeFiles/install/strip.dir

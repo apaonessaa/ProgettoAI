@@ -1,0 +1,1 @@
+/home/aiguy/projectAI/build/projectAI/ament_cmake_environment_hooks/local_setup.zsh

@@ -1,0 +1,80 @@
+set instance central_warehouse location
+set instance loc1 location
+set instance loc2 location
+set instance loc3 location
+
+set instance ws1 workstation
+set instance ws2 workstation
+set instance ws3 workstation
+set instance ws4 workstation
+
+set instance b1 box
+set instance b2 box
+set instance b3 box
+set instance b4 box
+set instance b5 box
+
+set instance a1 agent
+set instance a2 agent
+
+set instance c1 carrier
+set instance c2 carrier
+
+set instance valve1 content
+set instance valve2 content
+set instance bolt1 content
+set instance bolt2 content
+set instance bolt3 content
+set instance tool1 content
+
+set instance valve content-type
+set instance bolt content-type
+set instance tool content-type
+
+set function (= (capacity c1) 3)
+set function (= (capacity c2) 3)
+set function (= (amount c1) 0)
+set function (= (amount c2) 0)
+set function (= (pick-duration) 2)
+set function (= (fill-duration) 3)
+set function (= (move-duration) 5)
+set function (= (deliver-duration) 2)
+set function (= (empty-duration) 3)
+
+set predicate (is-type valve1 valve)
+set predicate (is-type valve2 valve)
+set predicate (is-type bolt1 bolt)
+set predicate (is-type bolt2 bolt)
+set predicate (is-type bolt3 bolt)
+set predicate (is-type tool1 tool)
+set predicate (at-box b1 central_warehouse)
+set predicate (at-box b2 central_warehouse)
+set predicate (at-box b3 central_warehouse)
+set predicate (at-box b4 central_warehouse)
+set predicate (at-box b5 central_warehouse)
+set predicate (at-content valve1 central_warehouse)
+set predicate (at-content valve2 central_warehouse)
+set predicate (at-content bolt1 central_warehouse)
+set predicate (at-content bolt2 central_warehouse)
+set predicate (at-content bolt3 central_warehouse)
+set predicate (at-content tool1 central_warehouse)
+set predicate (at-ws ws1 loc1)
+set predicate (at-ws ws2 loc2)
+set predicate (at-ws ws3 loc3)
+set predicate (at-ws ws4 loc3)
+set predicate (at-agent a1 central_warehouse)
+set predicate (at-agent a2 central_warehouse)
+set predicate (free-agent a1)
+set predicate (free-agent a2)
+set predicate (connected central_warehouse loc1)
+set predicate (connected central_warehouse loc2)
+set predicate (connected central_warehouse loc3)
+set predicate (connected loc1 central_warehouse)
+set predicate (connected loc2 central_warehouse)
+set predicate (connected loc3 central_warehouse)
+set predicate (empty b1)
+set predicate (empty b2)
+set predicate (carrier-at-agent a1 c1)
+set predicate (carrier-at-agent a2 c2)
+
+set goal (and (content-at-workstation ws1 bolt) (content-at-workstation ws2 valve) (content-at-workstation ws2 bolt) (content-at-workstation ws3 valve) (content-at-workstation ws3 bolt) (content-at-workstation ws4 tool))

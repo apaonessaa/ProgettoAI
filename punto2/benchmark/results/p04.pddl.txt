@@ -1,0 +1,16 @@
+* ParsedProblem features:
+    2742 number of actions 
+     246 number of relevant facts 
+
+* Time spent:
+    0,05 seconds parsing 
+    0,84 seconds encoding 
+    0,00 seconds searching
+    0,88 seconds total time
+
+* Memory used:
+    9,15 MBytes for problem representation
+    0,00 MBytes for searching
+    9,15 MBytes total
+
+

@@ -1,0 +1,623 @@
+[0.000000] (-) TimerEvent: {}
+[0.000272] (projectAI) JobQueued: {'identifier': 'projectAI', 'dependencies': OrderedDict()}
+[0.000306] (projectAI) JobStarted: {'identifier': 'projectAI'}
+[0.003411] (projectAI) JobProgress: {'identifier': 'projectAI', 'progress': 'cmake'}
+[0.003684] (projectAI) Command: {'cmd': ['/usr/bin/cmake', '/home/aiguy/projectAI', '-DAMENT_CMAKE_SYMLINK_INSTALL=1', '-DCMAKE_INSTALL_PREFIX=/home/aiguy/projectAI/install/projectAI'], 'cwd': '/home/aiguy/projectAI/build/projectAI', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'aiguy'), ('LC_TIME', 'it_IT.UTF-8'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/aiguy'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GRADLE_HOME', '/home/aiguy/.sdkman/candidates/gradle/current'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'it_IT.UTF-8'), ('DBUS_STARTER_BUS_TYPE', 'session'), ('SYSTEMD_EXEC_PID', '1296'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus,guid=1ca26a1ad6fe77ceedf345d76696370c'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'aiguy'), ('SDKMAN_CANDIDATES_API', 'https://api.sdkman.io/2'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'aiguy'), ('TERM', 'xterm-256color'), ('GAZEBO_MODEL_PATH', ':/opt/ros/humble/share/turtlebot3_gazebo/models'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/home/aiguy/.sdkman/candidates/gradle/current/bin:/opt/ros/humble/bin:/home/aiguy/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/usr/local/go/bin:/home/aiguy/.local/bin/'), ('SESSION_MANAGER', 'local/vm-ubu22:@/tmp/.ICE-unix/1296,unix/vm-ubu22:/tmp/.ICE-unix/1296'), ('SDKMAN_CANDIDATES_DIR', '/home/aiguy/.sdkman/candidates'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'it_IT.UTF-8'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/8b48fd79_da38_49a7_96d1_44120e632856'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('LC_TELEPHONE', 'it_IT.UTF-8'), ('RMW_IMPLEMENTATION', 'rmw_cyclonedds_cpp'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.CCE2Q2'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.156'), ('SDKMAN_DIR', '/home/aiguy/.sdkman'), ('SDKMAN_PLATFORM', 'linuxx64'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('LC_NAME', 'it_IT.UTF-8'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'it_IT.UTF-8'), ('LC_IDENTIFICATION', 'it_IT.UTF-8'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/aiguy/projectAI/build/projectAI'), ('TURTLEBOT3_MODEL', 'waffle'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('DBUS_STARTER_ADDRESS', 'unix:path=/run/user/1000/bus,guid=1ca26a1ad6fe77ceedf345d76696370c'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'it_IT.UTF-8'), ('LC_PAPER', 'it_IT.UTF-8'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[0.095863] (-) TimerEvent: {}
+[0.128684] (projectAI) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[0.195946] (-) TimerEvent: {}
+[0.249226] (projectAI) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[0.267560] (projectAI) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.296590] (-) TimerEvent: {}
+[0.361064] (projectAI) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.379084] (projectAI) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[0.379848] (projectAI) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[0.380771] (projectAI) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[0.385063] (projectAI) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[0.396807] (-) TimerEvent: {}
+[0.488803] (projectAI) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[0.497581] (-) TimerEvent: {}
+[0.504332] (projectAI) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[0.504893] (projectAI) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[0.505720] (projectAI) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[0.508844] (projectAI) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.8 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.597747] (-) TimerEvent: {}
+[0.698841] (-) TimerEvent: {}
+[0.764624] (projectAI) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter \n'}
+[0.799002] (-) TimerEvent: {}
+[0.847806] (projectAI) StdoutLine: {'line': b'-- Override CMake install command with custom implementation using symlinks instead of copying resources\n'}
+[0.878659] (projectAI) StdoutLine: {'line': b'-- Found rclcpp: 16.0.8 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[0.899146] (-) TimerEvent: {}
+[0.951828] (projectAI) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[0.960373] (projectAI) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[0.971983] (projectAI) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[0.992658] (projectAI) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[1.003046] (-) TimerEvent: {}
+[1.047826] (projectAI) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[1.103189] (-) TimerEvent: {}
+[1.196890] (projectAI) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.1 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[1.200423] (projectAI) StdoutLine: {'line': b'-- Found rmw_cyclonedds_cpp: 1.3.4 (/opt/ros/humble/share/rmw_cyclonedds_cpp/cmake)\n'}
+[1.203582] (-) TimerEvent: {}
+[1.271439] (projectAI) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_cyclonedds_cpp' as default\n"}
+[1.283971] (projectAI) StdoutLine: {'line': b'-- Looking for pthread.h\n'}
+[1.303847] (-) TimerEvent: {}
+[1.375321] (projectAI) StdoutLine: {'line': b'-- Looking for pthread.h - found\n'}
+[1.375952] (projectAI) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n'}
+[1.404804] (-) TimerEvent: {}
+[1.473144] (projectAI) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n'}
+[1.474494] (projectAI) StdoutLine: {'line': b'-- Found Threads: TRUE  \n'}
+[1.505380] (-) TimerEvent: {}
+[1.605735] (-) TimerEvent: {}
+[1.706096] (-) TimerEvent: {}
+[1.806487] (-) TimerEvent: {}
+[1.815989] (projectAI) StdoutLine: {'line': b'-- Found rclcpp_action: 16.0.8 (/opt/ros/humble/share/rclcpp_action/cmake)\n'}
+[1.906641] (-) TimerEvent: {}
+[2.007071] (-) TimerEvent: {}
+[2.013034] (projectAI) StdoutLine: {'line': b'-- Found plansys2_executor: 2.0.9 (/opt/ros/humble/share/plansys2_executor/cmake)\n'}
+[2.107220] (-) TimerEvent: {}
+[2.207617] (-) TimerEvent: {}
+[2.308024] (-) TimerEvent: {}
+[2.408607] (-) TimerEvent: {}
+[2.508996] (-) TimerEvent: {}
+[2.609395] (-) TimerEvent: {}
+[2.709786] (-) TimerEvent: {}
+[2.810294] (-) TimerEvent: {}
+[2.910663] (-) TimerEvent: {}
+[3.011206] (-) TimerEvent: {}
+[3.111678] (-) TimerEvent: {}
+[3.212254] (-) TimerEvent: {}
+[3.312640] (-) TimerEvent: {}
+[3.413070] (-) TimerEvent: {}
+[3.513489] (-) TimerEvent: {}
+[3.613877] (-) TimerEvent: {}
+[3.714295] (-) TimerEvent: {}
+[3.814687] (-) TimerEvent: {}
+[3.915104] (-) TimerEvent: {}
+[4.015541] (-) TimerEvent: {}
+[4.116479] (-) TimerEvent: {}
+[4.216838] (-) TimerEvent: {}
+[4.317246] (-) TimerEvent: {}
+[4.417663] (-) TimerEvent: {}
+[4.518048] (-) TimerEvent: {}
+[4.618392] (-) TimerEvent: {}
+[4.719121] (-) TimerEvent: {}
+[4.819481] (-) TimerEvent: {}
+[4.920134] (-) TimerEvent: {}
+[5.020729] (-) TimerEvent: {}
+[5.121140] (-) TimerEvent: {}
+[5.221583] (-) TimerEvent: {}
+[5.322015] (-) TimerEvent: {}
+[5.422381] (-) TimerEvent: {}
+[5.522749] (-) TimerEvent: {}
+[5.623159] (-) TimerEvent: {}
+[5.723555] (-) TimerEvent: {}
+[5.824371] (-) TimerEvent: {}
+[5.924768] (-) TimerEvent: {}
+[6.025240] (-) TimerEvent: {}
+[6.125772] (-) TimerEvent: {}
+[6.226171] (-) TimerEvent: {}
+[6.326593] (-) TimerEvent: {}
+[6.426992] (-) TimerEvent: {}
+[6.527425] (-) TimerEvent: {}
+[6.627774] (-) TimerEvent: {}
+[6.728593] (-) TimerEvent: {}
+[6.828995] (-) TimerEvent: {}
+[6.929407] (-) TimerEvent: {}
+[7.029868] (-) TimerEvent: {}
+[7.130281] (-) TimerEvent: {}
+[7.230699] (-) TimerEvent: {}
+[7.331073] (-) TimerEvent: {}
+[7.431456] (-) TimerEvent: {}
+[7.531783] (-) TimerEvent: {}
+[7.632357] (-) TimerEvent: {}
+[7.732787] (-) TimerEvent: {}
+[7.833209] (-) TimerEvent: {}
+[7.933595] (-) TimerEvent: {}
+[8.033950] (-) TimerEvent: {}
+[8.134312] (-) TimerEvent: {}
+[8.234698] (-) TimerEvent: {}
+[8.335069] (-) TimerEvent: {}
+[8.435426] (-) TimerEvent: {}
+[8.535754] (-) TimerEvent: {}
+[8.636257] (-) TimerEvent: {}
+[8.736619] (-) TimerEvent: {}
+[8.837026] (-) TimerEvent: {}
+[8.937442] (-) TimerEvent: {}
+[9.037823] (-) TimerEvent: {}
+[9.138655] (-) TimerEvent: {}
+[9.239050] (-) TimerEvent: {}
+[9.339464] (-) TimerEvent: {}
+[9.440428] (-) TimerEvent: {}
+[9.540940] (-) TimerEvent: {}
+[9.641381] (-) TimerEvent: {}
+[9.742258] (-) TimerEvent: {}
+[9.842690] (-) TimerEvent: {}
+[9.943085] (-) TimerEvent: {}
+[10.043531] (-) TimerEvent: {}
+[10.144434] (-) TimerEvent: {}
+[10.244780] (-) TimerEvent: {}
+[10.345178] (-) TimerEvent: {}
+[10.445561] (-) TimerEvent: {}
+[10.545958] (-) TimerEvent: {}
+[10.646354] (-) TimerEvent: {}
+[10.746879] (-) TimerEvent: {}
+[10.847276] (-) TimerEvent: {}
+[10.947672] (-) TimerEvent: {}
+[11.048780] (-) TimerEvent: {}
+[11.149351] (-) TimerEvent: {}
+[11.249725] (-) TimerEvent: {}
+[11.350095] (-) TimerEvent: {}
+[11.450444] (-) TimerEvent: {}
+[11.550837] (-) TimerEvent: {}
+[11.651246] (-) TimerEvent: {}
+[11.751616] (-) TimerEvent: {}
+[11.852481] (-) TimerEvent: {}
+[11.952895] (-) TimerEvent: {}
+[12.054673] (-) TimerEvent: {}
+[12.155179] (-) TimerEvent: {}
+[12.255811] (-) TimerEvent: {}
+[12.356384] (-) TimerEvent: {}
+[12.456877] (-) TimerEvent: {}
+[12.557295] (-) TimerEvent: {}
+[12.657748] (-) TimerEvent: {}
+[12.758232] (-) TimerEvent: {}
+[12.858619] (-) TimerEvent: {}
+[12.959003] (-) TimerEvent: {}
+[13.059375] (-) TimerEvent: {}
+[13.159761] (-) TimerEvent: {}
+[13.260081] (-) TimerEvent: {}
+[13.360691] (-) TimerEvent: {}
+[13.461131] (-) TimerEvent: {}
+[13.561527] (-) TimerEvent: {}
+[13.642264] (projectAI) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.12.10 (/opt/ros/humble/share/ament_lint_auto/cmake)\n'}
+[13.661664] (-) TimerEvent: {}
+[13.722310] (projectAI) StderrLine: {'line': b'WARNING: Package name "projectAI" does not follow the naming conventions. It should start with a lower case letter and only contain lower case letters, digits, underscores, and dashes.\n'}
+[13.756963] (projectAI) StdoutLine: {'line': b"-- Added test 'copyright' to check source files copyright and LICENSE\n"}
+[13.761775] (-) TimerEvent: {}
+[13.762122] (projectAI) StdoutLine: {'line': b"-- Added test 'cppcheck' to perform static code analysis on C / C++ code\n"}
+[13.763313] (projectAI) StdoutLine: {'line': b'-- Configured cppcheck include dirs: \n'}
+[13.763456] (projectAI) StdoutLine: {'line': b'-- Configured cppcheck exclude dirs and/or files: \n'}
+[13.768000] (projectAI) StdoutLine: {'line': b"-- Added test 'cpplint' to check C / C++ code against the Google style\n"}
+[13.768164] (projectAI) StdoutLine: {'line': b'-- Configured cpplint exclude dirs and/or files: \n'}
+[13.769326] (projectAI) StdoutLine: {'line': b"-- Added test 'flake8' to check Python code syntax and style conventions\n"}
+[13.771068] (projectAI) StdoutLine: {'line': b"-- Added test 'lint_cmake' to check CMake code style\n"}
+[13.772352] (projectAI) StdoutLine: {'line': b"-- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257\n"}
+[13.777409] (projectAI) StdoutLine: {'line': b"-- Added test 'uncrustify' to check C / C++ code style\n"}
+[13.777621] (projectAI) StdoutLine: {'line': b'-- Configured uncrustify additional arguments: \n'}
+[13.778808] (projectAI) StdoutLine: {'line': b"-- Added test 'xmllint' to check XML markup files\n"}
+[13.781271] (projectAI) StdoutLine: {'line': b'-- Configuring done\n'}
+[13.861924] (-) TimerEvent: {}
+[13.936545] (projectAI) StdoutLine: {'line': b'-- Generating done\n'}
+[13.940445] (projectAI) StdoutLine: {'line': b'-- Build files have been written to: /home/aiguy/projectAI/build/projectAI\n'}
+[13.951829] (projectAI) CommandEnded: {'returncode': 0}
+[13.952312] (projectAI) JobProgress: {'identifier': 'projectAI', 'progress': 'build'}
+[13.952390] (projectAI) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/aiguy/projectAI/build/projectAI', '--', '-j1', '-l1'], 'cwd': '/home/aiguy/projectAI/build/projectAI', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'aiguy'), ('LC_TIME', 'it_IT.UTF-8'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/aiguy'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GRADLE_HOME', '/home/aiguy/.sdkman/candidates/gradle/current'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'it_IT.UTF-8'), ('DBUS_STARTER_BUS_TYPE', 'session'), ('SYSTEMD_EXEC_PID', '1296'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus,guid=1ca26a1ad6fe77ceedf345d76696370c'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'aiguy'), ('SDKMAN_CANDIDATES_API', 'https://api.sdkman.io/2'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'aiguy'), ('TERM', 'xterm-256color'), ('GAZEBO_MODEL_PATH', ':/opt/ros/humble/share/turtlebot3_gazebo/models'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/home/aiguy/.sdkman/candidates/gradle/current/bin:/opt/ros/humble/bin:/home/aiguy/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/usr/local/go/bin:/home/aiguy/.local/bin/'), ('SESSION_MANAGER', 'local/vm-ubu22:@/tmp/.ICE-unix/1296,unix/vm-ubu22:/tmp/.ICE-unix/1296'), ('SDKMAN_CANDIDATES_DIR', '/home/aiguy/.sdkman/candidates'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'it_IT.UTF-8'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/8b48fd79_da38_49a7_96d1_44120e632856'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('LC_TELEPHONE', 'it_IT.UTF-8'), ('RMW_IMPLEMENTATION', 'rmw_cyclonedds_cpp'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.CCE2Q2'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.156'), ('SDKMAN_DIR', '/home/aiguy/.sdkman'), ('SDKMAN_PLATFORM', 'linuxx64'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('LC_NAME', 'it_IT.UTF-8'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'it_IT.UTF-8'), ('LC_IDENTIFICATION', 'it_IT.UTF-8'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/aiguy/projectAI/build/projectAI'), ('TURTLEBOT3_MODEL', 'waffle'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('DBUS_STARTER_ADDRESS', 'unix:path=/run/user/1000/bus,guid=1ca26a1ad6fe77ceedf345d76696370c'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'it_IT.UTF-8'), ('LC_PAPER', 'it_IT.UTF-8'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[13.962060] (-) TimerEvent: {}
+[14.023441] (projectAI) StdoutLine: {'line': b'[ 10%] \x1b[32mBuilding CXX object CMakeFiles/pickup_action.dir/src/pickup_action.cpp.o\x1b[0m\n'}
+[14.062202] (-) TimerEvent: {}
+[14.162563] (-) TimerEvent: {}
+[14.262990] (-) TimerEvent: {}
+[14.363374] (-) TimerEvent: {}
+[14.464113] (-) TimerEvent: {}
+[14.564703] (-) TimerEvent: {}
+[14.665108] (-) TimerEvent: {}
+[14.766156] (-) TimerEvent: {}
+[14.866513] (-) TimerEvent: {}
+[14.966909] (-) TimerEvent: {}
+[15.067380] (-) TimerEvent: {}
+[15.167749] (-) TimerEvent: {}
+[15.268742] (-) TimerEvent: {}
+[15.369131] (-) TimerEvent: {}
+[15.469548] (-) TimerEvent: {}
+[15.569944] (-) TimerEvent: {}
+[15.670332] (-) TimerEvent: {}
+[15.770706] (-) TimerEvent: {}
+[15.871342] (-) TimerEvent: {}
+[15.971856] (-) TimerEvent: {}
+[16.074757] (-) TimerEvent: {}
+[16.175227] (-) TimerEvent: {}
+[16.275697] (-) TimerEvent: {}
+[16.376595] (-) TimerEvent: {}
+[16.477037] (-) TimerEvent: {}
+[16.577460] (-) TimerEvent: {}
+[16.677892] (-) TimerEvent: {}
+[16.778302] (-) TimerEvent: {}
+[16.879479] (-) TimerEvent: {}
+[16.979830] (-) TimerEvent: {}
+[17.080634] (-) TimerEvent: {}
+[17.181023] (-) TimerEvent: {}
+[17.281411] (-) TimerEvent: {}
+[17.381778] (-) TimerEvent: {}
+[17.482152] (-) TimerEvent: {}
+[17.582539] (-) TimerEvent: {}
+[17.682955] (-) TimerEvent: {}
+[17.783434] (-) TimerEvent: {}
+[17.884291] (-) TimerEvent: {}
+[17.984727] (-) TimerEvent: {}
+[18.085476] (-) TimerEvent: {}
+[18.185851] (-) TimerEvent: {}
+[18.286177] (-) TimerEvent: {}
+[18.386632] (-) TimerEvent: {}
+[18.487062] (-) TimerEvent: {}
+[18.587465] (-) TimerEvent: {}
+[18.687783] (-) TimerEvent: {}
+[18.788576] (-) TimerEvent: {}
+[18.888979] (-) TimerEvent: {}
+[18.989678] (-) TimerEvent: {}
+[19.090116] (-) TimerEvent: {}
+[19.190868] (-) TimerEvent: {}
+[19.291266] (-) TimerEvent: {}
+[19.391816] (-) TimerEvent: {}
+[19.492564] (-) TimerEvent: {}
+[19.592940] (-) TimerEvent: {}
+[19.693395] (-) TimerEvent: {}
+[19.794161] (-) TimerEvent: {}
+[19.894612] (-) TimerEvent: {}
+[19.995008] (-) TimerEvent: {}
+[20.095388] (-) TimerEvent: {}
+[20.195765] (-) TimerEvent: {}
+[20.296315] (-) TimerEvent: {}
+[20.396734] (-) TimerEvent: {}
+[20.497101] (-) TimerEvent: {}
+[20.597485] (-) TimerEvent: {}
+[20.697855] (-) TimerEvent: {}
+[20.798228] (-) TimerEvent: {}
+[20.898599] (-) TimerEvent: {}
+[20.999023] (-) TimerEvent: {}
+[21.099469] (-) TimerEvent: {}
+[21.199768] (-) TimerEvent: {}
+[21.300177] (-) TimerEvent: {}
+[21.400660] (-) TimerEvent: {}
+[21.419393] (projectAI) StdoutLine: {'line': b'[ 20%] \x1b[32m\x1b[1mLinking CXX executable pickup_action\x1b[0m\n'}
+[21.501315] (-) TimerEvent: {}
+[21.601733] (-) TimerEvent: {}
+[21.702147] (-) TimerEvent: {}
+[21.707281] (projectAI) StdoutLine: {'line': b'[ 20%] Built target pickup_action\n'}
+[21.735987] (projectAI) StdoutLine: {'line': b'[ 30%] \x1b[32mBuilding CXX object CMakeFiles/fill_action.dir/src/fill_action.cpp.o\x1b[0m\n'}
+[21.802269] (-) TimerEvent: {}
+[21.902701] (-) TimerEvent: {}
+[22.003090] (-) TimerEvent: {}
+[22.103437] (-) TimerEvent: {}
+[22.204282] (-) TimerEvent: {}
+[22.304734] (-) TimerEvent: {}
+[22.405164] (-) TimerEvent: {}
+[22.505672] (-) TimerEvent: {}
+[22.606076] (-) TimerEvent: {}
+[22.706466] (-) TimerEvent: {}
+[22.806866] (-) TimerEvent: {}
+[22.907263] (-) TimerEvent: {}
+[23.007658] (-) TimerEvent: {}
+[23.108521] (-) TimerEvent: {}
+[23.208895] (-) TimerEvent: {}
+[23.309653] (-) TimerEvent: {}
+[23.410020] (-) TimerEvent: {}
+[23.510399] (-) TimerEvent: {}
+[23.610793] (-) TimerEvent: {}
+[23.711170] (-) TimerEvent: {}
+[23.811541] (-) TimerEvent: {}
+[23.912148] (-) TimerEvent: {}
+[24.012724] (-) TimerEvent: {}
+[24.113090] (-) TimerEvent: {}
+[24.213558] (-) TimerEvent: {}
+[24.313972] (-) TimerEvent: {}
+[24.414366] (-) TimerEvent: {}
+[24.514777] (-) TimerEvent: {}
+[24.615214] (-) TimerEvent: {}
+[24.715576] (-) TimerEvent: {}
+[24.816377] (-) TimerEvent: {}
+[24.916751] (-) TimerEvent: {}
+[25.017279] (-) TimerEvent: {}
+[25.117714] (-) TimerEvent: {}
+[25.218795] (-) TimerEvent: {}
+[25.319314] (-) TimerEvent: {}
+[25.419732] (-) TimerEvent: {}
+[25.520434] (-) TimerEvent: {}
+[25.620883] (-) TimerEvent: {}
+[25.721372] (-) TimerEvent: {}
+[25.821802] (-) TimerEvent: {}
+[25.922235] (-) TimerEvent: {}
+[26.022624] (-) TimerEvent: {}
+[26.123043] (-) TimerEvent: {}
+[26.223461] (-) TimerEvent: {}
+[26.324150] (-) TimerEvent: {}
+[26.424796] (-) TimerEvent: {}
+[26.525172] (-) TimerEvent: {}
+[26.625543] (-) TimerEvent: {}
+[26.725917] (-) TimerEvent: {}
+[26.826292] (-) TimerEvent: {}
+[26.926646] (-) TimerEvent: {}
+[27.026998] (-) TimerEvent: {}
+[27.127396] (-) TimerEvent: {}
+[27.227741] (-) TimerEvent: {}
+[27.328917] (-) TimerEvent: {}
+[27.429334] (-) TimerEvent: {}
+[27.529755] (-) TimerEvent: {}
+[27.630118] (-) TimerEvent: {}
+[27.730502] (-) TimerEvent: {}
+[27.830883] (-) TimerEvent: {}
+[27.931291] (-) TimerEvent: {}
+[28.031718] (-) TimerEvent: {}
+[28.132658] (-) TimerEvent: {}
+[28.233173] (-) TimerEvent: {}
+[28.333613] (-) TimerEvent: {}
+[28.434092] (-) TimerEvent: {}
+[28.534555] (-) TimerEvent: {}
+[28.634948] (-) TimerEvent: {}
+[28.735394] (-) TimerEvent: {}
+[28.835805] (-) TimerEvent: {}
+[28.936227] (-) TimerEvent: {}
+[29.036607] (-) TimerEvent: {}
+[29.048782] (projectAI) StdoutLine: {'line': b'[ 40%] \x1b[32m\x1b[1mLinking CXX executable fill_action\x1b[0m\n'}
+[29.136749] (-) TimerEvent: {}
+[29.237151] (-) TimerEvent: {}
+[29.320447] (projectAI) StdoutLine: {'line': b'[ 40%] Built target fill_action\n'}
+[29.337312] (-) TimerEvent: {}
+[29.341834] (projectAI) StdoutLine: {'line': b'[ 50%] \x1b[32mBuilding CXX object CMakeFiles/move_action.dir/src/move_action.cpp.o\x1b[0m\n'}
+[29.437457] (-) TimerEvent: {}
+[29.537812] (-) TimerEvent: {}
+[29.638190] (-) TimerEvent: {}
+[29.738688] (-) TimerEvent: {}
+[29.839494] (-) TimerEvent: {}
+[29.939808] (-) TimerEvent: {}
+[30.043756] (-) TimerEvent: {}
+[30.146283] (-) TimerEvent: {}
+[30.246667] (-) TimerEvent: {}
+[30.347083] (-) TimerEvent: {}
+[30.447623] (-) TimerEvent: {}
+[30.548474] (-) TimerEvent: {}
+[30.648849] (-) TimerEvent: {}
+[30.749571] (-) TimerEvent: {}
+[30.849993] (-) TimerEvent: {}
+[30.950427] (-) TimerEvent: {}
+[31.050842] (-) TimerEvent: {}
+[31.151239] (-) TimerEvent: {}
+[31.251640] (-) TimerEvent: {}
+[31.352070] (-) TimerEvent: {}
+[31.452694] (-) TimerEvent: {}
+[31.553326] (-) TimerEvent: {}
+[31.653812] (-) TimerEvent: {}
+[31.754221] (-) TimerEvent: {}
+[31.854634] (-) TimerEvent: {}
+[31.955022] (-) TimerEvent: {}
+[32.055459] (-) TimerEvent: {}
+[32.155798] (-) TimerEvent: {}
+[32.256280] (-) TimerEvent: {}
+[32.356639] (-) TimerEvent: {}
+[32.457029] (-) TimerEvent: {}
+[32.557403] (-) TimerEvent: {}
+[32.657816] (-) TimerEvent: {}
+[32.758255] (-) TimerEvent: {}
+[32.858650] (-) TimerEvent: {}
+[32.959041] (-) TimerEvent: {}
+[33.060026] (-) TimerEvent: {}
+[33.160545] (-) TimerEvent: {}
+[33.260963] (-) TimerEvent: {}
+[33.361640] (-) TimerEvent: {}
+[33.462060] (-) TimerEvent: {}
+[33.562834] (-) TimerEvent: {}
+[33.663245] (-) TimerEvent: {}
+[33.763792] (-) TimerEvent: {}
+[33.864586] (-) TimerEvent: {}
+[33.965116] (-) TimerEvent: {}
+[34.065523] (-) TimerEvent: {}
+[34.165935] (-) TimerEvent: {}
+[34.266947] (-) TimerEvent: {}
+[34.367354] (-) TimerEvent: {}
+[34.467758] (-) TimerEvent: {}
+[34.568664] (-) TimerEvent: {}
+[34.669049] (-) TimerEvent: {}
+[34.769456] (-) TimerEvent: {}
+[34.870789] (-) TimerEvent: {}
+[34.971161] (-) TimerEvent: {}
+[35.071525] (-) TimerEvent: {}
+[35.172274] (-) TimerEvent: {}
+[35.272638] (-) TimerEvent: {}
+[35.373020] (-) TimerEvent: {}
+[35.473383] (-) TimerEvent: {}
+[35.573776] (-) TimerEvent: {}
+[35.674611] (-) TimerEvent: {}
+[35.775249] (-) TimerEvent: {}
+[35.875731] (-) TimerEvent: {}
+[35.976136] (-) TimerEvent: {}
+[36.076545] (-) TimerEvent: {}
+[36.176951] (-) TimerEvent: {}
+[36.277330] (-) TimerEvent: {}
+[36.377740] (-) TimerEvent: {}
+[36.440545] (projectAI) StdoutLine: {'line': b'[ 60%] \x1b[32m\x1b[1mLinking CXX executable move_action\x1b[0m\n'}
+[36.477893] (-) TimerEvent: {}
+[36.578291] (-) TimerEvent: {}
+[36.683155] (-) TimerEvent: {}
+[36.706323] (projectAI) StdoutLine: {'line': b'[ 60%] Built target move_action\n'}
+[36.746155] (projectAI) StdoutLine: {'line': b'[ 70%] \x1b[32mBuilding CXX object CMakeFiles/deliver_action.dir/src/deliver_action.cpp.o\x1b[0m\n'}
+[36.783310] (-) TimerEvent: {}
+[36.883674] (-) TimerEvent: {}
+[36.984135] (-) TimerEvent: {}
+[37.084770] (-) TimerEvent: {}
+[37.185163] (-) TimerEvent: {}
+[37.285579] (-) TimerEvent: {}
+[37.388475] (-) TimerEvent: {}
+[37.488889] (-) TimerEvent: {}
+[37.589304] (-) TimerEvent: {}
+[37.689660] (-) TimerEvent: {}
+[37.790027] (-) TimerEvent: {}
+[37.891761] (-) TimerEvent: {}
+[37.992160] (-) TimerEvent: {}
+[38.092541] (-) TimerEvent: {}
+[38.192927] (-) TimerEvent: {}
+[38.293364] (-) TimerEvent: {}
+[38.393800] (-) TimerEvent: {}
+[38.499814] (-) TimerEvent: {}
+[38.600278] (-) TimerEvent: {}
+[38.700834] (-) TimerEvent: {}
+[38.801218] (-) TimerEvent: {}
+[38.901870] (-) TimerEvent: {}
+[39.002274] (-) TimerEvent: {}
+[39.106844] (-) TimerEvent: {}
+[39.207323] (-) TimerEvent: {}
+[39.307756] (-) TimerEvent: {}
+[39.408155] (-) TimerEvent: {}
+[39.509388] (-) TimerEvent: {}
+[39.609794] (-) TimerEvent: {}
+[39.710456] (-) TimerEvent: {}
+[39.810949] (-) TimerEvent: {}
+[39.911777] (-) TimerEvent: {}
+[40.012298] (-) TimerEvent: {}
+[40.112685] (-) TimerEvent: {}
+[40.213102] (-) TimerEvent: {}
+[40.313566] (-) TimerEvent: {}
+[40.414023] (-) TimerEvent: {}
+[40.514449] (-) TimerEvent: {}
+[40.614892] (-) TimerEvent: {}
+[40.715353] (-) TimerEvent: {}
+[40.815758] (-) TimerEvent: {}
+[40.916534] (-) TimerEvent: {}
+[41.017032] (-) TimerEvent: {}
+[41.117448] (-) TimerEvent: {}
+[41.217942] (-) TimerEvent: {}
+[41.318326] (-) TimerEvent: {}
+[41.418706] (-) TimerEvent: {}
+[41.519109] (-) TimerEvent: {}
+[41.619478] (-) TimerEvent: {}
+[41.720195] (-) TimerEvent: {}
+[41.820558] (-) TimerEvent: {}
+[41.920930] (-) TimerEvent: {}
+[42.021303] (-) TimerEvent: {}
+[42.121708] (-) TimerEvent: {}
+[42.222138] (-) TimerEvent: {}
+[42.322590] (-) TimerEvent: {}
+[42.423005] (-) TimerEvent: {}
+[42.523449] (-) TimerEvent: {}
+[42.624437] (-) TimerEvent: {}
+[42.724808] (-) TimerEvent: {}
+[42.825187] (-) TimerEvent: {}
+[42.925571] (-) TimerEvent: {}
+[43.026014] (-) TimerEvent: {}
+[43.126457] (-) TimerEvent: {}
+[43.226889] (-) TimerEvent: {}
+[43.327417] (-) TimerEvent: {}
+[43.428084] (-) TimerEvent: {}
+[43.528665] (-) TimerEvent: {}
+[43.629241] (-) TimerEvent: {}
+[43.729663] (-) TimerEvent: {}
+[43.830060] (-) TimerEvent: {}
+[43.930464] (-) TimerEvent: {}
+[44.005600] (projectAI) StdoutLine: {'line': b'[ 80%] \x1b[32m\x1b[1mLinking CXX executable deliver_action\x1b[0m\n'}
+[44.030610] (-) TimerEvent: {}
+[44.131049] (-) TimerEvent: {}
+[44.231498] (-) TimerEvent: {}
+[44.256904] (projectAI) StdoutLine: {'line': b'[ 80%] Built target deliver_action\n'}
+[44.296502] (projectAI) StdoutLine: {'line': b'[ 90%] \x1b[32mBuilding CXX object CMakeFiles/empty_action.dir/src/empty_action.cpp.o\x1b[0m\n'}
+[44.331654] (-) TimerEvent: {}
+[44.432036] (-) TimerEvent: {}
+[44.532522] (-) TimerEvent: {}
+[44.632880] (-) TimerEvent: {}
+[44.733270] (-) TimerEvent: {}
+[44.833672] (-) TimerEvent: {}
+[44.934044] (-) TimerEvent: {}
+[45.034414] (-) TimerEvent: {}
+[45.134770] (-) TimerEvent: {}
+[45.235199] (-) TimerEvent: {}
+[45.335609] (-) TimerEvent: {}
+[45.436352] (-) TimerEvent: {}
+[45.536719] (-) TimerEvent: {}
+[45.637144] (-) TimerEvent: {}
+[45.737538] (-) TimerEvent: {}
+[45.837911] (-) TimerEvent: {}
+[45.938285] (-) TimerEvent: {}
+[46.038698] (-) TimerEvent: {}
+[46.139197] (-) TimerEvent: {}
+[46.240171] (-) TimerEvent: {}
+[46.340616] (-) TimerEvent: {}
+[46.441238] (-) TimerEvent: {}
+[46.541757] (-) TimerEvent: {}
+[46.642163] (-) TimerEvent: {}
+[46.742628] (-) TimerEvent: {}
+[46.843078] (-) TimerEvent: {}
+[46.943525] (-) TimerEvent: {}
+[47.044650] (-) TimerEvent: {}
+[47.145065] (-) TimerEvent: {}
+[47.245516] (-) TimerEvent: {}
+[47.345948] (-) TimerEvent: {}
+[47.446408] (-) TimerEvent: {}
+[47.546809] (-) TimerEvent: {}
+[47.647177] (-) TimerEvent: {}
+[47.747700] (-) TimerEvent: {}
+[47.848289] (-) TimerEvent: {}
+[47.948724] (-) TimerEvent: {}
+[48.049133] (-) TimerEvent: {}
+[48.149527] (-) TimerEvent: {}
+[48.250623] (-) TimerEvent: {}
+[48.350988] (-) TimerEvent: {}
+[48.451384] (-) TimerEvent: {}
+[48.551755] (-) TimerEvent: {}
+[48.652113] (-) TimerEvent: {}
+[48.752503] (-) TimerEvent: {}
+[48.852871] (-) TimerEvent: {}
+[48.953666] (-) TimerEvent: {}
+[49.054258] (-) TimerEvent: {}
+[49.154832] (-) TimerEvent: {}
+[49.255199] (-) TimerEvent: {}
+[49.355615] (-) TimerEvent: {}
+[49.456615] (-) TimerEvent: {}
+[49.557108] (-) TimerEvent: {}
+[49.657520] (-) TimerEvent: {}
+[49.757974] (-) TimerEvent: {}
+[49.858409] (-) TimerEvent: {}
+[49.958888] (-) TimerEvent: {}
+[50.059282] (-) TimerEvent: {}
+[50.159643] (-) TimerEvent: {}
+[50.260218] (-) TimerEvent: {}
+[50.360655] (-) TimerEvent: {}
+[50.461090] (-) TimerEvent: {}
+[50.561537] (-) TimerEvent: {}
+[50.661947] (-) TimerEvent: {}
+[50.762387] (-) TimerEvent: {}
+[50.862792] (-) TimerEvent: {}
+[50.963276] (-) TimerEvent: {}
+[51.063866] (-) TimerEvent: {}
+[51.164436] (-) TimerEvent: {}
+[51.265052] (-) TimerEvent: {}
+[51.365410] (-) TimerEvent: {}
+[51.466051] (-) TimerEvent: {}
+[51.522606] (projectAI) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX executable empty_action\x1b[0m\n'}
+[51.566199] (-) TimerEvent: {}
+[51.666582] (-) TimerEvent: {}
+[51.766932] (-) TimerEvent: {}
+[51.772174] (projectAI) StdoutLine: {'line': b'[100%] Built target empty_action\n'}
+[51.784679] (projectAI) CommandEnded: {'returncode': 0}
+[51.841544] (projectAI) JobProgress: {'identifier': 'projectAI', 'progress': 'install'}
+[51.850552] (projectAI) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/aiguy/projectAI/build/projectAI'], 'cwd': '/home/aiguy/projectAI/build/projectAI', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'aiguy'), ('LC_TIME', 'it_IT.UTF-8'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/aiguy'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GRADLE_HOME', '/home/aiguy/.sdkman/candidates/gradle/current'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'it_IT.UTF-8'), ('DBUS_STARTER_BUS_TYPE', 'session'), ('SYSTEMD_EXEC_PID', '1296'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus,guid=1ca26a1ad6fe77ceedf345d76696370c'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'aiguy'), ('SDKMAN_CANDIDATES_API', 'https://api.sdkman.io/2'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'aiguy'), ('TERM', 'xterm-256color'), ('GAZEBO_MODEL_PATH', ':/opt/ros/humble/share/turtlebot3_gazebo/models'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/home/aiguy/.sdkman/candidates/gradle/current/bin:/opt/ros/humble/bin:/home/aiguy/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/usr/local/go/bin:/home/aiguy/.local/bin/'), ('SESSION_MANAGER', 'local/vm-ubu22:@/tmp/.ICE-unix/1296,unix/vm-ubu22:/tmp/.ICE-unix/1296'), ('SDKMAN_CANDIDATES_DIR', '/home/aiguy/.sdkman/candidates'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'it_IT.UTF-8'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/8b48fd79_da38_49a7_96d1_44120e632856'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('LC_TELEPHONE', 'it_IT.UTF-8'), ('RMW_IMPLEMENTATION', 'rmw_cyclonedds_cpp'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.CCE2Q2'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.156'), ('SDKMAN_DIR', '/home/aiguy/.sdkman'), ('SDKMAN_PLATFORM', 'linuxx64'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('LC_NAME', 'it_IT.UTF-8'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'it_IT.UTF-8'), ('LC_IDENTIFICATION', 'it_IT.UTF-8'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/aiguy/projectAI/build/projectAI'), ('TURTLEBOT3_MODEL', 'waffle'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('DBUS_STARTER_ADDRESS', 'unix:path=/run/user/1000/bus,guid=1ca26a1ad6fe77ceedf345d76696370c'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'it_IT.UTF-8'), ('LC_PAPER', 'it_IT.UTF-8'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[51.859877] (projectAI) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[51.860643] (projectAI) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[51.861343] (projectAI) StdoutLine: {'line': b'-- Symlinking: /home/aiguy/projectAI/install/projectAI/share/projectAI/launch/commands.txt\n'}
+[51.867053] (-) TimerEvent: {}
+[51.870130] (projectAI) StdoutLine: {'line': b'-- Symlinking: /home/aiguy/projectAI/install/projectAI/share/projectAI/launch/launch.py\n'}
+[51.879363] (projectAI) StdoutLine: {'line': b'-- Symlinking: /home/aiguy/projectAI/install/projectAI/share/projectAI/launch/planquality.txt\n'}
+[51.888105] (projectAI) StdoutLine: {'line': b'-- Symlinking: /home/aiguy/projectAI/install/projectAI/share/projectAI/pddl/domain_durative.pddl\n'}
+[51.913203] (projectAI) StdoutLine: {'line': b'-- Symlinking: /home/aiguy/projectAI/install/projectAI/lib/projectAI/pickup_action\n'}
+[51.924819] (projectAI) StdoutLine: {'line': b'-- Symlinking: /home/aiguy/projectAI/install/projectAI/lib/projectAI/fill_action\n'}
+[51.933057] (projectAI) StdoutLine: {'line': b'-- Symlinking: /home/aiguy/projectAI/install/projectAI/lib/projectAI/move_action\n'}
+[51.942152] (projectAI) StdoutLine: {'line': b'-- Symlinking: /home/aiguy/projectAI/install/projectAI/lib/projectAI/deliver_action\n'}
+[51.950483] (projectAI) StdoutLine: {'line': b'-- Symlinking: /home/aiguy/projectAI/install/projectAI/lib/projectAI/empty_action\n'}
+[51.959459] (projectAI) StdoutLine: {'line': b'-- Symlinking: /home/aiguy/projectAI/install/projectAI/share/ament_index/resource_index/package_run_dependencies/projectAI\n'}
+[51.967218] (-) TimerEvent: {}
+[51.968030] (projectAI) StdoutLine: {'line': b'-- Symlinking: /home/aiguy/projectAI/install/projectAI/share/ament_index/resource_index/parent_prefix_path/projectAI\n'}
+[51.976999] (projectAI) StdoutLine: {'line': b'-- Symlinking: /home/aiguy/projectAI/install/projectAI/share/projectAI/environment/ament_prefix_path.sh\n'}
+[51.985945] (projectAI) StdoutLine: {'line': b'-- Symlinking: /home/aiguy/projectAI/install/projectAI/share/projectAI/environment/ament_prefix_path.dsv\n'}
+[52.003810] (projectAI) StdoutLine: {'line': b'-- Symlinking: /home/aiguy/projectAI/install/projectAI/share/projectAI/environment/path.sh\n'}
+[52.020212] (projectAI) StdoutLine: {'line': b'-- Symlinking: /home/aiguy/projectAI/install/projectAI/share/projectAI/environment/path.dsv\n'}
+[52.030940] (projectAI) StdoutLine: {'line': b'-- Symlinking: /home/aiguy/projectAI/install/projectAI/share/projectAI/local_setup.bash\n'}
+[52.040381] (projectAI) StdoutLine: {'line': b'-- Symlinking: /home/aiguy/projectAI/install/projectAI/share/projectAI/local_setup.sh\n'}
+[52.049166] (projectAI) StdoutLine: {'line': b'-- Symlinking: /home/aiguy/projectAI/install/projectAI/share/projectAI/local_setup.zsh\n'}
+[52.058504] (projectAI) StdoutLine: {'line': b'-- Symlinking: /home/aiguy/projectAI/install/projectAI/share/projectAI/local_setup.dsv\n'}
+[52.066841] (projectAI) StdoutLine: {'line': b'-- Symlinking: /home/aiguy/projectAI/install/projectAI/share/projectAI/package.dsv\n'}
+[52.067368] (-) TimerEvent: {}
+[52.075913] (projectAI) StdoutLine: {'line': b'-- Symlinking: /home/aiguy/projectAI/install/projectAI/share/ament_index/resource_index/packages/projectAI\n'}
+[52.085033] (projectAI) StdoutLine: {'line': b'-- Symlinking: /home/aiguy/projectAI/install/projectAI/share/projectAI/cmake/ament_cmake_export_dependencies-extras.cmake\n'}
+[52.096953] (projectAI) StdoutLine: {'line': b'-- Symlinking: /home/aiguy/projectAI/install/projectAI/share/projectAI/cmake/projectAIConfig.cmake\n'}
+[52.121081] (projectAI) StdoutLine: {'line': b'-- Symlinking: /home/aiguy/projectAI/install/projectAI/share/projectAI/cmake/projectAIConfig-version.cmake\n'}
+[52.131891] (projectAI) StdoutLine: {'line': b'-- Symlinking: /home/aiguy/projectAI/install/projectAI/share/projectAI/package.xml\n'}
+[52.143791] (projectAI) CommandEnded: {'returncode': 0}
+[52.167539] (-) TimerEvent: {}
+[52.207060] (projectAI) JobEnded: {'identifier': 'projectAI', 'rc': 0}
+[52.208004] (-) EventReactorShutdown: {}

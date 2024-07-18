@@ -6,21 +6,16 @@
 
     (:predicates
         (connected ?loc1 ?loc2 - location)
-        
         (box-at-loc ?box - box ?loc - location)
         (agent-at-loc ?agent - agent ?loc - location)
         (ws-at-loc ?ws - workstation ?loc - location)
         (content-at-loc ?content - content ?loc - location)
-
         (is-type ?content - content ?t - content-type)
-
         (empty-box ?box - box)
         (filled-box ?box - box ?content - content)
         (box-at-ws ?box - box ?ws - workstation)
         (box-at-place ?box - box ?place - place)
-
         (content-type-at-ws ?t - content-type ?ws - workstation)
-
         (empty-place ?place - place)
         (place-at-carrier ?place - place ?carrier - carrier)
         (carrier-at-agent ?carrier - carrier ?agent - agent)
@@ -54,41 +49,52 @@
         )
     )
 
-    (:action deliver
-        :parameters (?box - box ?content - content ?t - content-type ?ws - workstation ?location - location ?agent - agent ?carrier - carrier ?place - place)
-        :precondition (and
-            (is-type ?content ?t)
-            (ws-at-loc ?ws ?location)
-            (agent-at-loc ?agent ?location)
-            (carrier-at-agent ?carrier ?agent)
-            (place-at-carrier ?place ?carrier)
-            (box-at-place ?box ?place)
-            (filled-box ?box ?content)
-        )
-        :effect (and
-            (not (box-at-place ?box ?place))
-            (empty-place ?place)
-            (box-at-ws ?box ?ws)
-        )
-    )
+    (:action deliver 
+        :parameters ( 
+            ?box - box  
+            ?ws - workstation  
+            ?location - location  
+            ?agent - agent  
+            ?carrier - carrier  
+            ?place - place 
+        ) 
+        :precondition (and 
+            (ws-at-loc ?ws ?location) 
+            (agent-at-loc ?agent ?location) 
+            (carrier-at-agent ?carrier ?agent) 
+            (place-at-carrier ?place ?carrier) 
+            (box-at-place ?box ?place) 
+        ) 
+        :effect (and 
+            (not (box-at-place ?box ?place)) 
+            (empty-place ?place) 
+            (box-at-ws ?box ?ws) 
+        ) 
+    ) 
 
-    (:action fill
-        :parameters (?box - box ?content - content ?t - content-type ?loc - location ?agent - agent ?carrier - carrier ?place - place)
-        :precondition (and
-            (is-type ?content ?t)
-            (content-at-loc ?content ?loc)
-            (agent-at-loc ?agent ?loc)
-            (carrier-at-agent ?carrier ?agent)
-            (place-at-carrier ?place ?carrier)
-            (box-at-place ?box ?place)
-            (empty-box ?box)
-        )
-        :effect (and
-            (not (empty-box ?box))
-            (filled-box ?box ?content)
-            (not (content-at-loc ?content ?loc))
-        )
-    )
+    (:action fill 
+        :parameters ( 
+            ?box - box  
+            ?content - content 
+            ?loc - location  
+            ?agent - agent  
+            ?carrier - carrier  
+            ?place - place 
+        ) 
+        :precondition (and 
+            (content-at-loc ?content ?loc) 
+            (agent-at-loc ?agent ?loc) 
+            (carrier-at-agent ?carrier ?agent) 
+            (place-at-carrier ?place ?carrier) 
+            (box-at-place ?box ?place) 
+            (empty-box ?box) 
+        ) 
+        :effect (and 
+            (not (empty-box ?box)) 
+            (filled-box ?box ?content) 
+            (not (content-at-loc ?content ?loc)) 
+        ) 
+    ) 
 
     (:action empty
         :parameters (?box - box ?content - content ?t - content-type ?ws - workstation ?agent - agent ?loc - location)

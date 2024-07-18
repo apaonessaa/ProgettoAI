@@ -11,7 +11,7 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     # Get the launch directory
-    example_dir = get_package_share_directory('projectAI')
+    example_dir = get_package_share_directory('project_ai')
     namespace = LaunchConfiguration('namespace')
 
     declare_namespace_cmd = DeclareLaunchArgument(
@@ -31,7 +31,7 @@ def generate_launch_description():
 
     # Specify the actions
     pickup_cmd = Node(
-        package='projectAI',
+        package='project_ai',
         executable='pickup_action',
         name='pickup_action',
         namespace=namespace,
@@ -39,7 +39,7 @@ def generate_launch_description():
         parameters=[])
 
     fill_cmd = Node(
-        package='projectAI',
+        package='project_ai',
         executable='fill_action',
         name='fill_action',
         namespace=namespace,
@@ -47,7 +47,7 @@ def generate_launch_description():
         parameters=[])
 
     move_cmd = Node(
-        package='projectAI',
+        package='project_ai',
         executable='move_action',
         name='move_action',
         namespace=namespace,
@@ -55,7 +55,7 @@ def generate_launch_description():
         parameters=[])
 
     deliver_cmd = Node(
-        package='projectAI',
+        package='project_ai',
         executable='deliver_action',
         name='deliver_action',
         namespace=namespace,
@@ -63,7 +63,7 @@ def generate_launch_description():
         parameters=[])
         
     empty_cmd = Node(
-        package='projectAI',
+        package='project_ai',
         executable='empty_action',
         name='empty_action',
         namespace=namespace,

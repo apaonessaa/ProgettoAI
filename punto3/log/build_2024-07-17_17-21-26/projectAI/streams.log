@@ -1,0 +1,40 @@
+[0.035s] Invoking command in '/home/aiguy/projectAI/build/projectAI': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/aiguy/projectAI/build/projectAI -- -j1 -l1
+[0.286s] [ 10%] [32mBuilding CXX object CMakeFiles/pickup_action.dir/src/pickup_action.cpp.o[0m
+[8.275s] [ 20%] [32m[1mLinking CXX executable pickup_action[0m
+[8.702s] [ 20%] Built target pickup_action
+[8.737s] [ 40%] Built target fill_action
+[8.770s] [ 60%] Built target move_action
+[8.810s] [ 80%] Built target deliver_action
+[8.842s] [100%] Built target empty_action
+[8.855s] Invoked command in '/home/aiguy/projectAI/build/projectAI' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/aiguy/projectAI/build/projectAI -- -j1 -l1
+[8.910s] Invoking command in '/home/aiguy/projectAI/build/projectAI': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/aiguy/projectAI/build/projectAI
+[8.926s] -- Install configuration: ""
+[8.930s] -- Execute custom install script
+[8.932s] -- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/launch/commands.txt
+[8.932s] -- Symlinking: /home/aiguy/projectAI/install/projectAI/share/projectAI/launch/commands2.txt
+[8.941s] -- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/launch/launch.py
+[8.941s] -- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/launch/plan.txt
+[8.942s] -- Symlinking: /home/aiguy/projectAI/install/projectAI/share/projectAI/launch/plan2.txt
+[8.952s] -- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/pddl/domain_durative.pddl
+[8.952s] -- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/lib/projectAI/pickup_action
+[8.953s] -- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/lib/projectAI/fill_action
+[8.954s] -- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/lib/projectAI/move_action
+[8.954s] -- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/lib/projectAI/deliver_action
+[8.954s] -- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/lib/projectAI/empty_action
+[8.955s] -- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/ament_index/resource_index/package_run_dependencies/projectAI
+[8.955s] -- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/ament_index/resource_index/parent_prefix_path/projectAI
+[8.955s] -- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/environment/ament_prefix_path.sh
+[8.956s] -- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/environment/ament_prefix_path.dsv
+[8.956s] -- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/environment/path.sh
+[8.957s] -- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/environment/path.dsv
+[8.957s] -- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/local_setup.bash
+[8.958s] -- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/local_setup.sh
+[8.958s] -- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/local_setup.zsh
+[8.958s] -- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/local_setup.dsv
+[8.959s] -- Symlinking: /home/aiguy/projectAI/install/projectAI/share/projectAI/package.dsv
+[8.968s] -- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/ament_index/resource_index/packages/projectAI
+[8.969s] -- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/cmake/ament_cmake_export_dependencies-extras.cmake
+[8.970s] -- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/cmake/projectAIConfig.cmake
+[8.970s] -- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/cmake/projectAIConfig-version.cmake
+[8.970s] -- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/package.xml
+[8.978s] Invoked command in '/home/aiguy/projectAI/build/projectAI' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/aiguy/projectAI/build/projectAI

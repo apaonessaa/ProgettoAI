@@ -1,1 +1,0 @@
-/home/aiguy/projectAI/pddl/domain_durative.pddl

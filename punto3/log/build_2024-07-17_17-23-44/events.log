@@ -1,0 +1,129 @@
+[0.000000] (-) TimerEvent: {}
+[0.000387] (projectAI) JobQueued: {'identifier': 'projectAI', 'dependencies': OrderedDict()}
+[0.000445] (projectAI) JobStarted: {'identifier': 'projectAI'}
+[0.004947] (projectAI) JobProgress: {'identifier': 'projectAI', 'progress': 'cmake'}
+[0.005677] (projectAI) JobProgress: {'identifier': 'projectAI', 'progress': 'build'}
+[0.006570] (projectAI) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/aiguy/projectAI/build/projectAI', '--', '-j1', '-l1'], 'cwd': '/home/aiguy/projectAI/build/projectAI', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'aiguy'), ('LC_TIME', 'it_IT.UTF-8'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/aiguy'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GRADLE_HOME', '/home/aiguy/.sdkman/candidates/gradle/current'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'it_IT.UTF-8'), ('DBUS_STARTER_BUS_TYPE', 'session'), ('SYSTEMD_EXEC_PID', '1279'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus,guid=9d7120d0af10b01dcd7a749d6697bc98'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'aiguy'), ('SDKMAN_CANDIDATES_API', 'https://api.sdkman.io/2'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'aiguy'), ('TERM', 'xterm-256color'), ('GAZEBO_MODEL_PATH', ':/opt/ros/humble/share/turtlebot3_gazebo/models'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/home/aiguy/.sdkman/candidates/gradle/current/bin:/opt/ros/humble/bin:/home/aiguy/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/usr/local/go/bin:/home/aiguy/.local/bin/'), ('SESSION_MANAGER', 'local/vm-ubu22:@/tmp/.ICE-unix/1279,unix/vm-ubu22:/tmp/.ICE-unix/1279'), ('SDKMAN_CANDIDATES_DIR', '/home/aiguy/.sdkman/candidates'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'it_IT.UTF-8'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/b35f2925_2823_4d3b_b1d5_026fa6be7905'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('LC_TELEPHONE', 'it_IT.UTF-8'), ('RMW_IMPLEMENTATION', 'rmw_cyclonedds_cpp'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.Z2R0Q2'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.223'), ('SDKMAN_DIR', '/home/aiguy/.sdkman'), ('SDKMAN_PLATFORM', 'linuxx64'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('LC_NAME', 'it_IT.UTF-8'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'it_IT.UTF-8'), ('LC_IDENTIFICATION', 'it_IT.UTF-8'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/aiguy/projectAI/build/projectAI'), ('TURTLEBOT3_MODEL', 'waffle'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('DBUS_STARTER_ADDRESS', 'unix:path=/run/user/1000/bus,guid=9d7120d0af10b01dcd7a749d6697bc98'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'it_IT.UTF-8'), ('LC_PAPER', 'it_IT.UTF-8'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[0.081971] (projectAI) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target pickup_action\x1b[0m\n'}
+[0.093161] (-) TimerEvent: {}
+[0.114118] (projectAI) StdoutLine: {'line': b'[ 10%] \x1b[32mBuilding CXX object CMakeFiles/pickup_action.dir/src/pickup_action.cpp.o\x1b[0m\n'}
+[0.193514] (-) TimerEvent: {}
+[0.293965] (-) TimerEvent: {}
+[0.394384] (-) TimerEvent: {}
+[0.495240] (-) TimerEvent: {}
+[0.595679] (-) TimerEvent: {}
+[0.696466] (-) TimerEvent: {}
+[0.797138] (-) TimerEvent: {}
+[0.897529] (-) TimerEvent: {}
+[0.997989] (-) TimerEvent: {}
+[1.098387] (-) TimerEvent: {}
+[1.198864] (-) TimerEvent: {}
+[1.299267] (-) TimerEvent: {}
+[1.399734] (-) TimerEvent: {}
+[1.500321] (-) TimerEvent: {}
+[1.600996] (-) TimerEvent: {}
+[1.701405] (-) TimerEvent: {}
+[1.801864] (-) TimerEvent: {}
+[1.902356] (-) TimerEvent: {}
+[2.002918] (-) TimerEvent: {}
+[2.103336] (-) TimerEvent: {}
+[2.203745] (-) TimerEvent: {}
+[2.304814] (-) TimerEvent: {}
+[2.405337] (-) TimerEvent: {}
+[2.505831] (-) TimerEvent: {}
+[2.606294] (-) TimerEvent: {}
+[2.706798] (-) TimerEvent: {}
+[2.807347] (-) TimerEvent: {}
+[2.907876] (-) TimerEvent: {}
+[3.008243] (-) TimerEvent: {}
+[3.108597] (-) TimerEvent: {}
+[3.208985] (-) TimerEvent: {}
+[3.310046] (-) TimerEvent: {}
+[3.410548] (-) TimerEvent: {}
+[3.510989] (-) TimerEvent: {}
+[3.611609] (-) TimerEvent: {}
+[3.712918] (-) TimerEvent: {}
+[3.813266] (-) TimerEvent: {}
+[3.913697] (-) TimerEvent: {}
+[4.014093] (-) TimerEvent: {}
+[4.114505] (-) TimerEvent: {}
+[4.214956] (-) TimerEvent: {}
+[4.315434] (-) TimerEvent: {}
+[4.415869] (-) TimerEvent: {}
+[4.516276] (-) TimerEvent: {}
+[4.617044] (-) TimerEvent: {}
+[4.717532] (-) TimerEvent: {}
+[4.817933] (-) TimerEvent: {}
+[4.918448] (-) TimerEvent: {}
+[5.019823] (-) TimerEvent: {}
+[5.120354] (-) TimerEvent: {}
+[5.221026] (-) TimerEvent: {}
+[5.321814] (-) TimerEvent: {}
+[5.422338] (-) TimerEvent: {}
+[5.523015] (-) TimerEvent: {}
+[5.623412] (-) TimerEvent: {}
+[5.723947] (-) TimerEvent: {}
+[5.824927] (-) TimerEvent: {}
+[5.925905] (-) TimerEvent: {}
+[6.026862] (-) TimerEvent: {}
+[6.127268] (-) TimerEvent: {}
+[6.227679] (-) TimerEvent: {}
+[6.328104] (-) TimerEvent: {}
+[6.428912] (-) TimerEvent: {}
+[6.529419] (-) TimerEvent: {}
+[6.629784] (-) TimerEvent: {}
+[6.730300] (-) TimerEvent: {}
+[6.830695] (-) TimerEvent: {}
+[6.931079] (-) TimerEvent: {}
+[7.031433] (-) TimerEvent: {}
+[7.131862] (-) TimerEvent: {}
+[7.232289] (-) TimerEvent: {}
+[7.332671] (-) TimerEvent: {}
+[7.433187] (-) TimerEvent: {}
+[7.479105] (projectAI) StdoutLine: {'line': b'[ 20%] \x1b[32m\x1b[1mLinking CXX executable pickup_action\x1b[0m\n'}
+[7.533341] (-) TimerEvent: {}
+[7.633807] (-) TimerEvent: {}
+[7.734267] (-) TimerEvent: {}
+[7.742504] (projectAI) StdoutLine: {'line': b'[ 20%] Built target pickup_action\n'}
+[7.784825] (projectAI) StdoutLine: {'line': b'[ 40%] Built target fill_action\n'}
+[7.817386] (projectAI) StdoutLine: {'line': b'[ 60%] Built target move_action\n'}
+[7.834416] (-) TimerEvent: {}
+[7.849352] (projectAI) StdoutLine: {'line': b'[ 80%] Built target deliver_action\n'}
+[7.886911] (projectAI) StdoutLine: {'line': b'[100%] Built target empty_action\n'}
+[7.899315] (projectAI) CommandEnded: {'returncode': 0}
+[7.935231] (-) TimerEvent: {}
+[7.938779] (projectAI) JobProgress: {'identifier': 'projectAI', 'progress': 'install'}
+[7.948521] (projectAI) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/aiguy/projectAI/build/projectAI'], 'cwd': '/home/aiguy/projectAI/build/projectAI', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'aiguy'), ('LC_TIME', 'it_IT.UTF-8'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/aiguy'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GRADLE_HOME', '/home/aiguy/.sdkman/candidates/gradle/current'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'it_IT.UTF-8'), ('DBUS_STARTER_BUS_TYPE', 'session'), ('SYSTEMD_EXEC_PID', '1279'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus,guid=9d7120d0af10b01dcd7a749d6697bc98'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'aiguy'), ('SDKMAN_CANDIDATES_API', 'https://api.sdkman.io/2'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'aiguy'), ('TERM', 'xterm-256color'), ('GAZEBO_MODEL_PATH', ':/opt/ros/humble/share/turtlebot3_gazebo/models'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/home/aiguy/.sdkman/candidates/gradle/current/bin:/opt/ros/humble/bin:/home/aiguy/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/usr/local/go/bin:/home/aiguy/.local/bin/'), ('SESSION_MANAGER', 'local/vm-ubu22:@/tmp/.ICE-unix/1279,unix/vm-ubu22:/tmp/.ICE-unix/1279'), ('SDKMAN_CANDIDATES_DIR', '/home/aiguy/.sdkman/candidates'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'it_IT.UTF-8'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/b35f2925_2823_4d3b_b1d5_026fa6be7905'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('LC_TELEPHONE', 'it_IT.UTF-8'), ('RMW_IMPLEMENTATION', 'rmw_cyclonedds_cpp'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.Z2R0Q2'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.223'), ('SDKMAN_DIR', '/home/aiguy/.sdkman'), ('SDKMAN_PLATFORM', 'linuxx64'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('LC_NAME', 'it_IT.UTF-8'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'it_IT.UTF-8'), ('LC_IDENTIFICATION', 'it_IT.UTF-8'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/aiguy/projectAI/build/projectAI'), ('TURTLEBOT3_MODEL', 'waffle'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('DBUS_STARTER_ADDRESS', 'unix:path=/run/user/1000/bus,guid=9d7120d0af10b01dcd7a749d6697bc98'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'it_IT.UTF-8'), ('LC_PAPER', 'it_IT.UTF-8'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[7.959881] (projectAI) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[7.967272] (projectAI) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[7.968131] (projectAI) StdoutLine: {'line': b'-- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/launch/commands.txt\n'}
+[7.968935] (projectAI) StdoutLine: {'line': b'-- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/launch/commands2.txt\n'}
+[7.969560] (projectAI) StdoutLine: {'line': b'-- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/launch/launch.py\n'}
+[7.970613] (projectAI) StdoutLine: {'line': b'-- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/launch/plan.txt\n'}
+[7.971684] (projectAI) StdoutLine: {'line': b'-- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/launch/plan2.txt\n'}
+[7.973380] (projectAI) StdoutLine: {'line': b'-- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/pddl/domain_durative.pddl\n'}
+[7.974232] (projectAI) StdoutLine: {'line': b'-- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/lib/projectAI/pickup_action\n'}
+[7.974990] (projectAI) StdoutLine: {'line': b'-- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/lib/projectAI/fill_action\n'}
+[7.975546] (projectAI) StdoutLine: {'line': b'-- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/lib/projectAI/move_action\n'}
+[7.976153] (projectAI) StdoutLine: {'line': b'-- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/lib/projectAI/deliver_action\n'}
+[7.976659] (projectAI) StdoutLine: {'line': b'-- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/lib/projectAI/empty_action\n'}
+[7.977327] (projectAI) StdoutLine: {'line': b'-- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/ament_index/resource_index/package_run_dependencies/projectAI\n'}
+[7.977921] (projectAI) StdoutLine: {'line': b'-- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/ament_index/resource_index/parent_prefix_path/projectAI\n'}
+[7.978464] (projectAI) StdoutLine: {'line': b'-- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/environment/ament_prefix_path.sh\n'}
+[7.978962] (projectAI) StdoutLine: {'line': b'-- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/environment/ament_prefix_path.dsv\n'}
+[7.979320] (projectAI) StdoutLine: {'line': b'-- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/environment/path.sh\n'}
+[7.979775] (projectAI) StdoutLine: {'line': b'-- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/environment/path.dsv\n'}
+[7.980230] (projectAI) StdoutLine: {'line': b'-- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/local_setup.bash\n'}
+[7.980870] (projectAI) StdoutLine: {'line': b'-- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/local_setup.sh\n'}
+[7.981303] (projectAI) StdoutLine: {'line': b'-- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/local_setup.zsh\n'}
+[7.981727] (projectAI) StdoutLine: {'line': b'-- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/local_setup.dsv\n'}
+[7.982101] (projectAI) StdoutLine: {'line': b'-- Symlinking: /home/aiguy/projectAI/install/projectAI/share/projectAI/package.dsv\n'}
+[7.992777] (projectAI) StdoutLine: {'line': b'-- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/ament_index/resource_index/packages/projectAI\n'}
+[7.993198] (projectAI) StdoutLine: {'line': b'-- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/cmake/ament_cmake_export_dependencies-extras.cmake\n'}
+[7.993564] (projectAI) StdoutLine: {'line': b'-- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/cmake/projectAIConfig.cmake\n'}
+[7.993841] (projectAI) StdoutLine: {'line': b'-- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/cmake/projectAIConfig-version.cmake\n'}
+[7.994161] (projectAI) StdoutLine: {'line': b'-- Up-to-date symlink: /home/aiguy/projectAI/install/projectAI/share/projectAI/package.xml\n'}
+[7.996322] (projectAI) CommandEnded: {'returncode': 0}
+[8.036049] (-) TimerEvent: {}
+[8.064241] (projectAI) JobEnded: {'identifier': 'projectAI', 'rc': 0}
+[8.065144] (-) EventReactorShutdown: {}

@@ -1,0 +1,38 @@
+[0.010s] Invoking command in '/home/aiguy/project_ai/build/project_ai': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/aiguy/project_ai/build/project_ai -- -j1 -l1
+[0.093s] [ 20%] Built target pickup_action
+[0.149s] [ 40%] Built target fill_action
+[0.184s] [ 60%] Built target move_action
+[0.217s] [ 80%] Built target deliver_action
+[0.259s] [100%] Built target empty_action
+[0.273s] Invoked command in '/home/aiguy/project_ai/build/project_ai' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/aiguy/project_ai/build/project_ai -- -j1 -l1
+[0.321s] Invoking command in '/home/aiguy/project_ai/build/project_ai': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/aiguy/project_ai/build/project_ai
+[0.339s] -- Install configuration: ""
+[0.339s] -- Execute custom install script
+[0.340s] -- Up-to-date symlink: /home/aiguy/project_ai/install/project_ai/share/project_ai/launch/commands.txt
+[0.340s] -- Up-to-date symlink: /home/aiguy/project_ai/install/project_ai/share/project_ai/launch/commands2.txt
+[0.341s] -- Up-to-date symlink: /home/aiguy/project_ai/install/project_ai/share/project_ai/launch/launch.py
+[0.341s] -- Up-to-date symlink: /home/aiguy/project_ai/install/project_ai/share/project_ai/launch/plan.txt
+[0.341s] -- Up-to-date symlink: /home/aiguy/project_ai/install/project_ai/share/project_ai/launch/plan2.txt
+[0.342s] -- Up-to-date symlink: /home/aiguy/project_ai/install/project_ai/share/project_ai/pddl/domain_durative.pddl
+[0.342s] -- Up-to-date symlink: /home/aiguy/project_ai/install/project_ai/lib/project_ai/pickup_action
+[0.343s] -- Up-to-date symlink: /home/aiguy/project_ai/install/project_ai/lib/project_ai/fill_action
+[0.343s] -- Up-to-date symlink: /home/aiguy/project_ai/install/project_ai/lib/project_ai/move_action
+[0.343s] -- Up-to-date symlink: /home/aiguy/project_ai/install/project_ai/lib/project_ai/deliver_action
+[0.344s] -- Up-to-date symlink: /home/aiguy/project_ai/install/project_ai/lib/project_ai/empty_action
+[0.344s] -- Up-to-date symlink: /home/aiguy/project_ai/install/project_ai/share/ament_index/resource_index/package_run_dependencies/project_ai
+[0.345s] -- Up-to-date symlink: /home/aiguy/project_ai/install/project_ai/share/ament_index/resource_index/parent_prefix_path/project_ai
+[0.345s] -- Up-to-date symlink: /home/aiguy/project_ai/install/project_ai/share/project_ai/environment/ament_prefix_path.sh
+[0.346s] -- Up-to-date symlink: /home/aiguy/project_ai/install/project_ai/share/project_ai/environment/ament_prefix_path.dsv
+[0.346s] -- Up-to-date symlink: /home/aiguy/project_ai/install/project_ai/share/project_ai/environment/path.sh
+[0.346s] -- Up-to-date symlink: /home/aiguy/project_ai/install/project_ai/share/project_ai/environment/path.dsv
+[0.347s] -- Up-to-date symlink: /home/aiguy/project_ai/install/project_ai/share/project_ai/local_setup.bash
+[0.347s] -- Up-to-date symlink: /home/aiguy/project_ai/install/project_ai/share/project_ai/local_setup.sh
+[0.347s] -- Up-to-date symlink: /home/aiguy/project_ai/install/project_ai/share/project_ai/local_setup.zsh
+[0.348s] -- Up-to-date symlink: /home/aiguy/project_ai/install/project_ai/share/project_ai/local_setup.dsv
+[0.348s] -- Symlinking: /home/aiguy/project_ai/install/project_ai/share/project_ai/package.dsv
+[0.358s] -- Up-to-date symlink: /home/aiguy/project_ai/install/project_ai/share/ament_index/resource_index/packages/project_ai
+[0.359s] -- Up-to-date symlink: /home/aiguy/project_ai/install/project_ai/share/project_ai/cmake/ament_cmake_export_dependencies-extras.cmake
+[0.359s] -- Up-to-date symlink: /home/aiguy/project_ai/install/project_ai/share/project_ai/cmake/project_aiConfig.cmake
+[0.359s] -- Up-to-date symlink: /home/aiguy/project_ai/install/project_ai/share/project_ai/cmake/project_aiConfig-version.cmake
+[0.360s] -- Up-to-date symlink: /home/aiguy/project_ai/install/project_ai/share/project_ai/package.xml
+[0.364s] Invoked command in '/home/aiguy/project_ai/build/project_ai' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/aiguy/project_ai/build/project_ai

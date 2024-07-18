@@ -1,0 +1,4 @@
+Invoking command in '/home/aiguy/project_ai/build/project_ai': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/aiguy/project_ai/build/project_ai -- -j1 -l1
+Invoked command in '/home/aiguy/project_ai/build/project_ai' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/aiguy/project_ai/build/project_ai -- -j1 -l1
+Invoking command in '/home/aiguy/project_ai/build/project_ai': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/aiguy/project_ai/build/project_ai
+Invoked command in '/home/aiguy/project_ai/build/project_ai' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/aiguy/project_ai/build/project_ai

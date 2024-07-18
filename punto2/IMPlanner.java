@@ -93,7 +93,7 @@ public class IMPlanner extends AbstractPlanner {
 
         // params
         SearchStrategy.Name strategyName = SearchStrategy.Name.ASTAR;
-        StateHeuristic.Name heuristic = StateHeuristic.Name.MAX;
+        StateHeuristic.Name heuristic = StateHeuristic.Name.IM_HEURISTIC;
         int timeout = 1000000;
 
         // Solving with A* and IMHeuristic

@@ -50,15 +50,20 @@
     )
 
     (:action deliver
-        :parameters (?box - box ?content - content ?t - content-type ?ws - workstation ?location - location ?agent - agent ?carrier - carrier ?place - place)
+        :parameters (
+            ?box - box
+            ?ws - workstation
+            ?location - location
+            ?agent - agent
+            ?carrier - carrier
+            ?place - place
+        )
         :precondition (and
-            (is-type ?content ?t)
             (ws-at-loc ?ws ?location)
             (agent-at-loc ?agent ?location)
             (carrier-at-agent ?carrier ?agent)
             (place-at-carrier ?place ?carrier)
             (box-at-place ?box ?place)
-            (filled-box ?box ?content)
         )
         :effect (and
             (not (box-at-place ?box ?place))
@@ -68,9 +73,15 @@
     )
 
     (:action fill
-        :parameters (?box - box ?content - content ?t - content-type ?loc - location ?agent - agent ?carrier - carrier ?place - place)
+        :parameters (
+            ?box - box
+            ?content - content
+            ?loc - location
+            ?agent - agent
+            ?carrier - carrier
+            ?place - place
+        )
         :precondition (and
-            (is-type ?content ?t)
             (content-at-loc ?content ?loc)
             (agent-at-loc ?agent ?loc)
             (carrier-at-agent ?carrier ?agent)

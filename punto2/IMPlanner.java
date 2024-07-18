@@ -22,8 +22,8 @@ public class IMPlanner extends AbstractPlanner {
         // The path to the benchmarks directory
         final String benchmark = "src/main/java/fr/uga/pddl4j/project/benchmark/";
         final String domainName = "domain.pddl";
-        final String problemName = "problems/p03.pddl";
-        final String outputName = "results/p03.pddl.txt";
+        final String problemName = "problems/p01.pddl";
+        final String outputName = "results/p01.pddl.txt";
 
         // Creates the planner
         final IMPlanner planner = new IMPlanner();
@@ -93,7 +93,7 @@ public class IMPlanner extends AbstractPlanner {
 
         // params
         SearchStrategy.Name strategyName = SearchStrategy.Name.ASTAR;
-        StateHeuristic.Name heuristic = StateHeuristic.Name.IM_HEURISTIC;
+        StateHeuristic.Name heuristic = StateHeuristic.Name.MAX;
         int timeout = 1000000;
 
         // Solving with A* and IMHeuristic
@@ -189,12 +189,12 @@ public class IMPlanner extends AbstractPlanner {
                     List<Expression<String>> subGoals = new LinkedList<>();
                     for (int k = 0; k < this.splitSize && j + k < goals[i].size(); k++)
                         subGoals.add(goals[i].get(j + k));
-//                    if(splitIndex==0 && subGoals.size()>1) {
-//                        LinkedList<Expression<String>> tmp = new LinkedList<>();
-//                        tmp.add(subGoals.remove(0));
-//                        splitGoals.add(tmp);
-//                        splitIndex++;
-//                    }
+                    if(splitIndex==0 && subGoals.size()>1) {
+                        LinkedList<Expression<String>> tmp = new LinkedList<>();
+                        tmp.add(subGoals.remove(0));
+                        splitGoals.add(tmp);
+                        splitIndex++;
+                    }
                     splitGoals.add(subGoals);
                     splitIndex++;
                 }

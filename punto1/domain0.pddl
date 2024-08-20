@@ -1,7 +1,7 @@
-(define (domain industrial_manufacturing)
+(define (domain industrial_manufacturing_no_carrier)
     (:requirements :strips :typing)
     (:types 
-        location box content agent workstation type carrier place - object
+        location box content agent workstation type - object
     )
 
     (:predicates
@@ -14,25 +14,21 @@
         (empty_box ?box - box)
         (filled_box ?box - box ?content - content)
         (box_at_ws ?box - box ?ws - workstation)
-        (box_at_place ?box - box ?place - place)
+        (box_at_agent ?box - box ?agent - agent)
         (content_type_at_ws ?t - type ?ws - workstation)
-        (empty_place ?place - place)
-        (place_at_carrier ?place - place ?carrier - carrier)
-        (carrier_at_agent ?carrier - carrier ?agent - agent)
+        (empty_agent ?agent - agent)
     )
 
     (:action pick_up
-        :parameters (?loc - location ?box - box ?agent - agent ?carrier - carrier ?place - place)
+        :parameters (?loc - location ?box - box ?agent - agent)
         :precondition (and
+            (empty_agent ?agent)
             (agent_at_loc ?agent ?loc)
             (box_at_loc ?box ?loc)
-            (carrier_at_agent ?carrier ?agent)
-            (place_at_carrier ?place ?carrier)
-            (empty_place ?place)
         )
         :effect (and
-            (box_at_place ?box ?place)
-            (not (empty_place ?place))
+            (not (empty_agent ?agent))
+            (box_at_agent ?box ?agent)
             (not (box_at_loc ?box ?loc))
         )
     )
@@ -55,19 +51,15 @@
             ?ws - workstation  
             ?location - location  
             ?agent - agent  
-            ?carrier - carrier  
-            ?place - place 
         ) 
         :precondition (and 
             (ws_at_loc ?ws ?location) 
             (agent_at_loc ?agent ?location) 
-            (carrier_at_agent ?carrier ?agent) 
-            (place_at_carrier ?place ?carrier) 
-            (box_at_place ?box ?place) 
+            (box_at_agent ?box ?agent)
         ) 
         :effect (and 
-            (not (box_at_place ?box ?place)) 
-            (empty_place ?place) 
+            (not (box_at_agent ?box ?agent)) 
+            (empty_agent ?agent)
             (box_at_ws ?box ?ws) 
         ) 
     ) 
@@ -78,15 +70,11 @@
             ?content - content 
             ?loc - location  
             ?agent - agent  
-            ?carrier - carrier  
-            ?place - place 
         ) 
         :precondition (and 
             (content_at_loc ?content ?loc) 
             (agent_at_loc ?agent ?loc) 
-            (carrier_at_agent ?carrier ?agent) 
-            (place_at_carrier ?place ?carrier) 
-            (box_at_place ?box ?place) 
+            (box_at_agent ?box ?agent) 
             (empty_box ?box) 
         ) 
         :effect (and 
@@ -97,7 +85,14 @@
     ) 
 
     (:action empty
-        :parameters (?box - box ?content - content ?t - type ?ws - workstation ?agent - agent ?loc - location)
+        :parameters (
+            ?box - box 
+            ?content - content 
+            ?t - type 
+            ?ws - workstation 
+            ?agent - agent 
+            ?loc - location
+        )
         :precondition (and
             (is_type ?content ?t)
             (box_at_ws ?box ?ws)

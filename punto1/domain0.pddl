@@ -14,8 +14,9 @@
         (empty_box ?box - box)
         (filled_box ?box - box ?content - content)
         (box_at_ws ?box - box ?ws - workstation)
-        (box_at_agent ?box - box ?agent - agent)
         (content_type_at_ws ?t - type ?ws - workstation)
+
+        (box_at_agent ?box - box ?agent - agent)
         (empty_agent ?agent - agent)
     )
 

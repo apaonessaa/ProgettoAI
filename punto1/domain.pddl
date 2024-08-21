@@ -1,21 +1,20 @@
 (define (domain industrial_manufacturing)
     (:requirements :strips :typing)
-    (:types 
-        location box content agent workstation type carrier place - object
-    )
+    (:types location box content agent workstation type carrier place - object)
 
     (:predicates
         (connected ?loc1 ?loc2 - location)
+        (content_at_loc ?content - content ?loc - location)
         (box_at_loc ?box - box ?loc - location)
         (agent_at_loc ?agent - agent ?loc - location)
         (ws_at_loc ?ws - workstation ?loc - location)
-        (content_at_loc ?content - content ?loc - location)
         (is_type ?content - content ?t - type)
         (empty_box ?box - box)
         (filled_box ?box - box ?content - content)
         (box_at_ws ?box - box ?ws - workstation)
-        (box_at_place ?box - box ?place - place)
         (content_type_at_ws ?t - type ?ws - workstation)
+
+        (box_at_place ?box - box ?place - place)
         (empty_place ?place - place)
         (place_at_carrier ?place - place ?carrier - carrier)
         (carrier_at_agent ?carrier - carrier ?agent - agent)

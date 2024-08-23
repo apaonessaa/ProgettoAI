@@ -1,4 +1,4 @@
-package fr.uga.pddl4j.project;
+package fr.uga.pddl4j.myproject;
 
 import fr.uga.pddl4j.heuristics.state.StateHeuristic;
 import fr.uga.pddl4j.planners.statespace.search.AbstractStateSpaceSearch;
@@ -16,6 +16,10 @@ import java.util.PriorityQueue;
 
 public class IMAStar extends AbstractStateSpaceSearch {
     private Node initial;
+
+    private static final int MAX_DEPTH = 50;
+    private static final int MAX_F_VALUE = Integer.MAX_VALUE;
+
 
     public IMAStar() {
         super();
@@ -39,7 +43,7 @@ public class IMAStar extends AbstractStateSpaceSearch {
         // Initialize the opened list (store the pending node)
         final double currWeight = getWeight();
         // The list stores the node ordered according to the A* (getFValue = g + h) function
-        final PriorityQueue<Node> open = new PriorityQueue<>(1000, new NodeComparator(currWeight));
+        final PriorityQueue<Node> open = new PriorityQueue<>(500, new NodeComparator(currWeight));
         // Creates the root node of the tree search
         final Node root = new Node(init, null, -1, 0, heuristic.estimate(init, codedProblem.getGoal()));
         // Adds the root to the list of pending nodes
@@ -56,56 +60,63 @@ public class IMAStar extends AbstractStateSpaceSearch {
             final Node current = open.poll();
             openSet.remove(current);
             closeSet.put(current, current);
+
             // If the goal is satisfy in the current node then extract the search and return it
             if (current.satisfy(codedProblem.getGoal())) {
                 solution = current;
             } else {
-                // Try to apply the operators of the problem to this node
-                int index = 0;
-                for (Action op : codedProblem.getActions()) {
+                // Verify the depth, if it is too long cut
+                // Depth Limiting & // F-value Thresholding
+                if (current.getDepth() > MAX_DEPTH) //|| current.getCost() + current.getHeuristic() > MAX_F_VALUE)
+                    continue;
+                else {
+                    // Try to apply the operators of the problem to this node
+                    int index = 0;
+                    for (Action op : codedProblem.getActions()) {
 
-                    // Test if a specified operator is applicable in the current state
-                    if (op.isApplicable(current)) {
-                        //System.out.println("IS APPLICABLE");
-                        Node state = new Node(current);
-                        this.setCreatedNodes(this.getCreatedNodes() + 1);
+                        // Test if a specified operator is applicable in the current state
+                        if (op.isApplicable(current)) {
+                            //System.out.println("IS APPLICABLE");
+                            Node state = new Node(current);
+                            this.setCreatedNodes(this.getCreatedNodes() + 1);
 
-                        // Apply the effect of the applicable operator
-                        // Test if the condition of the effect is satisfied in the current state
-                        // Apply the effect to the successor node
-                        op.getConditionalEffects().stream().filter(ce -> current.satisfy(ce.getCondition()))
-                            .forEach(ce -> state.apply(ce.getEffect()));
-                        final double g = current.getCost() + op.getCost().getValue();
-                        Node result = openSet.get(state);
-                        if (result == null) {
-                            result = closeSet.get(state);
-                            if (result != null) {
-                                if (g < result.getCost()) {
-                                    result.setCost(g);
-                                    result.setParent(current);
-                                    result.setAction(index);
-                                    result.setDepth(current.getDepth() + 1);
-                                    open.add(result);
-                                    openSet.put(result, result);
-                                    closeSet.remove(result);
+                            // Apply the effect of the applicable operator
+                            // Test if the condition of the effect is satisfied in the current state
+                            // Apply the effect to the successor node
+                            op.getConditionalEffects().stream().filter(ce -> current.satisfy(ce.getCondition()))
+                                .forEach(ce -> state.apply(ce.getEffect()));
+                            final double g = current.getCost() + op.getCost().getValue();
+                            Node result = openSet.get(state);
+                            if (result == null) {
+                                result = closeSet.get(state);
+                                if (result != null) {
+                                    if (g < result.getCost()) {
+                                        result.setCost(g);
+                                        result.setParent(current);
+                                        result.setAction(index);
+                                        result.setDepth(current.getDepth() + 1);
+                                        open.add(result);
+                                        openSet.put(result, result);
+                                        closeSet.remove(result);
+                                    }
+                                } else {
+                                    state.setCost(g);
+                                    state.setParent(current);
+                                    state.setAction(index);
+                                    state.setHeuristic(heuristic.estimate(state, codedProblem.getGoal()));
+                                    state.setDepth(current.getDepth() + 1);
+                                    open.add(state);
+                                    openSet.put(state, state);
                                 }
-                            } else {
-                                state.setCost(g);
-                                state.setParent(current);
-                                state.setAction(index);
-                                state.setHeuristic(heuristic.estimate(state, codedProblem.getGoal()));
-                                state.setDepth(current.getDepth() + 1);
-                                open.add(state);
-                                openSet.put(state, state);
+                            } else if (g < result.getCost()) {
+                                result.setCost(g);
+                                result.setParent(current);
+                                result.setAction(index);
+                                result.setDepth(current.getDepth() + 1);
                             }
-                        } else if (g < result.getCost()) {
-                            result.setCost(g);
-                            result.setParent(current);
-                            result.setAction(index);
-                            result.setDepth(current.getDepth() + 1);
                         }
+                        index++;
                     }
-                    index++;
                 }
             }
             // Compute the searching time

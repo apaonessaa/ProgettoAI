@@ -1,0 +1,105 @@
+problem instantiation done successfully (370 actions, 113 fluents)
+
+
+******************************************************************
+Start solving using ASTAR with FAST_FORWARD heuristic
+    + h weight=1.5
+    + split factor=3
+    + debug mode=false
+******************************************************************
+
+===================================================================
+SubProblems instantiated with:
+------------------------------------------------------------------
+
+Goal0: (and (content_type_at_ws valve ws1)
+  (content_type_at_ws valve ws2)
+  (content_type_at_ws valve ws3))
+Goal1: (and (content_type_at_ws valve ws4)
+  (content_type_at_ws valve ws5)
+  (content_type_at_ws valve ws6))
+
+===================================================================
+
+===================================================================
+Plan 0:
+------------------------------------------------------------------
+00: (           pick_up cw b4 a1 c1 p1) [0]
+01: (       fill b4 valve3 cw a1 c1 p1) [0]
+02: (           pick_up cw b2 a1 c1 p4) [0]
+03: (           pick_up cw b3 a1 c1 p2) [0]
+04: (       fill b3 valve6 cw a1 c1 p2) [0]
+05: (       fill b2 valve5 cw a1 c1 p4) [0]
+06: (                  move cw loc1 a1) [0]
+07: (     deliver b2 ws1 loc1 a1 c1 p4) [0]
+08: (     deliver b3 ws2 loc1 a1 c1 p2) [0]
+09: (     deliver b4 ws3 loc1 a1 c1 p1) [0]
+10: (empty b2 valve5 valve ws1 a1 loc1) [0]
+11: (empty b3 valve6 valve ws2 a1 loc1) [0]
+12: (empty b4 valve3 valve ws3 a1 loc1) [0]
+===================================================================
+
+===================================================================
+Plan 1:
+------------------------------------------------------------------
+00: (         pick_up loc1 b2 a1 c1 p2) [0]
+01: (         pick_up loc1 b3 a1 c1 p1) [0]
+02: (                  move loc1 cw a1) [0]
+03: (       fill b2 valve1 cw a1 c1 p2) [0]
+04: (       fill b3 valve4 cw a1 c1 p1) [0]
+05: (           pick_up cw b1 a1 c1 p4) [0]
+06: (       fill b1 valve2 cw a1 c1 p4) [0]
+07: (                  move cw loc1 a1) [0]
+08: (     deliver b1 ws4 loc1 a1 c1 p4) [0]
+09: (     deliver b2 ws5 loc1 a1 c1 p2) [0]
+10: (     deliver b3 ws6 loc1 a1 c1 p1) [0]
+11: (empty b1 valve2 valve ws4 a1 loc1) [0]
+12: (empty b2 valve1 valve ws5 a1 loc1) [0]
+13: (empty b3 valve4 valve ws6 a1 loc1) [0]
+===================================================================
+
+===================================================================
+Search stats:
+------------------------------------------------------------------
+ + Search time: 71,37 seconds
+ + Memory used: 414,01 MB
+===================================================================
+
+found plan as follows:
+
+00: (           pick_up cw b4 a1 c1 p1) [0]
+01: (       fill b4 valve3 cw a1 c1 p1) [0]
+02: (           pick_up cw b2 a1 c1 p4) [0]
+03: (           pick_up cw b3 a1 c1 p2) [0]
+04: (       fill b3 valve6 cw a1 c1 p2) [0]
+05: (       fill b2 valve5 cw a1 c1 p4) [0]
+06: (                  move cw loc1 a1) [0]
+07: (     deliver b2 ws1 loc1 a1 c1 p4) [0]
+08: (     deliver b3 ws2 loc1 a1 c1 p2) [0]
+09: (     deliver b4 ws3 loc1 a1 c1 p1) [0]
+10: (empty b2 valve5 valve ws1 a1 loc1) [0]
+11: (empty b3 valve6 valve ws2 a1 loc1) [0]
+12: (empty b4 valve3 valve ws3 a1 loc1) [0]
+13: (         pick_up loc1 b2 a1 c1 p2) [0]
+14: (         pick_up loc1 b3 a1 c1 p1) [0]
+15: (                  move loc1 cw a1) [0]
+16: (       fill b2 valve1 cw a1 c1 p2) [0]
+17: (       fill b3 valve4 cw a1 c1 p1) [0]
+18: (           pick_up cw b1 a1 c1 p4) [0]
+19: (       fill b1 valve2 cw a1 c1 p4) [0]
+20: (                  move cw loc1 a1) [0]
+21: (     deliver b1 ws4 loc1 a1 c1 p4) [0]
+22: (     deliver b2 ws5 loc1 a1 c1 p2) [0]
+23: (     deliver b3 ws6 loc1 a1 c1 p1) [0]
+24: (empty b1 valve2 valve ws4 a1 loc1) [0]
+25: (empty b2 valve1 valve ws5 a1 loc1) [0]
+26: (empty b3 valve4 valve ws6 a1 loc1) [0]
+
+time spent:       0,04 seconds parsing
+                  0,11 seconds encoding
+                  0,00 seconds searching
+                  0,14 seconds total time
+
+memory used:      1,41 MBytes for problem representation
+                  0,00 MBytes for searching
+                  1,41 MBytes total

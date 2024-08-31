@@ -1,0 +1,46 @@
+problem instantiation done successfully (6060 actions, 516 fluents)
+
+
+******************************************************************
+Start solving using ASTAR with SET_LEVEL heuristic
+    + h weight=1.5
+    + split factor=3
+    + debug mode=false
+******************************************************************
+
+===================================================================
+SubProblems instantiated with:
+------------------------------------------------------------------
+
+Goal0: (and (content_type_at_ws plier ws1)
+  (content_type_at_ws hammer ws1)
+  (content_type_at_ws plier ws2))
+Goal1: (and (content_type_at_ws hammer ws2)
+  (content_type_at_ws screwdriver ws3)
+  (content_type_at_ws plier ws3))
+Goal2: (and (content_type_at_ws hammer ws4)
+  (content_type_at_ws wrench ws4))
+Goal3: (and (content_type_at_ws valve ws5)
+  (content_type_at_ws bolt ws5)
+  (content_type_at_ws valve ws6))
+Goal4: (and (content_type_at_ws wrench ws6)
+  (content_type_at_ws valve ws7)
+  (content_type_at_ws plier ws7))
+Goal5: (and (content_type_at_ws bolt ws8)
+  (content_type_at_ws hammer ws8)
+  (content_type_at_ws screwdriver ws8))
+Goal6: (and (content_type_at_ws wrench ws9)
+  (content_type_at_ws hammer ws9)
+  (content_type_at_ws valve ws10))
+Goal7: (and (content_type_at_ws bolt ws10)
+  (content_type_at_ws plier ws10)
+  (content_type_at_ws screwdriver ws10))
+
+===================================================================
+
+TIMEOUT
+
+> Task :IMPlanner.main() FAILED
+4 actionable tasks: 2 executed, 2 up-to-date
+
+FAILURE: Build failed with an exception.

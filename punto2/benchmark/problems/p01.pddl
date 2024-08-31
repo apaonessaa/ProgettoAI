@@ -3,46 +3,44 @@
     (:domain industrial_manufacturing)
 
     (:objects
-        central_warehouse loc1 - location
-        ws1 ws2 ws3 - workstation
+        cw loc1 - location
+        ws1 - workstation
         b1 - box
         a1 - agent
         c1 - carrier
-        valve1 bolt1 tool1 - content
-        valve bolt tool - content-type
+        p1 - place
+        valve1 bolt1 hammer1 - content
+        valve bolt hammer - type
     )
 
     (:init
-        (is-type valve1 valve)
-        (is-type bolt1 bolt)
-        (is-type tool1 tool)
+        (is_type valve1 valve)
+        (is_type bolt1 bolt)
+        (is_type hammer1 hammer)
 
-        (at-box b1 central_warehouse)
-        (empty b1)
+        (box_at_loc b1 cw)
+        (empty_box b1)
 
-        (at-content valve1 central_warehouse)
-        (at-content bolt1 central_warehouse)
-        (at-content tool1 central_warehouse)
+        (content_at_loc valve1 cw)
+        (content_at_loc bolt1 cw)
+        (content_at_loc hammer1 cw)
 
-        (at-ws ws1 loc1)
-        (at-ws ws2 loc1)
-        (at-ws ws3 loc1)
+        (ws_at_loc ws1 loc1)
 
-        (at-agent a1 central_warehouse)
-        (carrier-at-agent a1 c1)
+        (connected cw loc1)
+        (connected loc1 cw)
 
-        (connected central_warehouse loc1)
-        (connected loc1 central_warehouse)
-
-        (= (capacity c1) 1)
-        (= (amount c1) 0)
+        (agent_at_loc a1 cw)
+        (carrier_at_agent c1 a1)
+        (place_at_carrier p1 c1)
+        (empty_place p1)
     )
 
     (:goal
         (and
-            (content-at-workstation ws1 bolt)
-            (content-at-workstation ws2 valve)
-            (content-at-workstation ws3 tool)
+            (content_type_at_ws bolt ws1)
+            (content_type_at_ws valve ws1)
+            (content_type_at_ws hammer ws1)
         )
     )
 )

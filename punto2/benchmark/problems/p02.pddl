@@ -1,54 +1,71 @@
 (define
     (problem p02)
     (:domain industrial_manufacturing)
-
     (:objects
-        central_warehouse loc1 - location
-        ws1 ws2 ws3 - workstation
-        b1 - box
+        cw loc1 - location
+        ws1 ws2 ws3 ws4 ws5 ws6 - workstation
+        b1 b2 b3 b4 - box
         a1 - agent
         c1 - carrier
-        valve1 valve2 valve3 bolt1 tool1 - content
-        valve bolt tool - content-type
+        p1 p2 p3 p4 - place
+        valve1 valve2 valve3 valve4 valve5 valve6 - content
+        valve - type
     )
 
     (:init
-        (is-type valve1 valve)
-        (is-type valve2 valve)
-        (is-type valve3 valve)
-        (is-type bolt1 bolt)
-        (is-type tool1 tool)
+        (is_type valve1 valve)
+        (is_type valve2 valve)
+        (is_type valve3 valve)
+        (is_type valve4 valve)
+        (is_type valve5 valve)
+        (is_type valve6 valve)
 
-        (at-content valve1 central_warehouse)
-        (at-content valve2 central_warehouse)
-        (at-content valve3 central_warehouse)
-        (at-content bolt1 central_warehouse)
-        (at-content tool1 central_warehouse)
+        (box_at_loc b1 cw)
+        (box_at_loc b2 cw)
+        (box_at_loc b3 cw)
+        (box_at_loc b4 cw)
+        (empty_box b1)
+        (empty_box b2)
+        (empty_box b3)
+        (empty_box b4)
 
-        (at-box b1 central_warehouse)
-        (empty b1)
+        (content_at_loc valve1 cw)
+        (content_at_loc valve2 cw)
+        (content_at_loc valve3 cw)
+        (content_at_loc valve4 cw)
+        (content_at_loc valve5 cw)
+        (content_at_loc valve6 cw)
 
-        (at-ws ws1 loc1)
-        (at-ws ws2 loc1)
-        (at-ws ws3 loc1)
+        (ws_at_loc ws1 loc1)
+        (ws_at_loc ws2 loc1)
+        (ws_at_loc ws3 loc1)
+        (ws_at_loc ws4 loc1)
+        (ws_at_loc ws5 loc1)
+        (ws_at_loc ws6 loc1)
 
-        (connected central_warehouse loc1)
-        (connected loc1 central_warehouse)
+        (connected cw loc1)
+        (connected loc1 cw)
 
-        (at-agent a1 central_warehouse)
-        (carrier-at-agent a1 c1)
-
-        (= (capacity c1) 1)
-        (= (amount c1) 0)
+        (agent_at_loc a1 cw)
+        (carrier_at_agent c1 a1)
+        (place_at_carrier p1 c1)
+        (place_at_carrier p2 c1)
+        (place_at_carrier p3 c1)
+        (place_at_carrier p4 c1)
+        (empty_place p1)
+        (empty_place p2)
+        (empty_place p3)
+        (empty_place p4)
     )
 
     (:goal
         (and
-            (content-at-workstation ws1 valve)
-            (content-at-workstation ws1 bolt)
-            (content-at-workstation ws2 valve)
-            (content-at-workstation ws3 valve)
-            (content-at-workstation ws3 tool)
+            (content_type_at_ws valve ws1)
+            (content_type_at_ws valve ws2)
+            (content_type_at_ws valve ws3)
+            (content_type_at_ws valve ws4)
+            (content_type_at_ws valve ws5)
+            (content_type_at_ws valve ws6)
         )
     )
 )

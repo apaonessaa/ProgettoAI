@@ -1,0 +1,29 @@
+problem instantiation done successfully (370 actions, 113 fluents)
+
+
+******************************************************************
+Start solving using ASTAR with MAX heuristic
+    + h weight=1.5
+    + split factor=3
+    + debug mode=false
+******************************************************************
+
+===================================================================
+SubProblems instantiated with:
+------------------------------------------------------------------
+
+Goal0: (and (content_type_at_ws valve ws1)
+  (content_type_at_ws valve ws2)
+  (content_type_at_ws valve ws3))
+Goal1: (and (content_type_at_ws valve ws4)
+  (content_type_at_ws valve ws5)
+  (content_type_at_ws valve ws6))
+
+===================================================================
+
+TIMEOUT
+
+> Task :IMPlanner.main() FAILED
+4 actionable tasks: 2 executed, 2 up-to-date
+
+FAILURE: Build failed with an exception.

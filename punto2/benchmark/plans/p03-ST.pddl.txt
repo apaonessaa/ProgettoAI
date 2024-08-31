@@ -1,0 +1,47 @@
+problem instantiation done successfully (1540 actions, 223 fluents)
+
+
+******************************************************************
+Start solving using ASTAR with SET_LEVEL heuristic
+    + h weight=1.5
+    + split factor=3
+    + debug mode=false
+******************************************************************
+
+===================================================================
+SubProblems instantiated with:
+------------------------------------------------------------------
+
+Goal0: (and (content_type_at_ws valve ws1)
+  (content_type_at_ws bolt ws1)
+  (content_type_at_ws plier ws1))
+Goal1: (and (content_type_at_ws valve ws2)
+  (content_type_at_ws bolt ws2)
+  (content_type_at_ws plier ws2))
+Goal2: (and (content_type_at_ws valve ws3)
+  (content_type_at_ws plier ws3)
+  (content_type_at_ws valve ws4))
+Goal3: (and (content_type_at_ws bolt ws4)
+  (content_type_at_ws plier ws4)
+  (content_type_at_ws valve ws5))
+Goal4: (and (content_type_at_ws plier ws5)
+  (content_type_at_ws valve ws6))
+
+===================================================================
+Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
+	at fr.uga.pddl4j.util.BitMatrix.<init>(BitMatrix.java:61)
+	at fr.uga.pddl4j.util.BitMatrix.<init>(BitMatrix.java:84)
+	at fr.uga.pddl4j.heuristics.state.GraphHeuristic.updateOperatorsMutex(GraphHeuristic.java:454)
+	at fr.uga.pddl4j.heuristics.state.GraphHeuristic.expandPlanningGraph(GraphHeuristic.java:384)
+	at fr.uga.pddl4j.heuristics.state.SetLevel.estimate(SetLevel.java:67)
+	at fr.uga.pddl4j.heuristics.state.SetLevel.estimate(SetLevel.java:81)
+	at fr.uga.pddl4j.planners.statespace.search.AStar.search(AStar.java:128)
+	at fr.uga.pddl4j.planners.statespace.search.AbstractStateSpaceSearch.searchSolutionNode(AbstractStateSpaceSearch.java:279)
+	at fr.uga.pddl4j.myproject.IMPlanner.solve(IMPlanner.java:111)
+	at fr.uga.pddl4j.planners.AbstractPlanner.solve(AbstractPlanner.java:432)
+	at fr.uga.pddl4j.myproject.IMPlanner.main(IMPlanner.java:47)
+
+> Task :IMPlanner.main() FAILED
+4 actionable tasks: 2 executed, 2 up-to-date
+
+FAILURE: Build failed with an exception.

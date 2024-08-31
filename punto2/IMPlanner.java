@@ -3,6 +3,7 @@ package fr.uga.pddl4j.myproject;
 import fr.uga.pddl4j.heuristics.state.StateHeuristic;
 import fr.uga.pddl4j.parser.DefaultParsedProblem;
 import fr.uga.pddl4j.parser.Expression;
+import fr.uga.pddl4j.parser.TypedSymbol;
 import fr.uga.pddl4j.plan.Plan;
 import fr.uga.pddl4j.plan.SequentialPlan;
 import fr.uga.pddl4j.planners.*;
@@ -23,8 +24,8 @@ public class IMPlanner extends AbstractPlanner {
         // The path to the benchmarks directory
         final String benchmark = "src/main/java/fr/uga/pddl4j/myproject/benchmark/";
         final String domainName = "domain.pddl";
-        final String problemName = "problems/instance2.pddl";
-        final String outputName = "statistics/p.pddl.txt";
+        final String problemName = "problems/p04.pddl";
+        final String outputName = "plans/p.pddl.txt";
 
         // Creates the planner
         final IMPlanner planner = new IMPlanner();
@@ -36,9 +37,10 @@ public class IMPlanner extends AbstractPlanner {
         planner.setTimeout(1000);
         // Sets log level
         planner.setLogLevel(LogLevel.INFO);
-        // Set heuristic weight and split size
+        // Set heuristic weight, split size and debug mode
         planner.setHeuristicWeight(1.5);
         planner.setSplitSize(3);
+        planner.setDebug(false);
 
         // Solve and print the result
         try {
@@ -66,17 +68,16 @@ public class IMPlanner extends AbstractPlanner {
         }
     }
 
-    private int splitSize = 2; // Max number of goals per sub-goal
-
+    private int splitSize = 2;
     private double heuristicWeight = 1.5;
-
-    public void setHeuristicWeight(double heuristicWeigth) {
-        if (heuristicWeigth>0) this.heuristicWeight = heuristicWeigth;
-    }
+    private boolean debug = true;
 
     public void setSplitSize(int splitSize) {
         if (splitSize>=0) this.splitSize = splitSize;
     }
+    public void setHeuristicWeight(double heuristicWeigth) { if (heuristicWeigth>0) this.heuristicWeight = heuristicWeigth; }
+
+    public void setDebug(boolean debugMode) { this.debug = debugMode; }
 
     @Override
     public Problem instantiate(DefaultParsedProblem problem) {
@@ -94,7 +95,7 @@ public class IMPlanner extends AbstractPlanner {
 
         System.out.println("\n******************************************************************");
         System.out.println("Start solving using "+strategyName+" with "+heuristic+" heuristic");
-        System.out.println("    + h weight="+heuristicWeight+"\n    + split factor="+splitSize);
+        System.out.println("    + h weight="+heuristicWeight+"\n    + split factor="+splitSize+"\n    + debug mode="+debug);
         System.out.println("****************************************************************** \n");
 
         // Utility structs for sub problem splitting
@@ -103,19 +104,24 @@ public class IMPlanner extends AbstractPlanner {
         Plan[] subplans = new Plan[subProblems.length];
 
         // Solving with A* and IMHeuristic
+        long searchTime=0, memoryUsed=0;
         for (int i = 0; i<subProblems.length; i++){
             if (i==0) {
                 // solve sub problem 0
-                StateSpaceSearch alg = StateSpaceSearch.getInstance(strategyName,heuristic,heuristicWeight);
+                StateSpaceSearch alg = StateSpaceSearch.getInstance(strategyName, heuristic, heuristicWeight);
                 subSolutions[i] = alg.searchSolutionNode(subProblems[i]);
                 subplans[i] = alg.extractPlan(subSolutions[i],subProblems[i]);
+                searchTime += alg.getSearchingTime();
+                memoryUsed += alg.getMemoryUsed();
             }
             else {
                 // solve sub problem from prev sub solution founded
-                subSolutions[i-1].setParent(null);
-                StateSpaceSearch alg = new IMAStar(timeout,heuristic,heuristicWeight,subSolutions[i-1]);
+                subSolutions[i - 1].setParent(null);
+                StateSpaceSearch alg = new IMAStar(timeout, heuristic, heuristicWeight, subSolutions[i - 1]);
                 subSolutions[i] = alg.searchSolutionNode(subProblems[i]);
-                subplans[i] = alg.extractPlan(subSolutions[i],subProblems[i]);
+                subplans[i] = alg.extractPlan(subSolutions[i], subProblems[i]);
+                searchTime += alg.getSearchingTime();
+                memoryUsed += alg.getMemoryUsed();
             }
             System.out.println("\n===================================================================");
             System.out.printf("Plan %d: \n",i);
@@ -126,6 +132,16 @@ public class IMPlanner extends AbstractPlanner {
                 System.out.println("Plan empty");
             System.out.println("===================================================================");
         }
+        double searchTimeInSeconds = searchTime / 1000.0;
+        double memoryUsedInMB = memoryUsed / (1024.0 * 1024.0);
+
+        System.out.println("\n===================================================================");
+        System.out.println("Search stats:");
+        System.out.println("------------------------------------------------------------------");
+        System.out.println(" + Search time: " + String.format("%.2f", searchTimeInSeconds) + " seconds" +
+            "\n + Memory used: " + String.format("%.2f", memoryUsedInMB) + " MB");
+        System.out.println("===================================================================");
+
         // Print the plan
         List<Action> sol = new LinkedList<>();
         for(Plan p: subplans)
@@ -143,16 +159,17 @@ public class IMPlanner extends AbstractPlanner {
         DefaultParsedProblem pp = problem.getParsedProblem();
 
         // No split
-        if (this.splitSize==0) {
-            return new Problem[]{problem};
-        }
+        if (this.splitSize==0) return new Problem[]{problem};
 
         // Extract locations from objects
-        List<String> locations = pp.getObjects().stream()
-            .filter(stringTypedSymbol -> stringTypedSymbol.getValue().startsWith("loc"))
-            .map(obj -> obj.getImage().toString())
-            .toList();
-        //System.out.println("Locations: " + locations);
+        List<String> locations = new ArrayList<>();
+        for (TypedSymbol<String> stringTypedSymbol : pp.getObjects()) {
+            if (stringTypedSymbol.getValue().startsWith("loc")) {
+                String string = stringTypedSymbol.getImage().toString();
+                locations.add(string);
+            }
+        }
+        if (debug) System.out.println("Locations: " + locations);
 
         // Extract ws from init and build map {ws -> location index}
         Map<String, Integer> wsMap = new HashMap<>();
@@ -169,9 +186,11 @@ public class IMPlanner extends AbstractPlanner {
             }
         }
 
+        if (debug) System.out.println("Workstations: " +wsMap.keySet());
+
+        if (debug) System.out.println("Categorize goals by locations...");
         List<Expression<String>>[] goals = new LinkedList[locations.size()];
         List<Expression<String>> inGoal = pp.getGoal().getChildren();
-        // Categorize goals by workstation
         for (Expression<String> goal : inGoal) {
             String[] parts = goal.toString().split(" ");
             //System.out.println(parts[1]); loc
@@ -183,14 +202,7 @@ public class IMPlanner extends AbstractPlanner {
             goals[index].add(goal);
         }
 
-        // foreach Expression<String> in goals.
-        //  if it can be splitted in split=2 parts
-        // add to goals new items builded as:
-        //  goals[i] -> subgoals[i:..],  subgoals[i+?:...]
-        // each component has less than split elements.
-        // Add this subgoals to array of goals and remove the item splitted.
-        // Split goals into sub-goals
-
+        if (debug) System.out.println("Splitting the goals by workstations...");
         List<List<Expression<String>>> splitGoals = new LinkedList<>();
         int splitIndex = 0;
         for (int i = 0; i < goals.length; i++) {
@@ -199,12 +211,6 @@ public class IMPlanner extends AbstractPlanner {
                     List<Expression<String>> subGoals = new LinkedList<>();
                     for (int k = 0; k < this.splitSize && j + k < goals[i].size(); k++)
                         subGoals.add(goals[i].get(j + k));
-//                    if(splitIndex==0 && subGoals.size()>1) {
-//                        LinkedList<Expression<String>> tmp = new LinkedList<>();
-//                        tmp.add(subGoals.remove(0));
-//                        splitGoals.add(tmp);
-//                        splitIndex++;
-//                    }
                     splitGoals.add(subGoals);
                     splitIndex++;
                 }

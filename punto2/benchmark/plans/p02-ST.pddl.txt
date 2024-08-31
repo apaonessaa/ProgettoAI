@@ -1,0 +1,49 @@
+problem instantiation done successfully (370 actions, 113 fluents)
+
+
+******************************************************************
+Start solving using ASTAR with SET_LEVEL heuristic
+    + h weight=1.5
+    + split factor=3
+    + debug mode=false
+******************************************************************
+
+===================================================================
+SubProblems instantiated with:
+------------------------------------------------------------------
+
+Goal0: (and (content_type_at_ws valve ws1)
+  (content_type_at_ws valve ws2)
+  (content_type_at_ws valve ws3))
+Goal1: (and (content_type_at_ws valve ws4)
+  (content_type_at_ws valve ws5)
+  (content_type_at_ws valve ws6))
+
+===================================================================
+Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
+	at fr.uga.pddl4j.util.BitSet.initWords(BitSet.java:170)
+	at fr.uga.pddl4j.util.BitSet.<init>(BitSet.java:165)
+	at fr.uga.pddl4j.util.BitVector.<init>(BitVector.java:45)
+	at fr.uga.pddl4j.util.BitMatrix.<init>(BitMatrix.java:61)
+	at fr.uga.pddl4j.heuristics.state.GraphHeuristic.expandPlanningGraph(GraphHeuristic.java:342)
+	at fr.uga.pddl4j.heuristics.state.SetLevel.estimate(SetLevel.java:67)
+	at fr.uga.pddl4j.heuristics.state.SetLevel.estimate(SetLevel.java:81)
+	at fr.uga.pddl4j.planners.statespace.search.AStar.search(AStar.java:128)
+	at fr.uga.pddl4j.planners.statespace.search.AbstractStateSpaceSearch.searchSolutionNode(AbstractStateSpaceSearch.java:279)
+	at fr.uga.pddl4j.myproject.IMPlanner.solve(IMPlanner.java:111)
+	at fr.uga.pddl4j.planners.AbstractPlanner.solve(AbstractPlanner.java:432)
+	at fr.uga.pddl4j.myproject.IMPlanner.main(IMPlanner.java:47)
+Exception in thread "process reaper" java.lang.OutOfMemoryError: Java heap space
+	at java.base/java.util.concurrent.SynchronousQueue$TransferStack$SNode.tryCancel(SynchronousQueue.java:280)
+	at java.base/java.util.concurrent.SynchronousQueue$TransferStack.awaitFulfill(SynchronousQueue.java:449)
+	at java.base/java.util.concurrent.SynchronousQueue$TransferStack.transfer(SynchronousQueue.java:361)
+	at java.base/java.util.concurrent.SynchronousQueue.poll(SynchronousQueue.java:937)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1055)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1116)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:831)
+
+> Task :IMPlanner.main() FAILED
+4 actionable tasks: 2 executed, 2 up-to-date
+
+FAILURE: Build failed with an exception.

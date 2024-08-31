@@ -1,0 +1,135 @@
+problem instantiation done successfully (472 actions, 128 fluents)
+
+
+******************************************************************
+Start solving using ASTAR with IM_HEURISTIC heuristic
+    + h weight=3.0
+    + split factor=1
+    + debug mode=false
+******************************************************************
+
+===================================================================
+SubProblems instantiated with:
+------------------------------------------------------------------
+
+Goal0: (and (content_type_at_ws bolt ws1))
+Goal1: (and (content_type_at_ws valve ws1))
+Goal2: (and (content_type_at_ws bolt ws2))
+Goal3: (and (content_type_at_ws hammer ws3))
+Goal4: (and (content_type_at_ws valve ws3))
+Goal5: (and (content_type_at_ws hammer ws4))
+
+===================================================================
+
+===================================================================
+Plan 0:
+------------------------------------------------------------------
+0: (        pick_up cw b1 a1 c1 p11) [0]
+1: (        pick_up cw b2 a1 c1 p12) [0]
+2: (     fill b1 bolt1 cw a1 c1 p11) [0]
+3: (        pick_up cw b3 a2 c2 p21) [0]
+4: (                move cw loc1 a1) [0]
+5: (  deliver b1 ws1 loc1 a1 c1 p11) [0]
+6: (empty b1 bolt1 bolt ws1 a1 loc1) [0]
+===================================================================
+
+===================================================================
+Plan 1:
+------------------------------------------------------------------
+0: (        pick_up loc1 b1 a1 c1 p11) [0]
+1: (                  move loc1 cw a1) [0]
+2: (      fill b1 valve1 cw a1 c1 p11) [0]
+3: (                  move cw loc1 a1) [0]
+4: (    deliver b1 ws1 loc1 a1 c1 p11) [0]
+5: (empty b1 valve1 valve ws1 a1 loc1) [0]
+===================================================================
+
+===================================================================
+Plan 2:
+------------------------------------------------------------------
+00: (      pick_up loc1 b1 a1 c1 p11) [0]
+01: (                move loc1 cw a1) [0]
+02: (        pick_up cw b4 a2 c2 p22) [0]
+03: (   fill b1 hammer1 cw a1 c1 p11) [0]
+04: (   fill b2 hammer2 cw a1 c1 p12) [0]
+05: (    fill b4 valve2 cw a2 c2 p22) [0]
+06: (     fill b3 bolt2 cw a2 c2 p21) [0]
+07: (                move cw loc1 a2) [0]
+08: (  deliver b3 ws2 loc1 a2 c2 p21) [0]
+09: (empty b3 bolt2 bolt ws2 a2 loc1) [0]
+===================================================================
+
+===================================================================
+Plan 3:
+------------------------------------------------------------------
+0: (                    move cw loc2 a1) [0]
+1: (      deliver b1 ws3 loc2 a1 c1 p11) [0]
+2: (empty b1 hammer1 hammer ws3 a1 loc2) [0]
+===================================================================
+
+===================================================================
+Plan 4:
+------------------------------------------------------------------
+0: (        pick_up loc1 b3 a2 c2 p21) [0]
+1: (        pick_up loc2 b1 a1 c1 p11) [0]
+2: (                  move loc1 cw a2) [0]
+3: (                  move cw loc2 a2) [0]
+4: (    deliver b4 ws3 loc2 a2 c2 p22) [0]
+5: (empty b4 valve2 valve ws3 a1 loc2) [0]
+===================================================================
+
+===================================================================
+Plan 5:
+------------------------------------------------------------------
+0: (          pick_up loc2 b4 a2 c2 p22) [0]
+1: (      deliver b2 ws4 loc2 a1 c1 p12) [0]
+2: (empty b2 hammer2 hammer ws4 a1 loc2) [0]
+===================================================================
+
+found plan as follows:
+
+00: (            pick_up cw b1 a1 c1 p11) [0]
+01: (            pick_up cw b2 a1 c1 p12) [0]
+02: (         fill b1 bolt1 cw a1 c1 p11) [0]
+03: (            pick_up cw b3 a2 c2 p21) [0]
+04: (                    move cw loc1 a1) [0]
+05: (      deliver b1 ws1 loc1 a1 c1 p11) [0]
+06: (    empty b1 bolt1 bolt ws1 a1 loc1) [0]
+07: (          pick_up loc1 b1 a1 c1 p11) [0]
+08: (                    move loc1 cw a1) [0]
+09: (        fill b1 valve1 cw a1 c1 p11) [0]
+10: (                    move cw loc1 a1) [0]
+11: (      deliver b1 ws1 loc1 a1 c1 p11) [0]
+12: (  empty b1 valve1 valve ws1 a1 loc1) [0]
+13: (          pick_up loc1 b1 a1 c1 p11) [0]
+14: (                    move loc1 cw a1) [0]
+15: (            pick_up cw b4 a2 c2 p22) [0]
+16: (       fill b1 hammer1 cw a1 c1 p11) [0]
+17: (       fill b2 hammer2 cw a1 c1 p12) [0]
+18: (        fill b4 valve2 cw a2 c2 p22) [0]
+19: (         fill b3 bolt2 cw a2 c2 p21) [0]
+20: (                    move cw loc1 a2) [0]
+21: (      deliver b3 ws2 loc1 a2 c2 p21) [0]
+22: (    empty b3 bolt2 bolt ws2 a2 loc1) [0]
+23: (                    move cw loc2 a1) [0]
+24: (      deliver b1 ws3 loc2 a1 c1 p11) [0]
+25: (empty b1 hammer1 hammer ws3 a1 loc2) [0]
+26: (          pick_up loc1 b3 a2 c2 p21) [0]
+27: (          pick_up loc2 b1 a1 c1 p11) [0]
+28: (                    move loc1 cw a2) [0]
+29: (                    move cw loc2 a2) [0]
+30: (      deliver b4 ws3 loc2 a2 c2 p22) [0]
+31: (  empty b4 valve2 valve ws3 a1 loc2) [0]
+32: (          pick_up loc2 b4 a2 c2 p22) [0]
+33: (      deliver b2 ws4 loc2 a1 c1 p12) [0]
+34: (empty b2 hammer2 hammer ws4 a1 loc2) [0]
+
+time spent:       0,03 seconds parsing
+                  0,13 seconds encoding
+                  0,00 seconds searching
+                  0,16 seconds total time
+
+memory used:      1,80 MBytes for problem representation
+                  0,00 MBytes for searching
+                  1,80 MBytes total
+

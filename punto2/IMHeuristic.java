@@ -14,67 +14,65 @@ import fr.uga.pddl4j.util.BitVector;
 import java.util.*;
 
 public class IMHeuristic extends RelaxedGraphHeuristic {
-    private final Problem p;
     private final HashMap<Integer, List<String>> fluents;
-
-    private HashMap<String, String> typeOf;
-
-    // carrier -> places
-    private HashMap<String, List<String>> placeOnCarrier;
-    // carrier -> agent
-    private HashMap<String, String> carrierOnAgent;
-
-    private HashMap<String, List<String>> wsRequested;
-
-    private List<String> typeRequested;
-
+    private final HashMap<String, List<String>> placeOnCarrier;
+    private final HashMap<String, String> carrierOnAgent;
+    private final HashMap<String, List<String>> wsRequested;
+    private final HashMap<String, String> typeOf;
+    private final List<String> typeRequested;
+    private final String NO_TYPE = "unknown";
+    private final String LOCATION = "loc";
+    private final String CENTRAL_WAREHOUSE = "cw";
     private boolean debug = false;
+    public void setDebugMode(boolean debug) { this.debug = debug; }
 
     public IMHeuristic(Problem problem) {
         super(problem);
-        this.p = problem;
         // carrier -> places
         this.placeOnCarrier = new HashMap<>();
         // carrier -> agent
         this.carrierOnAgent = new HashMap<>();
 
-        // extraction the fluents and initializing of support struct
+        // Extraction the fluents and initializing of support struct
         this.fluents = new HashMap<>();
         this.typeOf = new HashMap<>();
         int index = 0;
-        String place, carrier, agent;
-        for (Fluent f : p.getFluents()) {
-            StringTokenizer st = new StringTokenizer(p.toString(f), "( )", false);
+        String predicate, content, type, place, carrier, agent;
+        for (Fluent f : problem.getFluents()) {
+            StringTokenizer st = new StringTokenizer(problem.toString(f), "( )", false);
             this.fluents.computeIfAbsent(index, k -> new ArrayList<>());
             while (st.hasMoreTokens())
                 this.fluents.get(index).add(st.nextToken());
-            // collect
-            switch (this.fluents.get(index).get(0)) {
+            // Collect default predicate
+            predicate = this.fluents.get(index).get(0);
+            switch (predicate) {
                 case "is_type":
                     // is_type ?content - content ?t - type
-                    this.typeOf.put(this.fluents.get(index).get(1), this.fluents.get(index).get(2));
+                    content=this.fluents.get(index).get(1);
+                    type=this.fluents.get(index).get(2);
+                    this.typeOf.put(content, type);
                     break;
                 case "place_at_carrier":
                     // place_at_carrier ?place - place ?carrier - carrier
                     place=this.fluents.get(index).get(1);
                     carrier=this.fluents.get(index).get(2);
-                    placeOnCarrier.computeIfAbsent(carrier, k -> new ArrayList<>());
-                    placeOnCarrier.get(carrier).add(place);
+                    this.placeOnCarrier.computeIfAbsent(carrier, k -> new ArrayList<>());
+                    this.placeOnCarrier.get(carrier).add(place);
                     break;
                 case "carrier_at_agent":
                     // carrier_at_agent ?carrier - carrier ?agent - agent
                     carrier=this.fluents.get(index).get(1);
                     agent=this.fluents.get(index).get(2);
-                    carrierOnAgent.put(carrier, agent);
+                    this.carrierOnAgent.put(carrier, agent);
                     break;
             }
             index++;
         }
 
-        // Struct that contains the type requested by ws
+        // Structs that contain the type requested by ws
         this.typeRequested = new LinkedList<>();
         this.wsRequested = new HashMap<>();
-        String ws, type;
+        String ws;
         BitVector gpk = new BitVector(problem.getGoal());
         for (int p = gpk.nextSetBit(0); p >= 0; p = gpk.nextSetBit(p + 1)) {
             // content_type_at_ws ?t - type ?ws - workstation
@@ -86,12 +84,10 @@ public class IMHeuristic extends RelaxedGraphHeuristic {
         }
 
         if(debug) {
-            System.out.println(this.fluents);
-            System.out.println(this.typeOf);
-            System.out.println(this.typeRequested);
-            System.out.println(this.wsRequested);
-            //System.out.println(this.placeOnCarrier);
-            //System.out.println(this.carrierOnAgent);
+            System.out.println("Fluents: "+this.fluents);
+            System.out.println("Content type: "+this.typeOf);
+            System.out.println("Type requested: "+this.typeRequested);
+            System.out.println("Ws requested: "+this.wsRequested);
         }
     }
 
@@ -104,9 +100,7 @@ public class IMHeuristic extends RelaxedGraphHeuristic {
     public int estimate(State state, Condition goal) {
         super.setGoal(goal);
 
-        if (debug)
-            System.out.println("-----------------------------------------");
-
+        if (debug) System.out.println("-----------------------------------------");
         /**
          * Estimated cost from current state
          * */
@@ -117,34 +111,32 @@ public class IMHeuristic extends RelaxedGraphHeuristic {
         int malusNoTypeNecessary = +10;
         int bonusBoxAtPlace = -1;
         int penaltyBoxAtWs = +2;
+        int penaltyAgentAtLoc = +10;
         int evalState = 0;
 
-        // the type that are requested and not satisfied in current state
+        // Define the type and ws that are requested and not already satisfied in current state
         List<String> tmpTypeRequested = this.typeRequested;
         HashMap<String, List<String>> tmpWsRequested = this.wsRequested;
-        List<String> tmp;
 
-        //HashMap<String, String> boxAtLoc = new HashMap<>();
-        //HashMap<String, String> boxAtWs = new HashMap<>();
-        HashMap<String, List<String>> boxAtAgent = new HashMap<>(); // agent -> list of box (box at place[empty or filled])
-        //HashMap<String, String> agentAtLoc = new HashMap<>();
+        // Define for each agent a list of box (box at place[empty or filled])
+        HashMap<String, List<String>> boxAtAgent = new HashMap<>();
+        // Define for each box the content type which it is filled
         HashMap<String, String> boxContentType = new HashMap<>();
 
-        String predicate;
-        String loc, ws, box, content, agent, carrier, place, type;
+        List<String> tmp;
+        String predicate, loc, ws, box, content, agent, carrier, place, type;
         BitVector ppk = new BitVector(state);
         for (int p = ppk.nextSetBit(0); p >= 0; p = ppk.nextSetBit(p + 1)) {
-            //if(debug) System.out.println(this.fluents.get(p));
-
             predicate = this.fluents.get(p).get(0);
-
             switch (predicate) {
-                // 1. Count the goal not already satisfied in the current state
+                // 1. Count the goal already satisfied in the current state
                 case "content_type_at_ws":
                     // content_type_at_ws ?t - type ?ws - workstation
                     type = this.fluents.get(p).get(1);
                     ws = this.fluents.get(p).get(2);
                     evalState += goalSatisfied;
+
+                    // Update ws request and type requested
                     tmp = tmpWsRequested.getOrDefault(ws, new LinkedList<>());
                     if (!tmp.isEmpty()) {
                         tmpWsRequested.get(ws).remove(type); // remove satisfied goal
@@ -152,40 +144,36 @@ public class IMHeuristic extends RelaxedGraphHeuristic {
                     }
                     break;
 
-                // 2. (Penalty) count the number of request not satisfied (relaxed problem :- count the number of content located at cw)
+                // 2. (Penalty) the content at CENTRAL_WAREHOUSE that is necessary to satisfed the goal (relaxed problem :- count the number of content located at cw)
                 case "content_at_loc":
                     // content_at_loc ?content - content ?loc - location
                     content = this.fluents.get(p).get(1);
                     loc = this.fluents.get(p).get(2);
-                    evalState += loc.startsWith("cw") ? (this.typeRequested.contains(this.typeOf.get(content)) ? penaltyContentAtCw : -1): 0;
+                    evalState += loc.startsWith(CENTRAL_WAREHOUSE) ? (this.typeRequested.contains(this.typeOf.get(content)) ? penaltyContentAtCw : -1): 0;
                     break;
 
-                // 3. (Penalty) box that contains a type not requested by any ws (relaxed problem :- no constraints on where is located the box)
+                // 3. (Penalty) the box that contains a type not requested by any ws, otherwise (Bonus) (relaxed problem :- no constraints on where is located the box)
                 case "filled_box":
                     // filled_box ?box - box ?content - content
-                    // 2.1. box is filled with a type necessary
                     box = this.fluents.get(p).get(1);
                     content = this.fluents.get(p).get(2);
-                    type = this.typeOf.getOrDefault(content, "empty");
+                    type = this.typeOf.getOrDefault(content, NO_TYPE);
                     evalState += this.typeRequested.contains(type) ? bonusTypeNecessary : malusNoTypeNecessary;
-                    if (!type.equals("empty")) boxContentType.put(box, this.typeOf.get(content));
+                    if (!type.equals(NO_TYPE)) boxContentType.put(box, this.typeOf.get(content));
                     break;
 
-                /**
-                 * Box distance to goal : box at location, box at agent, box at ws.
-                 * */
-                // 2. (Penalty) empty box not located at cw
+                // 4. (Penalty) the empty box that are not allocated at CENTRAL_WAREHOUSE
                 case "box_at_loc":
                     // box_at_loc ?box - box ?loc - location
-                    box = this.fluents.get(p).get(1);
+                    //box = this.fluents.get(p).get(1);
                     loc = this.fluents.get(p).get(2);
-                    evalState+= loc.startsWith("loc") ? penaltyBoxAtLoc : 0;
-                    //boxAtLoc.put(box, loc);
+                    evalState += loc.startsWith(LOCATION) ? penaltyBoxAtLoc : 0;
                     break;
 
+                // 5. (Bonus) the box on carrier
                 case "box_at_place":
                     // box_at_place ?box - box ?place - place
-                    // for each carrier, find the place of box_at_place
+                    // for each carrier, find the place of box_at_place and collect in the struct
                     box = this.fluents.get(p).get(1);
                     place = this.fluents.get(p).get(2);
                     for (Map.Entry<String, List<String>> entry : this.placeOnCarrier.entrySet()) {
@@ -200,86 +188,87 @@ public class IMHeuristic extends RelaxedGraphHeuristic {
                     evalState += bonusBoxAtPlace;
                     break;
 
+                // 6. (Penalty) the agent that is no located at CENTRAL_WAREHOUSE
                 case "agent_at_loc":
                     // agent_at_loc ?agent - agent ?loc - location
-                    agent = this.fluents.get(p).get(1);
+                    //agent = this.fluents.get(p).get(1);
                     loc = this.fluents.get(p).get(2);
-                    evalState+=loc.startsWith("loc") ? +5 : 0;
-                    //agentAtLoc.put(agent, loc);
+                    evalState += loc.startsWith(LOCATION) ? penaltyAgentAtLoc : 0;
                     break;
 
+                // 7. (Penalty) the box that is located at ws
                 case "box_at_ws":
                     // box_at_ws ?box - box ?ws - workstation
-                    box = this.fluents.get(p).get(1);
+                    //box = this.fluents.get(p).get(1);
                     ws = this.fluents.get(p).get(2);
                     evalState += this.wsRequested.containsKey(ws) ? 0 : penaltyBoxAtWs;
-                    //boxAtWs.put(box, ws);
                     break;
 
                 default:
+                    // other predicates, MAX penalty + 1
+                    evalState+=11;
                     break;
             }
 
-            if (tmpTypeRequested.isEmpty()) return -500;
+            // All the request are satisfied
+            if (tmpTypeRequested.isEmpty()) return 0;
         }
 
-        if (evalState==0) evalState=100;
-
         if (debug) {
-            //System.out.println(boxAtLoc);
-            System.out.println(boxAtAgent);
-            //System.out.println(agentAtLoc);
-            //System.out.println(boxAtWs);
-            System.out.println(boxContentType);
-            System.out.println(tmpWsRequested);
-            System.out.println(tmpTypeRequested);
+            System.out.println("Box at Agent: "+boxAtAgent);
+            System.out.println("Box & content type: "+boxContentType);
+            System.out.println("Ws to satisfy: "+tmpWsRequested);
+            System.out.println("Type requested: "+tmpTypeRequested);
         }
 
         /**
-         * Estimated cost from next states available from action perform on current state
+         * For each available action for the current state, assign a value
          * */
         Effect effects;
-        BitVector positiveFluents, negativeFluents;
-        String toLoc, fromLoc;
-        int moveBonus = -1;
-        int movePenalty = +1;
-        int moveCost;
+        BitVector positiveFluents; //, negativeFluents;
+        int[] actions = new int[]{
+            Integer.MAX_VALUE, // 0 - pick_up
+            Integer.MAX_VALUE, // 1 - move
+            Integer.MAX_VALUE, // 2 - deliver
+            Integer.MAX_VALUE, // 3 - fill
+            Integer.MAX_VALUE  // 4 - empty
+        };
+        String toLoc; //, fromLoc;
+        int moveBonus = -1, movePenalty = +1, moveCost, index;
         boolean lastOne = tmpTypeRequested.size()==1;
-        // pick_up, move, deliver, fill, empty
-        int[] moves = new int[]{Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE};
-        int index = -1;
         for (Action op : this.getActions()) {
             if (op.isApplicable(state)) {
                 effects = op.getConditionalEffects().get(0).getEffect();
                 positiveFluents = effects.getPositiveFluents();
-                negativeFluents = effects.getNegativeFluents();
+                //negativeFluents = effects.getNegativeFluents();
                 moveCost = Integer.MAX_VALUE;
                 index = -1;
                 switch (op.getName()) {
                     case "pick_up":
                         /**
-                         *  >> pick_up
-                         *      [box_at_place, b1, p1]
-                         *      ---
-                         *      [empty_place, p1]
-                         *      [box_at_loc, b1, loc1]
+                         *      Positive fluents:
+                         *          [box_at_place, box, place]
+                         *      --------------------------------
+                         *      Negative fluents:
+                         *          [empty_place, place]
+                         *          [box_at_loc, box, loc]
                          */
+                        System.out.println(tmpWsRequested.values().size());
                         moveCost = tmpTypeRequested.size()*moveBonus;
                         index=0;
-                        //if (debug) System.out.println(op.getName()+">>"+distance);
                         break;
                     case "move":
                         /**
-                         *   >> move
-                         *      [agent_at_loc, a1, cw]
-                         *      ---
-                         *      [agent_at_loc, a1, loc1]
+                         *      Positive fluents:
+                         *          [agent_at_loc, agent, loc]
+                         *      --------------------------------
+                         *      Negative fluents:
+                         *          [agent_at_loc, agent, loc]
                          * */
                         agent = this.fluents.get(positiveFluents.nextSetBit(0)).get(1);
                         toLoc = this.fluents.get(positiveFluents.nextSetBit(0)).get(2);
-                        fromLoc = this.fluents.get(negativeFluents.nextSetBit(0)).get(2);
-
-                        // carrier on agent
+                        //fromLoc = this.fluents.get(negativeFluents.nextSetBit(0)).get(2);
+                        // Get the carrier on agent
                         carrier = "";
                         for (Map.Entry<String, String> entry : this.carrierOnAgent.entrySet()) {
                             carrier = entry.getKey();
@@ -288,22 +277,24 @@ public class IMHeuristic extends RelaxedGraphHeuristic {
                                 break;
                             }
                         }
-                        // num place on carrier
+                        // Get the number of places on carrier
                         int totalCapacity = this.placeOnCarrier.get(carrier).size();
-                        // check all box at carrier (boxAtAgent)
+                        // Check all boxes on carrier (boxAtAgent)
                         List<String> boxes = boxAtAgent.getOrDefault(agent, new LinkedList<>());
                         if (boxes.isEmpty()) {
                             moveCost = totalCapacity*movePenalty;
                         } else {
                             int necessary = 0, unnecessary = 0;
                             for (String theBox : boxes) {
-                                type = this.typeOf.getOrDefault(theBox, "empty");
-                                if (!type.equals("empty")){
-                                    if (tmpTypeRequested.contains(type)) necessary++;
-                                    else unnecessary++;
+                                type = this.typeOf.getOrDefault(theBox, NO_TYPE);
+                                if (!type.equals(NO_TYPE)){
+                                    if (tmpTypeRequested.contains(type))
+                                        necessary++;
+                                    else
+                                        unnecessary++;
                                 }
                             }
-                            moveCost = toLoc.startsWith("loc") ?
+                            moveCost = toLoc.startsWith(LOCATION) ?
                                 (necessary>0 ? (necessary-unnecessary)*moveBonus : totalCapacity*movePenalty) :
                                 (necessary>0 ? totalCapacity*moveBonus : (totalCapacity-unnecessary)*movePenalty);
                         }
@@ -311,21 +302,21 @@ public class IMHeuristic extends RelaxedGraphHeuristic {
                         break;
                     case "deliver":
                         /**
-                         *  >> deliver
-                         *      [empty_place, p1]
-                         *      [box_at_ws, b1, ws1]
-                         *      ---
-                         *      [box_at_place, b1, p1]
+                         *      Positive fluents:
+                         *          [empty_place, place]
+                         *          [box_at_ws, box, ws]
+                         *      --------------------------------
+                         *      Negative fluents:
+                         *          [box_at_place, box, place]
                          */
                         for (int p = positiveFluents.nextSetBit(0); p >= 0; p = positiveFluents.nextSetBit(p + 1)) {
                             predicate = this.fluents.get(p).get(0);
                             if (predicate.equals("box_at_ws")) {
                                 box = this.fluents.get(p).get(1);
                                 ws = this.fluents.get(p).get(2);
-                                type = boxContentType.getOrDefault(box, "empty");
-                                if (type.equals("empty"))
+                                type = boxContentType.getOrDefault(box, NO_TYPE);
+                                if (type.equals(NO_TYPE))
                                     moveCost = movePenalty;
-                                    //if (debug) System.out.println(op.getName()+">>"+box+",empty,Malus");
                                 else {
                                     tmp = tmpWsRequested.getOrDefault(ws, new LinkedList<>());
                                     if (tmp.isEmpty())
@@ -333,7 +324,6 @@ public class IMHeuristic extends RelaxedGraphHeuristic {
                                     else
                                         moveCost = tmp.contains(type) ? (lastOne ? 10*moveBonus : moveBonus) : movePenalty;
                                 }
-                                    //if (debug) System.out.println(op.getName()+">>"+box+","+type+","+(tmpTypeRequested.contains(type) ? "BBonus" : "MMalus"));
                                 break;
                             }
                         }
@@ -341,31 +331,32 @@ public class IMHeuristic extends RelaxedGraphHeuristic {
                         break;
                     case "fill":
                         /**
-                         * >> fill
-                         *      [filled_box, b1, valve1]
-                         *      ---
-                         *      [content_at_loc, valve1, cw]
-                         *      [empty_box, b1]
+                         *      Positive fluents:
+                         *          [filled_box, box, content]
+                         *      --------------------------------
+                         *      Negative fluents:
+                         *          [content_at_loc, content, loc]
+                         *          [empty_box, box]
                          * */
-                        box = this.fluents.get(positiveFluents.nextSetBit(0)).get(1);
+                        //box = this.fluents.get(positiveFluents.nextSetBit(0)).get(1);
                         content = this.fluents.get(positiveFluents.nextSetBit(0)).get(2);
-                        type = this.typeOf.getOrDefault(content, "empty");
-                        if (type.equals("empty"))
+                        type = this.typeOf.getOrDefault(content, NO_TYPE);
+                        if (type.equals(NO_TYPE))
                             moveCost = movePenalty;
                         else
                             moveCost = tmpTypeRequested.contains(type) ? (lastOne ? 10*moveBonus : moveBonus) : movePenalty;
-                            //if (debug) System.out.println(op.getName()+">>"+content+","+type+","+(tmpTypeRequested.contains(type) ? "Bonus" : "Malus"));
                         index=3;
                         break;
                     case "empty":
                         /**
-                         * >> empty
-                         *      [box_at_loc, b1, loc1]
-                         *      [empty_box, b1]
-                         *      [content_type_at_ws, valve, ws1]
-                         *      ---
-                         *      [box_at_ws, b1, ws1]
-                         *      [filled_box, b1, valve1]
+                         *      Positive fluents:
+                         *          [box_at_loc, box, loc]
+                         *          [empty_box, box]
+                         *          [content_type_at_ws, type, ws]
+                         *      --------------------------------
+                         *      Negative fluents:
+                         *          [box_at_ws, box, ws]
+                         *          [filled_box, box, content]
                          */
                         for (int p = positiveFluents.nextSetBit(0); p >= 0; p = positiveFluents.nextSetBit(p + 1)) {
                             predicate = this.fluents.get(p).get(0);
@@ -376,7 +367,7 @@ public class IMHeuristic extends RelaxedGraphHeuristic {
                                 if (tmp.isEmpty())
                                     moveCost = movePenalty;
                                 else
-                                    moveCost = tmp.contains(type) ? (lastOne ? 10*moveBonus : moveBonus) : movePenalty;
+                                    moveCost = tmp.contains(type) ? (lastOne ? 10 * moveBonus : moveBonus) : movePenalty;
                                 break;
                             }
                         }
@@ -385,25 +376,27 @@ public class IMHeuristic extends RelaxedGraphHeuristic {
                     default:
                         break;
                 }
-                if (index!=-1 && moveCost < moves[index]) moves[index] = moveCost;
+                if (index!=-1 && moveCost < actions[index]) actions[index] = moveCost;
             }
         }
 
+        int estimated = evalState
+            + (actions[0]<Integer.MAX_VALUE ? 2*actions[0] : 0)
+            + (actions[1]<Integer.MAX_VALUE ? 3*actions[1] : 0)
+            + (actions[2]<Integer.MAX_VALUE ? 6*actions[2] : 0)
+            + (actions[3]<Integer.MAX_VALUE ? 4*actions[3] : 0)
+            + (actions[4]<Integer.MAX_VALUE ? 9*actions[4] : 0);
+
         if(debug) {
             System.out.println("<"+evalState+">");
-            // pick_up, move, deliver, fill, empty
-            System.out.println("Best pick up:"+moves[0]);
-            System.out.println("Best move:"+moves[1]);
-            System.out.println("Best deliver:"+moves[2]);
-            System.out.println("Best fill:"+moves[3]);
-            System.out.println("Best empty:"+moves[4]);
+            if (actions[0]<Integer.MAX_VALUE) System.out.println("<Pick up:"+actions[0]+">");
+            if (actions[1]<Integer.MAX_VALUE) System.out.println("<Move:"+actions[1]+">");
+            if (actions[2]<Integer.MAX_VALUE) System.out.println("<Deliver:"+actions[2]+">");
+            if (actions[3]<Integer.MAX_VALUE) System.out.println("<Fill:"+actions[3]+">");
+            if (actions[4]<Integer.MAX_VALUE) System.out.println("<Empty:"+actions[4]+">");
+            System.out.println("<"+estimated+">");
             System.out.println("-----------------------------------------");
         }
-        return evalState
-            + (moves[0]<Integer.MAX_VALUE ? 2*moves[0] : 0)
-            + (moves[1]<Integer.MAX_VALUE ? 3*moves[1] : 0)
-            + (moves[2]<Integer.MAX_VALUE ? 6*moves[2] : 0)
-            + (moves[3]<Integer.MAX_VALUE ? 4*moves[3] : 0)
-            + (moves[4]<Integer.MAX_VALUE ? 9*moves[4] : 0);
+        return estimated;
     }
 }

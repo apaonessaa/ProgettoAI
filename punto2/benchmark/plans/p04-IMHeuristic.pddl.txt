@@ -1,0 +1,348 @@
+problem instantiation done successfully (6060 actions, 516 fluents)
+
+
+******************************************************************
+Start solving using ASTAR with IM_HEURISTIC heuristic
+    + h weight=1.5
+    + split factor=3
+    + debug mode=false
+******************************************************************
+
+===================================================================
+SubProblems instantiated with:
+------------------------------------------------------------------
+
+Goal0: (and (content_type_at_ws plier ws1)
+  (content_type_at_ws hammer ws1)
+  (content_type_at_ws plier ws2))
+Goal1: (and (content_type_at_ws hammer ws2)
+  (content_type_at_ws screwdriver ws3)
+  (content_type_at_ws plier ws3))
+Goal2: (and (content_type_at_ws hammer ws4)
+  (content_type_at_ws wrench ws4))
+Goal3: (and (content_type_at_ws valve ws5)
+  (content_type_at_ws bolt ws5)
+  (content_type_at_ws valve ws6))
+Goal4: (and (content_type_at_ws wrench ws6)
+  (content_type_at_ws valve ws7)
+  (content_type_at_ws plier ws7))
+Goal5: (and (content_type_at_ws bolt ws8)
+  (content_type_at_ws hammer ws8)
+  (content_type_at_ws screwdriver ws8))
+Goal6: (and (content_type_at_ws wrench ws9)
+  (content_type_at_ws hammer ws9)
+  (content_type_at_ws valve ws10))
+Goal7: (and (content_type_at_ws bolt ws10)
+  (content_type_at_ws plier ws10)
+  (content_type_at_ws screwdriver ws10))
+
+===================================================================
+
+===================================================================
+Plan 0:
+------------------------------------------------------------------
+00: (            pick_up cw b1 a1 c1 p11) [0]
+01: (        fill b1 plier1 cw a1 c1 p11) [0]
+02: (            pick_up cw b2 a1 c1 p12) [0]
+03: (        fill b2 plier2 cw a1 c1 p12) [0]
+04: (            pick_up cw b3 a1 c1 p13) [0]
+05: (        fill b3 plier3 cw a1 c1 p13) [0]
+06: (            pick_up cw b4 a1 c1 p14) [0]
+07: (        fill b4 plier4 cw a1 c1 p14) [0]
+08: (            pick_up cw b5 a2 c2 p21) [0]
+09: (        fill b5 plier5 cw a2 c2 p21) [0]
+10: (            pick_up cw b6 a2 c2 p22) [0]
+11: (       fill b6 hammer1 cw a2 c2 p22) [0]
+12: (            pick_up cw b7 a2 c2 p23) [0]
+13: (       fill b7 hammer2 cw a2 c2 p23) [0]
+14: (            pick_up cw b8 a2 c2 p24) [0]
+15: (       fill b8 hammer3 cw a2 c2 p24) [0]
+16: (                    move cw loc1 a2) [0]
+17: (      deliver b5 ws1 loc1 a2 c2 p21) [0]
+18: (      deliver b6 ws1 loc1 a2 c2 p22) [0]
+19: (empty b6 hammer1 hammer ws1 a2 loc1) [0]
+20: (                    move cw loc1 a1) [0]
+21: (      deliver b3 ws2 loc1 a1 c1 p13) [0]
+22: (  empty b3 plier3 plier ws2 a1 loc1) [0]
+23: (  empty b5 plier5 plier ws1 a1 loc1) [0]
+===================================================================
+
+===================================================================
+Plan 1:
+------------------------------------------------------------------
+00: (                    pick_up loc1 b3 a1 c1 p13) [0]
+01: (                    pick_up loc1 b5 a2 c2 p21) [0]
+02: (                              move loc1 cw a1) [0]
+03: (                    pick_up loc1 b6 a2 c2 p22) [0]
+04: (                 fill b3 hammer4 cw a1 c1 p13) [0]
+05: (                              move loc1 cw a2) [0]
+06: (                 fill b5 hammer5 cw a2 c2 p21) [0]
+07: (            fill b6 screwdriver1 cw a2 c2 p22) [0]
+08: (                              move cw loc1 a2) [0]
+09: (                deliver b5 ws2 loc1 a2 c2 p21) [0]
+10: (          empty b5 hammer5 hammer ws2 a2 loc1) [0]
+11: (                    pick_up loc1 b5 a2 c2 p21) [0]
+12: (                deliver b6 ws3 loc1 a2 c2 p22) [0]
+13: (empty b6 screwdriver1 screwdriver ws3 a2 loc1) [0]
+14: (                              move cw loc1 a1) [0]
+15: (                deliver b1 ws3 loc1 a1 c1 p11) [0]
+16: (            empty b1 plier1 plier ws3 a1 loc1) [0]
+===================================================================
+
+===================================================================
+Plan 2:
+------------------------------------------------------------------
+00: (          pick_up loc1 b1 a1 c1 p11) [0]
+01: (                    move loc1 cw a1) [0]
+02: (          pick_up loc1 b6 a2 c2 p22) [0]
+03: (       fill b1 wrench1 cw a1 c1 p11) [0]
+04: (                    move loc1 cw a2) [0]
+05: (       fill b5 wrench2 cw a2 c2 p21) [0]
+06: (       fill b6 wrench3 cw a2 c2 p22) [0]
+07: (                    move cw loc1 a1) [0]
+08: (      deliver b1 ws4 loc1 a1 c1 p11) [0]
+09: (empty b1 wrench1 wrench ws4 a1 loc1) [0]
+10: (          pick_up loc1 b1 a1 c1 p11) [0]
+11: (      deliver b3 ws4 loc1 a1 c1 p13) [0]
+12: (empty b3 hammer4 hammer ws4 a1 loc1) [0]
+===================================================================
+
+===================================================================
+Plan 3:
+------------------------------------------------------------------
+00: (                  move loc1 cw a1) [0]
+01: (      fill b1 valve2 cw a1 c1 p11) [0]
+02: (                  move cw loc1 a1) [0]
+03: (        pick_up loc1 b3 a1 c1 p13) [0]
+04: (                  move loc1 cw a1) [0]
+05: (       fill b3 bolt1 cw a1 c1 p13) [0]
+06: (                  move cw loc2 a1) [0]
+07: (    deliver b1 ws5 loc2 a1 c1 p11) [0]
+08: (empty b1 valve2 valve ws5 a1 loc2) [0]
+09: (        pick_up loc2 b1 a1 c1 p11) [0]
+10: (    deliver b3 ws5 loc2 a1 c1 p13) [0]
+11: (  empty b3 bolt1 bolt ws5 a1 loc2) [0]
+12: (                  move loc2 cw a1) [0]
+13: (      fill b1 valve1 cw a1 c1 p11) [0]
+14: (                  move cw loc2 a1) [0]
+15: (    deliver b1 ws6 loc2 a1 c1 p11) [0]
+16: (empty b1 valve1 valve ws6 a1 loc2) [0]
+===================================================================
+
+===================================================================
+Plan 4:
+------------------------------------------------------------------
+00: (          pick_up loc2 b1 a1 c1 p11) [0]
+01: (          pick_up loc2 b3 a1 c1 p13) [0]
+02: (                    move loc2 cw a1) [0]
+03: (                    move cw loc2 a2) [0]
+04: (      deliver b5 ws6 loc2 a2 c2 p21) [0]
+05: (empty b5 wrench2 wrench ws6 a2 loc2) [0]
+06: (        fill b1 valve3 cw a1 c1 p11) [0]
+07: (                    move cw loc2 a1) [0]
+08: (      deliver b1 ws7 loc2 a1 c1 p11) [0]
+09: (      deliver b2 ws7 loc2 a1 c1 p12) [0]
+10: (  empty b2 plier2 plier ws7 a1 loc2) [0]
+11: (  empty b1 valve3 valve ws7 a1 loc2) [0]
+===================================================================
+
+===================================================================
+Plan 5:
+------------------------------------------------------------------
+00: (                    pick_up loc2 b1 a1 c1 p11) [0]
+01: (                    pick_up loc2 b2 a1 c1 p12) [0]
+02: (                              move loc2 cw a1) [0]
+03: (                   fill b1 bolt2 cw a1 c1 p11) [0]
+04: (                   fill b2 bolt3 cw a1 c1 p12) [0]
+05: (            fill b3 screwdriver2 cw a1 c1 p13) [0]
+06: (                    pick_up loc2 b5 a2 c2 p21) [0]
+07: (                              move loc2 cw a2) [0]
+08: (            fill b5 screwdriver3 cw a2 c2 p21) [0]
+09: (                              move cw loc3 a2) [0]
+10: (                deliver b5 ws8 loc3 a2 c2 p21) [0]
+11: (                deliver b7 ws8 loc3 a2 c2 p23) [0]
+12: (          empty b7 hammer2 hammer ws8 a2 loc3) [0]
+13: (                              move cw loc3 a1) [0]
+14: (                deliver b1 ws8 loc3 a1 c1 p11) [0]
+15: (              empty b1 bolt2 bolt ws8 a1 loc3) [0]
+16: (empty b5 screwdriver3 screwdriver ws8 a1 loc3) [0]
+===================================================================
+
+===================================================================
+Plan 6:
+------------------------------------------------------------------
+00: (          pick_up loc3 b1 a1 c1 p11) [0]
+01: (          pick_up loc3 b5 a2 c2 p21) [0]
+02: (                    move loc3 cw a1) [0]
+03: (        fill b1 valve4 cw a1 c1 p11) [0]
+04: (          pick_up loc3 b7 a2 c2 p23) [0]
+05: (      deliver b6 ws9 loc3 a2 c2 p22) [0]
+06: (                    move loc3 cw a2) [0]
+07: (                    move cw loc3 a1) [0]
+08: (     deliver b1 ws10 loc3 a1 c1 p11) [0]
+09: ( empty b1 valve4 valve ws10 a1 loc3) [0]
+10: (                    move cw loc3 a2) [0]
+11: (      deliver b8 ws9 loc3 a2 c2 p24) [0]
+12: (empty b8 hammer3 hammer ws9 a1 loc3) [0]
+13: (empty b6 wrench3 wrench ws9 a1 loc3) [0]
+===================================================================
+
+===================================================================
+Plan 7:
+------------------------------------------------------------------
+00: (                     pick_up loc3 b1 a1 c1 p11) [0]
+01: (                     pick_up loc3 b6 a2 c2 p22) [0]
+02: (                     pick_up loc3 b8 a2 c2 p24) [0]
+03: (                               move loc3 cw a2) [0]
+04: (                deliver b3 ws10 loc3 a1 c1 p13) [0]
+05: (empty b3 screwdriver2 screwdriver ws10 a1 loc3) [0]
+06: (                     pick_up loc3 b3 a1 c1 p13) [0]
+07: (                deliver b4 ws10 loc3 a1 c1 p14) [0]
+08: (            empty b4 plier4 plier ws10 a1 loc3) [0]
+09: (                deliver b2 ws10 loc3 a1 c1 p12) [0]
+10: (              empty b2 bolt3 bolt ws10 a1 loc3) [0]
+===================================================================
+
+===================================================================
+Search stats:
+------------------------------------------------------------------
+ + Search time: 156,15 seconds
+ + Memory used: 428,77 MB
+===================================================================
+
+found plan as follows:
+
+000: (                       pick_up cw b1 a1 c1 p11) [0]
+001: (                   fill b1 plier1 cw a1 c1 p11) [0]
+002: (                       pick_up cw b2 a1 c1 p12) [0]
+003: (                   fill b2 plier2 cw a1 c1 p12) [0]
+004: (                       pick_up cw b3 a1 c1 p13) [0]
+005: (                   fill b3 plier3 cw a1 c1 p13) [0]
+006: (                       pick_up cw b4 a1 c1 p14) [0]
+007: (                   fill b4 plier4 cw a1 c1 p14) [0]
+008: (                       pick_up cw b5 a2 c2 p21) [0]
+009: (                   fill b5 plier5 cw a2 c2 p21) [0]
+010: (                       pick_up cw b6 a2 c2 p22) [0]
+011: (                  fill b6 hammer1 cw a2 c2 p22) [0]
+012: (                       pick_up cw b7 a2 c2 p23) [0]
+013: (                  fill b7 hammer2 cw a2 c2 p23) [0]
+014: (                       pick_up cw b8 a2 c2 p24) [0]
+015: (                  fill b8 hammer3 cw a2 c2 p24) [0]
+016: (                               move cw loc1 a2) [0]
+017: (                 deliver b5 ws1 loc1 a2 c2 p21) [0]
+018: (                 deliver b6 ws1 loc1 a2 c2 p22) [0]
+019: (           empty b6 hammer1 hammer ws1 a2 loc1) [0]
+020: (                               move cw loc1 a1) [0]
+021: (                 deliver b3 ws2 loc1 a1 c1 p13) [0]
+022: (             empty b3 plier3 plier ws2 a1 loc1) [0]
+023: (             empty b5 plier5 plier ws1 a1 loc1) [0]
+024: (                     pick_up loc1 b3 a1 c1 p13) [0]
+025: (                     pick_up loc1 b5 a2 c2 p21) [0]
+026: (                               move loc1 cw a1) [0]
+027: (                     pick_up loc1 b6 a2 c2 p22) [0]
+028: (                  fill b3 hammer4 cw a1 c1 p13) [0]
+029: (                               move loc1 cw a2) [0]
+030: (                  fill b5 hammer5 cw a2 c2 p21) [0]
+031: (             fill b6 screwdriver1 cw a2 c2 p22) [0]
+032: (                               move cw loc1 a2) [0]
+033: (                 deliver b5 ws2 loc1 a2 c2 p21) [0]
+034: (           empty b5 hammer5 hammer ws2 a2 loc1) [0]
+035: (                     pick_up loc1 b5 a2 c2 p21) [0]
+036: (                 deliver b6 ws3 loc1 a2 c2 p22) [0]
+037: ( empty b6 screwdriver1 screwdriver ws3 a2 loc1) [0]
+038: (                               move cw loc1 a1) [0]
+039: (                 deliver b1 ws3 loc1 a1 c1 p11) [0]
+040: (             empty b1 plier1 plier ws3 a1 loc1) [0]
+041: (                     pick_up loc1 b1 a1 c1 p11) [0]
+042: (                               move loc1 cw a1) [0]
+043: (                     pick_up loc1 b6 a2 c2 p22) [0]
+044: (                  fill b1 wrench1 cw a1 c1 p11) [0]
+045: (                               move loc1 cw a2) [0]
+046: (                  fill b5 wrench2 cw a2 c2 p21) [0]
+047: (                  fill b6 wrench3 cw a2 c2 p22) [0]
+048: (                               move cw loc1 a1) [0]
+049: (                 deliver b1 ws4 loc1 a1 c1 p11) [0]
+050: (           empty b1 wrench1 wrench ws4 a1 loc1) [0]
+051: (                     pick_up loc1 b1 a1 c1 p11) [0]
+052: (                 deliver b3 ws4 loc1 a1 c1 p13) [0]
+053: (           empty b3 hammer4 hammer ws4 a1 loc1) [0]
+054: (                               move loc1 cw a1) [0]
+055: (                   fill b1 valve2 cw a1 c1 p11) [0]
+056: (                               move cw loc1 a1) [0]
+057: (                     pick_up loc1 b3 a1 c1 p13) [0]
+058: (                               move loc1 cw a1) [0]
+059: (                    fill b3 bolt1 cw a1 c1 p13) [0]
+060: (                               move cw loc2 a1) [0]
+061: (                 deliver b1 ws5 loc2 a1 c1 p11) [0]
+062: (             empty b1 valve2 valve ws5 a1 loc2) [0]
+063: (                     pick_up loc2 b1 a1 c1 p11) [0]
+064: (                 deliver b3 ws5 loc2 a1 c1 p13) [0]
+065: (               empty b3 bolt1 bolt ws5 a1 loc2) [0]
+066: (                               move loc2 cw a1) [0]
+067: (                   fill b1 valve1 cw a1 c1 p11) [0]
+068: (                               move cw loc2 a1) [0]
+069: (                 deliver b1 ws6 loc2 a1 c1 p11) [0]
+070: (             empty b1 valve1 valve ws6 a1 loc2) [0]
+071: (                     pick_up loc2 b1 a1 c1 p11) [0]
+072: (                     pick_up loc2 b3 a1 c1 p13) [0]
+073: (                               move loc2 cw a1) [0]
+074: (                               move cw loc2 a2) [0]
+075: (                 deliver b5 ws6 loc2 a2 c2 p21) [0]
+076: (           empty b5 wrench2 wrench ws6 a2 loc2) [0]
+077: (                   fill b1 valve3 cw a1 c1 p11) [0]
+078: (                               move cw loc2 a1) [0]
+079: (                 deliver b1 ws7 loc2 a1 c1 p11) [0]
+080: (                 deliver b2 ws7 loc2 a1 c1 p12) [0]
+081: (             empty b2 plier2 plier ws7 a1 loc2) [0]
+082: (             empty b1 valve3 valve ws7 a1 loc2) [0]
+083: (                     pick_up loc2 b1 a1 c1 p11) [0]
+084: (                     pick_up loc2 b2 a1 c1 p12) [0]
+085: (                               move loc2 cw a1) [0]
+086: (                    fill b1 bolt2 cw a1 c1 p11) [0]
+087: (                    fill b2 bolt3 cw a1 c1 p12) [0]
+088: (             fill b3 screwdriver2 cw a1 c1 p13) [0]
+089: (                     pick_up loc2 b5 a2 c2 p21) [0]
+090: (                               move loc2 cw a2) [0]
+091: (             fill b5 screwdriver3 cw a2 c2 p21) [0]
+092: (                               move cw loc3 a2) [0]
+093: (                 deliver b5 ws8 loc3 a2 c2 p21) [0]
+094: (                 deliver b7 ws8 loc3 a2 c2 p23) [0]
+095: (           empty b7 hammer2 hammer ws8 a2 loc3) [0]
+096: (                               move cw loc3 a1) [0]
+097: (                 deliver b1 ws8 loc3 a1 c1 p11) [0]
+098: (               empty b1 bolt2 bolt ws8 a1 loc3) [0]
+099: ( empty b5 screwdriver3 screwdriver ws8 a1 loc3) [0]
+100: (                     pick_up loc3 b1 a1 c1 p11) [0]
+101: (                     pick_up loc3 b5 a2 c2 p21) [0]
+102: (                               move loc3 cw a1) [0]
+103: (                   fill b1 valve4 cw a1 c1 p11) [0]
+104: (                     pick_up loc3 b7 a2 c2 p23) [0]
+105: (                 deliver b6 ws9 loc3 a2 c2 p22) [0]
+106: (                               move loc3 cw a2) [0]
+107: (                               move cw loc3 a1) [0]
+108: (                deliver b1 ws10 loc3 a1 c1 p11) [0]
+109: (            empty b1 valve4 valve ws10 a1 loc3) [0]
+110: (                               move cw loc3 a2) [0]
+111: (                 deliver b8 ws9 loc3 a2 c2 p24) [0]
+112: (           empty b8 hammer3 hammer ws9 a1 loc3) [0]
+113: (           empty b6 wrench3 wrench ws9 a1 loc3) [0]
+114: (                     pick_up loc3 b1 a1 c1 p11) [0]
+115: (                     pick_up loc3 b6 a2 c2 p22) [0]
+116: (                     pick_up loc3 b8 a2 c2 p24) [0]
+117: (                               move loc3 cw a2) [0]
+118: (                deliver b3 ws10 loc3 a1 c1 p13) [0]
+119: (empty b3 screwdriver2 screwdriver ws10 a1 loc3) [0]
+120: (                     pick_up loc3 b3 a1 c1 p13) [0]
+121: (                deliver b4 ws10 loc3 a1 c1 p14) [0]
+122: (            empty b4 plier4 plier ws10 a1 loc3) [0]
+123: (                deliver b2 ws10 loc3 a1 c1 p12) [0]
+124: (              empty b2 bolt3 bolt ws10 a1 loc3) [0]
+
+time spent:       0,03 seconds parsing
+                  0,60 seconds encoding
+                  0,00 seconds searching
+                  0,63 seconds total time
+
+memory used:     22,01 MBytes for problem representation
+                  0,00 MBytes for searching
+                 22,01 MBytes total

@@ -1,1 +1,1 @@
-# Indistrial Manufacturing project
+# Industrial Manufacturing project

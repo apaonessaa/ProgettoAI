@@ -23,16 +23,16 @@
     )
 
     (:functions
-        (pick-duration)
-        (fill-duration)
-        (move-duration)
-        (deliver-duration)
-        (empty-duration)
+        (pick_duration)
+        (fill_duration)
+        (move_duration)
+        (deliver_duration)
+        (empty_duration)
     )
 
     (:durative-action pick_up
         :parameters (?loc - location ?box - box ?agent - agent ?carrier - carrier ?place - place)
-        :duration (= ?duration (pick-duration))
+        :duration (= ?duration (pick_duration))
         :condition (and
             (at start (free_agent ?agent))
             (over all (agent_at_loc ?agent ?loc))
@@ -52,7 +52,7 @@
 
     (:durative-action move
         :parameters (?from ?to - location ?agent - agent)
-        :duration (= ?duration (move-duration))
+        :duration (= ?duration (move_duration))
         :condition (and
             (at start (free_agent ?agent))
             (over all (connected ?from ?to))
@@ -68,7 +68,7 @@
 
     (:durative-action deliver
         :parameters (?box - box ?ws - workstation ?location - location ?agent - agent ?carrier - carrier ?place - place)
-        :duration (= ?duration (deliver-duration))
+        :duration (= ?duration (deliver_duration))
         :condition (and
             (at start (free_agent ?agent))
             (over all (ws_at_loc ?ws ?location))
@@ -88,7 +88,7 @@
 
     (:durative-action fill
         :parameters (?box - box ?content - content ?loc - location ?agent - agent ?carrier - carrier ?place - place)
-        :duration (= ?duration (fill-duration))
+        :duration (= ?duration (fill_duration))
         :condition (and
             (at start (free_agent ?agent))
             (at start (content_at_loc ?content ?loc))
@@ -109,7 +109,7 @@
 
     (:durative-action empty
         :parameters (?box - box ?content - content ?t - type ?ws - workstation ?agent - agent ?loc - location)
-        :duration (= ?duration (empty-duration))
+        :duration (= ?duration (empty_duration))
         :condition (and
             (at start (free_agent ?agent))
             (over all (is_type ?content ?t))

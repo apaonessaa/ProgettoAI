@@ -1,0 +1,78 @@
+set instance cw location
+set instance loc1 location
+set instance loc2 location
+set instance ws1 workstation
+set instance ws2 workstation
+set instance ws3 workstation
+set instance ws4 workstation
+set instance ws5 workstation
+set instance b1 box
+set instance b2 box
+set instance b3 box
+set instance b4 box
+set instance a1 agent
+set instance a2 agent
+set instance c1 carrier
+set instance c2 carrier
+set instance p11 place
+set instance p12 place
+set instance p21 place
+set instance p22 place
+set instance valve1 content
+set instance valve2 content
+set instance bolt1 content
+set instance bolt2 content
+set instance hammer1 content
+set instance hammer2 content
+set instance valve type
+set instance bolt type
+set instance hammer type
+set function (= (pick_duration) 2)
+set function (= (fill_duration) 3)
+set function (= (move_duration) 5)
+set function (= (deliver_duration) 2)
+set function (= (empty_duration) 3)
+set predicate (is_type valve1 valve)
+set predicate (is_type valve2 valve)
+set predicate (is_type bolt1 bolt)
+set predicate (is_type bolt2 bolt)
+set predicate (is_type hammer1 hammer)
+set predicate (is_type hammer2 hammer)
+set predicate (box_at_loc b1 cw)
+set predicate (box_at_loc b2 cw)
+set predicate (box_at_loc b3 cw)
+set predicate (box_at_loc b4 cw)
+set predicate (empty_box b1)
+set predicate (empty_box b2)
+set predicate (empty_box b3)
+set predicate (empty_box b4)
+set predicate (content_at_loc valve1 cw)
+set predicate (content_at_loc valve2 cw)
+set predicate (content_at_loc bolt1 cw)
+set predicate (content_at_loc bolt2 cw)
+set predicate (content_at_loc hammer1 cw)
+set predicate (content_at_loc hammer2 cw)
+set predicate (ws_at_loc ws1 loc1)
+set predicate (ws_at_loc ws2 loc1)
+set predicate (ws_at_loc ws3 loc2)
+set predicate (ws_at_loc ws4 loc2)
+set predicate (ws_at_loc ws5 loc2)
+set predicate (connected cw loc1)
+set predicate (connected cw loc2)
+set predicate (connected loc1 cw)
+set predicate (connected loc2 cw)
+set predicate (agent_at_loc a1 cw)
+set predicate (free_agent a1)
+set predicate (carrier_at_agent c1 a1)
+set predicate (place_at_carrier p11 c1)
+set predicate (place_at_carrier p12 c1)
+set predicate (empty_place p11)
+set predicate (empty_place p12)
+set predicate (agent_at_loc a2 cw)
+set predicate (free_agent a2)
+set predicate (carrier_at_agent c2 a2)
+set predicate (place_at_carrier p21 c2)
+set predicate (place_at_carrier p22 c2)
+set predicate (empty_place p21)
+set predicate (empty_place p22)
+set goal (and (content_type_at_ws bolt ws1) (content_type_at_ws valve ws1) (content_type_at_ws bolt ws2) (content_type_at_ws hammer ws3) (content_type_at_ws valve ws3) (content_type_at_ws hammer ws4))
